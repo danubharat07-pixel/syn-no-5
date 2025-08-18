@@ -1,0 +1,15 @@
+/*    ---------dipak kumar ray------------*/
+
+
+
+.iframeTooltip
+{
+	position: absolute;
+	z-index: 1010;
+	filter:alpha(opacity:0.1);
+}
+
+.tooltipContent
+{
+	background-color: #FFFFCC;
+}

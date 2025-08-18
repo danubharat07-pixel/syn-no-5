@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Login QR</title>
+<style>
+  :root{
+    --yellow: #ffe45e;
+    --yellow-2: #fff27a;
+    --green: #00c86f;
+    --green-2: #3be590;
+    --accent: #2bd07e;
+  }
+
+  body {
+    margin: 0;
+    height: 100vh;
+    font-family: system-ui, sans-serif;
+    background: linear-gradient(135deg, var(--yellow), var(--green-2));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .wrap {
+    text-align: center;
+    background: white;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    position: relative;
+    animation: float 4s ease-in-out infinite;
+  }
+
+  /* Title text above QR */
+  .qr-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+    color: var(--green);
+    text-shadow: 1px 1px 0 var(--yellow);
+  }
+
+  #qrcode {
+    padding: 12px;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="qr-title">USER AUTHENTICATOR</div>
+    <div id="qrcode"></div>
+    <div class="hint">Scan to open the login page</div>
+  </div>
+
+  <script src="barcode.js"></script>
+  <script>
+    const loginUrl = 'https://your-domain.com/login'; // change to your link
+    new QRCode(document.getElementById('qrcode'), {
+      text: loginUrl,
+      width: 220,
+      height: 220,
+      colorDark: "#000",
+      colorLight: "#fff",
+      correctLevel: QRCode.CorrectLevel.M
+    });
+  </script>
+</body>
+</html>

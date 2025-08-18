@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dynamic TRG Calendar – Solid</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- Attractive solid-friendly fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Poppins:wght@700&display=swap" rel="stylesheet" />
+
+  <style>
+    /* Solid theme tokens */
+    :root{
+      --bg: #c0f446fd;
+      --text: #1f2430;
+      --muted: #f14ec0;
+      --heading: #1f2a44;
+
+      --surface: #ffffff;
+      --surface-2: #eef1f7;          /* solid light panel */
+      --border: #d8dbe6;
+      --shadow: 0 8px 24px rgba(31,42,68,0.08);
+
+      --primary: #2563eb;            /* blue 600 */
+      --hover: #e8f0ff;              /* solid hover fill */
+      --focus: 2px solid #2563eb;
+
+      /* Event colors (solid) */
+      --event-default: #2563eb;
+      --event-text-on: #ffffff;
+
+      --event-0: #2563eb; /* Sun - Blue */
+      --event-1: #16a34a; /* Mon - Green */
+      --event-2: #7c3aed; /* Tue - Violet */
+      --event-3: #ea580c; /* Wed - Orange */
+      --event-4: #ca8a04; /* Thu - Amber */
+      --event-5: #0ea5e9; /* Fri - Sky */
+      --event-6: #be185d; /* Sat - Rose */
+    }
+
+    /* Base */
+    *{ box-sizing: border-box; }
+    html, body{ height: 100%; }
+
+    body{
+      font-family: "Inter", "Segoe UI", system-ui, -apple-system, Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 32px 16px 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    h1{
+      font-family: "Poppins", "Inter", "Segoe UI", system-ui, -apple-system, Roboto, Arial, sans-serif;
+      color: var(--heading);
+      margin: 0 0 20px;
+      letter-spacing: 0.2px;
+      font-weight: 700;
+      animation: fadeInDown 0.6s ease-out;
+    }
+
+    /* Calendar shell */
+    .calendar{
+      width: min(1000px, 94vw);
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 12px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 16px;
+      box-shadow: var(--shadow);
+      animation: fadeInUp 0.6s ease-out;
+    }
+
+    /* Day names */
+    .day-name{
+      font-weight: 800;
+      text-align: center;
+      color: var(--muted);
+      background: var(--surface-2);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 10px 6px;
+      text-transform: uppercase;
+      font-size: 0.85rem;
+      letter-spacing: 0.6px;
+    }
+
+    /* Day cells */
+    .day{
+      background: #e648bc;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      text-align: center;
+      position: relative;
+      transition: background .2s ease, transform .08s ease, box-shadow .2s ease, border-color .2s ease;
+      min-height: 84px;
+      padding: 12px 10px;
+    }
+
+    /* Subtle solid zebra to reduce glare */
+    .day:nth-child(odd){ background: #64e644; }
+    .day:nth-child(even){ background: #f9f45f; }
+
+    .day:hover{
+      background: var(--hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 18px rgba(31,42,68,0.08);
+      z-index: 1;
+    }
+
+    .day .date{
+      font-weight: 800;
+      font-size: 1.05rem;
+      color: var(--heading);
+    }
+
+    /* Event chip (solid) */
+    .event{
+      margin-top: 8px;
+      background: var(--event-default);
+      color: var(--event-text-on);
+      padding: 8px 10px;
+      border-radius: 10px;
+      font-size: 0.86rem;
+      line-height: 1.2;
+      width: 100%;
+      display: inline-block;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      border: 1px solid rgba(0,0,0,0.05);
+      animation: popIn 0.25s ease;
+      font-weight: 600;
+    }
+
+    /* Solid themed event variations by weekday */
+    .day[data-variant="0"] .event{ background: var(--event-0); }
+    .day[data-variant="1"] .event{ background: var(--event-1); }
+    .day[data-variant="2"] .event{ background: var(--event-2); }
+    .day[data-variant="3"] .event{ background: var(--event-3); }
+    .day[data-variant="4"] .event{ background: var(--event-4); }
+    .day[data-variant="5"] .event{ background: var(--event-5); }
+    .day[data-variant="6"] .event{ background: var(--event-6); }
+
+    /* Animations */
+    @keyframes fadeInDown {
+      0%{ opacity:0; transform: translateY(-12px); }
+      100%{ opacity:1; transform: translateY(0); }
+    }
+    @keyframes fadeInUp {
+      0%{ opacity:0; transform: translateY(12px); }
+      100%{ opacity:1; transform: translateY(0); }
+    }
+    @keyframes popIn {
+      0%{ opacity:0; transform: scale(0.96); }
+      100%{ opacity:1; transform: scale(1); }
+    }
+
+    /* Focus */
+    .day:focus-visible{
+      outline: var(--focus);
+      outline-offset: 2px;
+    }
+
+    /* Responsive */
+    @media (max-width: 720px){
+      .calendar{ gap: 8px; padding: 12px; }
+      .day{ min-height: 72px; padding: 10px 8px; }
+      .event{ font-size: 0.8rem; padding: 6px 8px; }
+    }
+  </style>
+</head>
+<body>
+  <h1 id="calendarTitle">Training Calendar</h1>
+
+  <div class="calendar" id="calendar">
+    <!-- Day names -->
+    <div class="day-name">Sun</div>
+    <div class="day-name">Mon</div>
+    <div class="day-name">Tue</div>
+    <div class="day-name">Wed</div>
+    <div class="day-name">Thu</div>
+    <div class="day-name">Fri</div>
+    <div class="day-name">Sat</div>
+    <!-- JS will generate the days below -->
+  </div>
+
+  <script>
+    // Customize this:
+    const MONTH = 7; // August (0-based, 7 = August)
+    const YEAR = 2025;
+
+    // Training events
+    const events = {
+      1: "Fitness Test",
+      7: "Weapons Training",
+      11: "Drill Practice",
+      14: "Map Reading",
+      15: "Independence Parade",
+      18: "Night Nav",
+      23: "Mock Drill",
+      27: "Range Practice",
+      30: "Route March"
+    };
+
+    const calendar = document.getElementById("calendar");
+    const title = document.getElementById("calendarTitle");
+
+    const monthNames = [
+      "January","February","March","April","May","June",
+      "July","August","September","October","November","December"
+    ];
+
+    // Set title
+    title.textContent = `${monthNames[MONTH]} ${YEAR} - TRG Calendar`;
+
+    function generateCalendar(month, year) {
+      const firstDay = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+      // Remove existing generated days (keep headers)
+      [...document.querySelectorAll(".day")].forEach(el => el.remove());
+
+      // Fill blanks before day 1
+      for (let i = 0; i < firstDay; i++) {
+        const empty = document.createElement("div");
+        empty.classList.add("day");
+        calendar.appendChild(empty);
+      }
+
+      // Fill all days
+      for (let day = 1; day <= daysInMonth; day++) {
+        const cell = document.createElement("div");
+        cell.classList.add("day");
+
+        // Assign a solid variant based on weekday for event color variety
+        const weekday = new Date(year, month, day).getDay(); // 0..6
+        cell.dataset.variant = weekday;
+
+        const dateLabel = document.createElement("div");
+        dateLabel.classList.add("date");
+        dateLabel.textContent = day;
+        cell.appendChild(dateLabel);
+
+        // If event exists, add it
+        if (events[day]) {
+          const event = document.createElement("div");
+          event.classList.add("event");
+          event.textContent = events[day];
+          cell.appendChild(event);
+        }
+
+        calendar.appendChild(cell);
+      }
+    }
+
+    generateCalendar(MONTH, YEAR);
+  </script>
+</body>
+</html>
+```
