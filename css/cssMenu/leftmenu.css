@@ -1,0 +1,52 @@
+#cssmenu {
+	padding: 0;
+	margin: 0;
+	border: 0;
+	width:75px;
+	height:auto;
+	float:left;
+	line-height:30px;
+	margin-top:3px;
+	font-family:Verdana, Geneva, sans-serif;
+	text-decoration:none;
+	
+}
+#cssmenu ul,
+
+#cssmenu ul ul {
+
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  
+}
+#cssmenu ul {
+	position:absolute;
+  z-index: 597;
+  
+ 
+  
+}
+#cssmenu ul li {
+	
+	background-color:#000;
+	border:1px solid white;
+	width:230px;
+	height:35px;
+	text-align:inherit;
+	line-height:35px;
+	
+	position:relative;
+	padding:1px;
+
+}
+
+
+#cssmenu ul li:hover {
+  position: relative;
+  z-index: 599;
+  background-color:green;
+  
+}
+
+
