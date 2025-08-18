@@ -1,0 +1,49 @@
+<table id="marksTable" border="1">
+  <thead>
+    <tr>
+      <th>S No</th>
+      <th>Army No</th>
+      <th>Rank</th>
+      <th>Name</th>
+      <th>Course Code</th>
+      <th>Course Title</th>
+      <th>Test Title</th>
+      <th>Test Date</th>
+      <th>Max Marks</th>
+      <th>Pass Marks</th>
+      <th>Obtained Marks</th>
+      <th>Percentage</th>
+      <th>Result</th>
+      <th>Remarks</th>
+    </tr>
+  </thead>
+  <tbody></tbody>
+</table>
+
+<script>
+fetch('api/get_student_marks.php')
+  .then(res => res.json())
+  .then(data => {
+    const tbody = document.querySelector('#marksTable tbody');
+    data.forEach(row => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${row.s_no}</td>
+        <td>${row.army_no}</td>
+        <td>${row.rank}</td>
+        <td>${row.name}</td>
+        <td>${row.course_code}</td>
+        <td>${row.course_title}</td>
+        <td>${row.test_title}</td>
+        <td>${row.test_date}</td>
+        <td>${row.max_marks}</td>
+        <td>${row.pass_marks}</td>
+        <td>${row.obtained_marks}</td>
+        <td>${row.percentage}%</td>
+        <td>${row.result}</td>
+        <td>${row.remarks || ''}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  });
+</script>

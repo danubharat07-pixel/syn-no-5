@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Camouflage Remote Login</title>
+<style>
+  :root{
+    --cam1:#2f3c33; --cam2:#445642; --cam3:#6a7c58; --cam4:#8fa172;
+    --ink:#e8f1e9; --accent:#ffd54a; --btn-hi:#20c26a;
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; color:var(--ink);
+    font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial;
+    background-color:#253128;
+    background-image:
+      radial-gradient(120px 90px at 15% 20%, var(--cam2) 0 40%, transparent 45% 100%),
+      radial-gradient(140px 110px at 80% 25%, var(--cam3) 0 45%, transparent 50% 100%),
+      radial-gradient(200px 150px at 30% 75%, var(--cam4) 0 40%, transparent 44% 100%),
+      radial-gradient(180px 140px at 70% 80%, var(--cam2) 0 42%, transparent 47% 100%),
+      linear-gradient(180deg, #1e281f, #1a231d);
+    display:grid; place-items:center; padding:20px;
+  }
+  .corner-img{
+    position:absolute; top:12px;
+    width:120px; height:auto;
+  }
+  .corner-img img{
+    max-width:100%; height:auto; display:block;
+    border-radius:8px; background:rgba(0,0,0,0.35);
+    padding:4px;
+  }
+  .corner-left{ left:12px; }
+  .corner-right{ right:12px; }
+
+  .layout{
+    width:min(1000px, 96vw);
+    display:grid; grid-template-columns: 0.95fr 1.05fr; gap:28px;
+  }
+  @media (max-width: 900px){ .layout{ grid-template-columns: 1fr; } }
+
+  .remote{
+    background: rgba(0,0,0,0.35);
+    border-radius: 24px;
+    padding: 22px;
+    box-shadow: 0 24px 70px rgba(0,0,0,0.45);
+  }
+  .remote h2{ color: var(--accent); margin:0 0 12px; }
+  .grid{ display:grid; grid-template-columns: repeat(2, minmax(160px, 1fr)); gap:14px; }
+  .rbtn{
+    padding:16px; border-radius: 16px;
+    background: linear-gradient(180deg, #1a241e, #111a15);
+    color:#eaf6ee; font-weight:800; text-transform:uppercase;
+    border: 1px solid rgba(255,255,255,0.06);
+    cursor:pointer; transition: background 0.2s;
+  }
+  .rbtn:hover{ background: linear-gradient(180deg, #202c24, #141f19); }
+  .rbtn.active{ box-shadow: 0 0 0 2px rgba(32,194,106,0.35); }
+
+  .card{
+    border-radius: 22px;
+    padding: 22px;
+    background: rgba(0,0,0,0.55);
+    box-shadow: 0 24px 70px rgba(0,0,0,0.45);
+  }
+  .card h3{ color: var(--accent); margin-top:0; }
+  .badge{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:6px 10px; border-radius: 999px;
+    background: #26342b; font-weight:800; margin-bottom: 14px;
+  }
+  .form{ display:grid; gap: 12px; }
+  .label{ font-weight: 700; }
+  .input{
+    padding:12px; border-radius: 12px;
+    border: 1px solid rgba(255,255,255,0.08);
+    background:#0f1612; color:#e6f4ea;
+  }
+  .btn-primary{
+    all: unset; cursor:pointer; text-align:center;
+    background: linear-gradient(135deg, #22d276, #18a85b);
+    color: #0a1510; font-weight:900; padding:12px; border-radius: 14px;
+  }
+</style>
+</head>
+<body>
+
+  <!-- Corner images -->
+  <div class="corner-img corner-left">
+    <img src="left-logo.png" alt="Left Logo" />
+  </div>
+  <div class="corner-img corner-right">
+    <img src="right-logo.png" alt="Right Logo" />
+  </div>
+
+  <div class="layout">
+    <section class="remote">
+      <h2>Select portal</h2>
+      <div class="grid" id="portalGrid">
+        <button type="button" class="rbtn" data-role="co" data-label="CO PORTAL">CO PORTAL</button>
+        <button type="button" class="rbtn" data-role="trg_offr" data-label="TRG OFFR PORTAL">TRG OFFR PORTAL</button>
+        <button type="button" class="rbtn" data-role="trg_jco" data-label="TRG JCO PORTAL">TRG JCO PORTAL</button>
+        <button type="button" class="rbtn" data-role="trainee" data-label="TRAINEE PORTAL">TRAINEE PORTAL</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h3>Login</h3>
+      <div class="badge" id="portalBadge">TRAINEE PORTAL</div>
+      <form id="loginForm" method="post" action="http://127.0.0.1:5500/login%20portals/user.html">
+        <input type="hidden" name="portal" id="portalInput" value="trainee" />
+        <div class="form">
+          <label class="label" for="username">Username</label>
+          <input class="input" id="username" name="username" type="text" required />
+          <label class="label" for="password">Password</label>
+          <input class="input" id="password" name="password" type="password" required />
+          <button class="btn-primary" type="submit">Sign in</button>
+        </div>
+      </form>
+    </section>
+  </div>
+
+<script>
+  const DASHBOARDS = {
+    co: "http://127.0.0.1:5500/CO%20FOLDER/superviser.html",
+    trg_offr: "http://127.0.0.1:5500/login%20portals/superadmin.html",
+    trg_jco: "http://127.0.0.1:5500/login%20portals/admin.html",
+    trainee: "http://127.0.0.1:5500/login%20portals/user.html"
+  };
+
+  const grid = document.getElementById('portalGrid');
+  const badgeText = document.getElementById('portalBadge');
+  const portalInput = document.getElementById('portalInput');
+  const form = document.getElementById('loginForm');
+  const buttons = grid.querySelectorAll('.rbtn');
+
+  grid.addEventListener('click', (e) => {
+    const btn = e.target.closest('.rbtn');
+    if (!btn) return;
+    buttons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const roleKey = btn.dataset.role;
+    badgeText.textContent = btn.dataset.label;
+    portalInput.value = roleKey;
+    form.action = DASHBOARDS[roleKey] || "#";
+  });
+
+  document.querySelector('.rbtn[data-role="trainee"]').classList.add('active');
+</script>
+
+</body>
+</html>

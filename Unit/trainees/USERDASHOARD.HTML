@@ -1,0 +1,186 @@
+<?php
+// student/dashboard.php
+require_once __DIR__ . '/../inc/auth.php';
+$user = require_student(); // Auth helper ensures student-only access
+?>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Student Dashboard</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@2/css/pico.min.css">
+  <style>
+    body { background: #f4f6f8; }
+    .tag { background: #eef; padding: .2rem .5rem; border-radius: .3rem; font-size: .8rem }
+    .progress-bar { height: 10px; background: #ddd; border-radius: 6px; overflow: hidden }
+    .progress-bar span { display: block; height: 100%; background: #0077b6 }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem }
+    table td, table th { white-space: nowrap }
+    .muted { color: #666 }
+  </style>
+</head>
+<body>
+<main class="container">
+  <header>
+    <h2>📘 Student Dashboard</h2>
+    <p class="muted">S No: <strong><?=htmlspecialchars($user['s_no'])?></strong> |
+      Army No: <strong><?=htmlspecialchars($user['army_no'])?></strong> |
+      Rank: <strong><?=htmlspecialchars($user['rank'])?></strong> |
+      Name: <strong><?=htmlspecialchars($user['name'])?></strong></p>
+  </header>
+<section class="profile-card">
+  <div class="profile-photo">
+    <img src="../uploads/photos/<?= htmlspecialchars($user['army_no']) ?>.jpg" alt="Profile Photo" onerror="this.src='../assets/default_avatar.png'">
+  </div>
+  <div class="profile-info">
+    <h3><?= htmlspecialchars($user['name']) ?></h3>
+    <p><strong>Rank:</strong> <?= htmlspecialchars($user['rank']) ?>  
+       <strong>Army No:</strong> <?= htmlspecialchars($user['army_no']) ?></p>
+    <p><strong>Unit:</strong> <?= htmlspecialchars($user['unit'] ?? 'N/A') ?>  
+       <strong>S No:</strong> <?= htmlspecialchars($user['s_no']) ?></p>
+    <form method="post" action="../api/upload_photo.php" enctype="multipart/form-data">
+      <label>Update Photo:
+        <input type="file" name="photo" accept="image/jpeg,image/png" required>
+      </label>
+      <button type="submit">Upload</button>
+    </form>
+  </div>
+</section>
+
+  <nav>
+    <ul>
+      <li><a href="#progress" data-tab>Progress</a></li>
+      <li><a href="#exams" data-tab>Written Exams</a></li>
+      <li><a href="#materials" data-tab>Study Materials</a></li>
+      <li><a href="#feedback" data-tab>Feedback</a></li>
+
+    </ul>
+  </nav>
+
+  <section id="progress" class="tab">
+    <h3>📊 Training Progress</h3>
+    <div id="progress-cards" class="grid-2"></div>
+  </section>
+
+  <section id="exams" class="tab" hidden>
+    <h3>📝 Written Exam Papers</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>S No</th><th>Army No</th><th>Rank</th><th>Name</th>
+          <th>Course</th><th>Test</th><th>Date</th>
+          <th>Obtained</th><th>Max</th><th>%</th><th>Result</th><th>Remarks</th>
+        </tr>
+      </thead>
+      <tbody id="exam-body"></tbody>
+    </table>
+  </section>
+
+  <section id="materials" class="tab" hidden>
+    <h3>📂 Study Materials</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>S No</th><th>Army No</th><th>Rank</th><th>Name</th>
+          <th>Course</th><th>Material</th><th>Type</th><th>Size</th><th>Download</th>
+        </tr>
+      </thead>
+      <tbody id="materials-body"></tbody>
+    </table>
+  </section>
+  <section id="feedback" class="tab" hidden>
+  <h3>💬 Submit Feedback</h3>
+  <form id="feedback-form">
+    <label>Course
+      <select name="course_id" required></select>
+    </label>
+    <label>Feedback Type
+      <select name="type" required>
+        <option value="Course">Course</option>
+        <option value="Instructor">Instructor</option>
+        <option value="Material">Material</option>
+        <option value="Other">Other</option>
+      </select>
+    </label>
+    <label>Message
+      <textarea name="message" rows="4" required></textarea>
+    </label>
+    <button type="submit">Submit Feedback</button>
+  </form>
+
+  <h4>📄 Your Past Feedback</h4>
+  <table>
+    <thead>
+      <tr>
+        <th>S No</th><th>Army No</th><th>Rank</th><th>Name</th>
+        <th>Course</th><th>Type</th><th>Message</th><th>Status</th><th>Submitted</th>
+      </tr>
+    </thead>
+    <tbody id="feedback-history"></tbody>
+  </table>
+</section>
+
+</main>
+
+<script>
+const tabs = document.querySelectorAll('[data-tab]');
+tabs.forEach(t => t.addEventListener('click', e => {
+  e.preventDefault();
+  document.querySelectorAll('.tab').forEach(s => s.hidden = true);
+  document.querySelector(t.getAttribute('href')).hidden = false;
+}));
+
+async function loadProgress(){
+  const res = await fetch('../api/progress.php');
+  const data = await res.json();
+  const wrap = document.getElementById('progress-cards'); wrap.innerHTML='';
+  data.forEach(r => {
+    const div = document.createElement('div');
+    div.innerHTML = `
+      <article>
+        <header><strong>${r.course_title}</strong> <span class="tag">${r.course_code}</span></header>
+        <p class="muted">S No ${r.s_no} • ${r.army_no} • ${r.rank} ${r.name}</p>
+        <div class="progress-bar"><span style="width:${r.completion_percent}%"></span></div>
+        <small>${r.completion_percent}% complete • Updated ${r.last_updated ?? ''}</small>
+      </article>`;
+    wrap.appendChild(div);
+  });
+}
+
+async function loadExams(){
+  const res = await fetch('../api/marks.php');
+  const data = await res.json();
+  const tbody = document.getElementById('exam-body'); tbody.innerHTML='';
+  data.forEach(r => {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${r.s_no}</td><td>${r.army_no}</td><td>${r.rank}</td><td>${r.name}</td>
+      <td><span class="tag">${r.course_code}</span> ${r.course_title}</td>
+      <td>${r.test_title}</td><td>${r.test_date}</td>
+      <td>${r.obtained_marks}</td><td>${r.max_marks}</td>
+      <td>${r.percentage}</td><td>${r.result}</td><td>${r.remarks ?? ''}</td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+async function loadMaterials(){
+  const res = await fetch('../api/materials.php');
+  const data = await res.json();
+  const tbody = document.getElementById('materials-body'); tbody.innerHTML='';
+  data.forEach(r => {
+    const size = r.size_bytes ? (Math.round(r.size_bytes/1024)+' KB') : '';
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td>${r.s_no}</td><td>${r.army_no}</td><td>${r.rank}</td><td>${r.name}</td>
+      <td><span class="tag">${r.course_code}</span> ${r.course_title}</td>
+      <td>${r.material_title}</td><td>${r.file_type ?? ''}</td><td>${size}</td>
+      <td><a href="../api/download.php?id=${r.material_id}" role="button">Download</a></td>`;
+    tbody.appendChild(tr);
+  });
+}
+
+loadProgress(); loadExams(); loadMaterials();
+</script>
+</body>
+</html>
