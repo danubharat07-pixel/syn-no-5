@@ -3,12 +3,12 @@ version: "3.8"
 services:
   mongodb:
     image: mongo:7.0
-    container_name: blog-app-mongo
+    container_name: bharat-test-app
     restart: unless-stopped
     ports:
       - "27017:27017"
     environment:
-      MONGO_INITDB_DATABASE: blog-app
+      MONGO_URI: bharat-test-app
     volumes:
       - mongodb_data:/data/db
 

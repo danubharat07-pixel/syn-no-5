@@ -1,24 +1,27 @@
 // routes/courses.js
-const express = require('express');
+const express = require("express");
 const {
   createCourse,
   updateCourse,
   renameCourse,
-  deleteCourse
-} = require('../controllers/courseController');
+  deleteCourse,
+  getAllCourses,
+} = require("../controllers/courseController");
 
 const router = express.Router();
 
+router.get("/getAllCourses", getAllCourses);
+
 // Create
-router.post('/', createCourse);
+router.post("/", createCourse);
 
 // Update (all fields except courseName)
-router.put('/:id', updateCourse);
+router.put("/:id", updateCourse);
 
 // Rename (only courseName)
-router.patch('/:id/rename', renameCourse);
+router.patch("/:id/rename", renameCourse);
 
 // Delete
-router.delete('/:id', deleteCourse);
+router.delete("/:id", deleteCourse);
 
 module.exports = router;

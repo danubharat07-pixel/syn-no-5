@@ -1,11 +1,12 @@
-const User = require('../models/User');
-const Course = require('../models/Course');
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcryptjs');
+const User = require("../models/User");
+const Course = require("../models/Course");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
+const mongoose = require("mongoose");
 
 // Generate JWT
 const generateToken = (id) => {
-  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: '7d' });
+  return jwt.sign({ id }, process.env.JWT_SECRET, { expiresIn: "7d" });
 };
 
 // @desc    Register new user
@@ -17,7 +18,7 @@ const registerUser = async (req, res) => {
   try {
     const userExists = await User.findOne({ army_no });
     if (userExists) {
-      return res.status(400).json({ message: 'User already exists' });
+      return res.status(400).json({ message: "User already exists" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -28,7 +29,7 @@ const registerUser = async (req, res) => {
       rank,
       name,
       role,
-      password: hashedPassword
+      password: hashedPassword,
     });
 
     res.status(201).json({
@@ -38,10 +39,10 @@ const registerUser = async (req, res) => {
       rank: user.rank,
       name: user.name,
       role: user.role,
-      token: generateToken(user._id)
+      token: generateToken(user._id),
     });
   } catch (err) {
-    res.status(500).json({ message: 'Server Error' });
+    res.status(500).json({ message: "Server Error" });
   }
 };
 
@@ -53,10 +54,11 @@ const loginUser = async (req, res) => {
 
   try {
     const user = await User.findOne({ army_no });
-    if (!user) return res.status(401).json({ message: 'Invalid credentials' });
+    if (!user) return res.status(401).json({ message: "Invalid credentials" });
 
     const isMatch = await bcrypt.compare(password, user.password);
-    if (!isMatch) return res.status(401).json({ message: 'Invalid credentials' });
+    if (!isMatch)
+      return res.status(401).json({ message: "Invalid credentials" });
 
     res.json({
       _id: user._id,
@@ -65,10 +67,11 @@ const loginUser = async (req, res) => {
       rank: user.rank,
       name: user.name,
       role: user.role,
-      token: generateToken(user._id)
+      token: generateToken(user._id),
     });
   } catch (err) {
-    res.status(500).json({ message: 'Server Error' });
+    console.log(err);
+    res.status(500).json({ message: "Server Error" });
   }
 };
 
@@ -77,15 +80,14 @@ const loginUser = async (req, res) => {
 // @access  Private
 const getProfile = async (req, res) => {
   try {
-    const user = await User.findById(req.user._id).select('-password');
-    if (!user) return res.status(404).json({ message: 'User not found' });
+    const user = await User.findById(req.user._id).select("-password");
+    if (!user) return res.status(404).json({ message: "User not found" });
 
     res.json(user);
   } catch (err) {
-    res.status(500).json({ message: 'Server Error' });
+    res.status(500).json({ message: "Server Error" });
   }
 };
-
 
 const isValidObjectId = (id) => mongoose.isValidObjectId(id);
 
@@ -94,25 +96,35 @@ const isValidObjectId = (id) => mongoose.isValidObjectId(id);
  * Body: { courseId: string, overwrite?: boolean }
  * - overwrite: if false, will not replace an existing different course (defaults to true)
  */
-async function assignCourseToUser (req, res){
+async function assignCourseToUser(req, res) {
   try {
     const { userId } = req.params;
     const { courseId, overwrite = true } = req.body;
 
     if (!isValidObjectId(userId)) {
-      return res.status(400).json({ success: false, message: 'Invalid userId' });
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid userId" });
     }
     if (!isValidObjectId(courseId)) {
-      return res.status(400).json({ success: false, message: 'Invalid courseId' });
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid courseId" });
     }
 
     const [user, course] = await Promise.all([
       User.findById(userId),
-      Course.findById(courseId)
+      Course.findById(courseId),
     ]);
 
-    if (!user) return res.status(404).json({ success: false, message: 'User not found' });
-    if (!course) return res.status(404).json({ success: false, message: 'Course not found' });
+    if (!user)
+      return res
+        .status(404)
+        .json({ success: false, message: "User not found" });
+    if (!course)
+      return res
+        .status(404)
+        .json({ success: false, message: "Course not found" });
 
     const alreadyAssigned =
       user.course && user.course.toString() === courseId.toString();
@@ -120,25 +132,53 @@ async function assignCourseToUser (req, res){
     if (alreadyAssigned) {
       return res.json({
         success: true,
-        message: 'User already assigned to this course',
-        data: await user.populate('course', 'courseName durationWeeks')
+        message: "User already assigned to this course",
+        data: await user.populate("course", "courseName durationWeeks"),
       });
     }
 
-    if (!overwrite && user.course && user.course.toString() !== courseId.toString()) {
+    if (
+      !overwrite &&
+      user.course &&
+      user.course.toString() !== courseId.toString()
+    ) {
       return res.status(409).json({
         success: false,
-        message: 'User already has a different course. Set overwrite=true to replace.'
+        message:
+          "User already has a different course. Set overwrite=true to replace.",
       });
     }
 
     user.course = courseId;
     await user.save();
 
-    const populated = await user.populate('course', 'courseName durationWeeks');
+    const populated = await user.populate("course", "courseName durationWeeks");
     return res.status(200).json({ success: true, data: populated });
   } catch (err) {
     return res.status(400).json({ success: false, message: err.message });
+  }
+}
+
+const getAllStudents = async (req, res) => {
+  try {
+    const users = await User.find({ role: "Student" }).select(
+      "army_no rank name"
+    );
+    res.status(200).json({ success: true, data: users });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+
+const getAllStudentsWithCourse = async (req, res) => {
+  try {
+    const users = await User.find({
+      role: "Student",
+      course: { $ne: null },
+    }).populate("course", "courseName durationWeeks");
+    res.status(200).json({ success: true, data: users });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
   }
 };
 
@@ -151,45 +191,93 @@ async function assignCourseToUser (req, res){
  *   overwrite?: boolean  // defaults to false: only fill where course is empty
  * }
  */
-async function bulkAssignCourse  (req, res){
+async function bulkAssignCourse(req, res) {
   try {
     const { courseId, userIds, all = false, overwrite = false } = req.body;
 
     if (!isValidObjectId(courseId)) {
-      return res.status(400).json({ success: false, message: 'Invalid courseId' });
+      return res
+        .status(400)
+        .json({ success: false, message: "Invalid courseId" });
     }
     const course = await Course.findById(courseId);
-    if (!course) return res.status(404).json({ success: false, message: 'Course not found' });
+    if (!course)
+      return res
+        .status(404)
+        .json({ success: false, message: "Course not found" });
 
     if (!all && (!Array.isArray(userIds) || userIds.length === 0)) {
       return res.status(400).json({
         success: false,
-        message: 'Provide userIds array or set all=true'
+        message: "Provide userIds array or set all=true",
       });
     }
 
-    const filter = all
-      ? {}
-      : { _id: { $in: userIds.filter(isValidObjectId) } };
+    const filter = all ? {} : { _id: { $in: userIds.filter(isValidObjectId) } };
 
     // If not overwriting, only target users without a course assigned
     if (!overwrite) {
       filter.$or = [{ course: null }, { course: { $exists: false } }];
     }
 
-    const result = await User.updateMany(filter, { $set: { course: courseId } });
+    const result = await User.updateMany(filter, {
+      $set: { course: courseId },
+    });
 
     return res.status(200).json({
       success: true,
       data: {
-        matchedCount: result.matchedCount ?? result.n,     // mongoose v6/v5 compatibility
+        matchedCount: result.matchedCount ?? result.n, // mongoose v6/v5 compatibility
         modifiedCount: result.modifiedCount ?? result.nModified,
-        overwrite
-      }
+        overwrite,
+      },
     });
   } catch (err) {
     return res.status(400).json({ success: false, message: err.message });
   }
+}
+
+const updateUser = async (req, res) => {
+  try {
+    const { userId } = req.params;
+    const { event, result, remarks } = req.body;
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { event, result, remarks },
+      { new: true }
+    );
+    res.status(200).json({ success: true, data: user });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  } finally {
+    res.status(200).json({ success: true, message: "User updated" });
+  }
 };
-module.exports = { registerUser, loginUser, getProfile, assignCourseToUser,
-  bulkAssignCourse};
+
+const addStudent = async (req, res) => {
+  try {
+    const { army_no, rank, name } = req.body;
+    const hashedPassword = await bcrypt.hash(army_no, 10);
+    const user = await User.create({
+      army_no,
+      rank,
+      name,
+      role: "Student",
+      password: hashedPassword,
+    });
+    res.status(200).json({ success: true, data: user });
+  } catch (err) {
+    res.status(500).json({ success: false, message: err.message });
+  }
+};
+module.exports = {
+  registerUser,
+  loginUser,
+  getProfile,
+  assignCourseToUser,
+  bulkAssignCourse,
+  getAllStudents,
+  getAllStudentsWithCourse,
+  updateUser,
+  addStudent,
+};
