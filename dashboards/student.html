@@ -1,267 +1,407 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Student Dashboard</title>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: linear-gradient(135deg, #74ebd5, #ACB6E5);
-    }
-
-    /* Page Header */
-    .page-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 15px 40px;
-      background: linear-gradient(45deg, #74ebd5, #ACB6E5);
-      border-bottom: 3px solid #444;
-      position: sticky;
-      top: 0;
-      z-index: 2000;
-    }
-    .page-header h1 {
-      flex: 1;
-      text-align: center;
-      font-size: 26px;
-      font-weight: bold;
-      color: #222;
-      text-transform: uppercase;
-      letter-spacing: 2px;
-    }
-    .corner-img {
-      width: 70px;
-      height: 70px;
-      object-fit: cover;
-    }
-
-    /* Profile below header */
-    .profile-pic {
-      display: block;
-      margin: 20px auto;
-      width: 120px;
-      height: 120px;
-      border-radius: 50%;
-      object-fit: cover;
-      border: 4px solid #444;
-    }
-
-    /* Section Styling */
-    .section {
-      margin: 25px;
-      padding: 20px;
-      background: white;
-      border-radius: 12px;
-      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
-    }
-    .section h2 {
-      text-align: center;
-      margin-bottom: 15px;
-      color: #333;
-      font-size: 22px;
-    }
-
-    /* Table Styling */
-    .data-table {
-      width: 100%;
-      border-collapse: collapse;
-    }
-    .data-table th, .data-table td {
-      border: 1px solid #ccc;
-      padding: 8px;
-      text-align: center;
-      font-size: 14px;
-    }
-    .data-table th {
-      background: #f4f4f4;
-      font-weight: bold;
-    }
-    .data-table tr:nth-child(even) {
-      background: #f9f9f9;
-    }
-
-    /* Study Material Links */
-    .material-list {
-      list-style: none;
-      padding: 0;
-    }
-    .material-list li {
-      margin: 8px 0;
-    }
-    .material-list a {
-      text-decoration: none;
-      color: white;
-      background: linear-gradient(45deg, #ff6b6b, #f06595);
-      padding: 10px 15px;
-      border-radius: 8px;
-      display: inline-block;
-    }
-    .material-list a:hover {
-      background: linear-gradient(45deg, #fa5252, #d6336c);
-    }
-
-    /* Chart responsiveness */
-    .chart-container {
-      width: 50%;
-      max-width: 400px;
-      margin: 0 auto;
-    }
-    canvas {
-      width: 100% !important;
-      height: auto !important;
-    }
-  </style>
-</head>
-<body>
-
-  <!-- Page Header -->
-  <header class="page-header">
-    <img src="left-logo.png" alt="Left Logo" class="corner-img">
-    <h1>Student Dashboard</h1>
-    <img src="right-logo.png" alt="Right Logo" class="corner-img">
-  </header>
-
-  <!-- Profile Picture -->
-  <img src="student-photo.jpg" alt="Profile Photo" class="profile-pic">
-
-  <!-- Bio Data -->
-  <div class="section">
-    <h2>Bio Data</h2>
-    <table class="data-table">
-      <tr><th>Army No</th><td>123456</td></tr>
-      <tr><th>Rank</th><td>Cadet</td></tr>
-      <tr><th>Name</th><td>Rahul Sharma</td></tr>
-      <tr><th>Coy</th><td>Alpha Coy</td></tr>
-      <tr><th>DOB</th><td>15-Aug-2008</td></tr>
-      <tr><th>Contact</th><td>9876543210</td></tr>
-      <tr><th>Email</th><td>rahul@example.com</td></tr>
-    </table>
-  </div>
-
-  <!-- Previous Test Marks -->
-  <div class="section">
-    <h2>Previous Test Marks</h2>
-    <table class="data-table">
-      <thead>
-        <tr><th>S No</th><th>Subject</th><th>Marks Obtained</th><th>Total Marks</th><th>Grade</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>1</td><td>Math</td><td>88</td><td>100</td><td>A</td></tr>
-        <tr><td>2</td><td>Science</td><td>76</td><td>100</td><td>B+</td></tr>
-        <tr><td>3</td><td>English</td><td>82</td><td>100</td><td>A</td></tr>
-        <tr><td>4</td><td>History</td><td>69</td><td>100</td><td>B</td></tr>
-        <tr><td>5</td><td>Geography</td><td>91</td><td>100</td><td>A+</td></tr>
-      </tbody>
-    </table>
-
-    <!-- Chart for Marks -->
-    <div class="chart-container">
-      <canvas id="marksChart"></canvas>
-    </div>
-  </div>
-
-  <!-- BPET Summary -->
-  <div class="section">
-    <h2>BPET Summary</h2>
-    <table class="data-table">
-      <thead>
-        <tr><th>S No</th><th>Event</th><th>Result</th><th>Remarks</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>1</td><td>Running</td><td>Passed</td><td>Good Stamina</td></tr>
-        <tr><td>2</td><td>Jumping</td><td>Passed</td><td>Strong Performance</td></tr>
-      </tbody>
-    </table>
-
-    <!-- Chart for BPET -->
-    <div class="chart-container">
-      <canvas id="bpetChart"></canvas>
-    </div>
-  </div>
-
-  <!-- PPT Summary -->
-  <div class="section">
-    <h2>PPT Summary</h2>
-    <table class="data-table">
-      <thead>
-        <tr><th>S No</th><th>Event</th><th>Result</th><th>Remarks</th></tr>
-      </thead>
-      <tbody>
-        <tr><td>1</td><td>Pushups</td><td>Qualified</td><td>Excellent</td></tr>
-        <tr><td>2</td><td>Situps</td><td>Unqualified</td><td>Needs Practice</td></tr>
-      </tbody>
-    </table>
-
-    <!-- Chart for PPT -->
-    <div class="chart-container">
-      <canvas id="pptChart"></canvas>
-    </div>
-  </div>
-
-  <!-- Study Material -->
-  <div class="section">
-    <h2>Study Material</h2>
-    <ul class="material-list">
-      <li><a href="math_notes.pdf" download>📘 Download Math Notes</a></li>
-      <li><a href="science_notes.pdf" download>🔬 Download Science Notes</a></li>
-      <li><a href="english_grammar.pdf" download>📖 Download English Grammar</a></li>
-      <li><a href="history_chapter1.pdf" download>📜 Download History Ch 1</a></li>
-      <li><a href="geography_maps.pdf" download>🗺️ Download Geography Maps</a></li>
-    </ul>
-  </div>
-
-  <!-- Charts Script -->
-  <script>
-    // Disable animations globally
-    Chart.defaults.animation = false;
-
-    // Marks Chart
-    new Chart(document.getElementById('marksChart'), {
-      type: 'bar',
-      data: {
-        labels: ['Math', 'Science', 'English', 'History', 'Geography'],
-        datasets: [{
-          label: 'Marks Obtained',
-          data: [88, 76, 82, 69, 91],
-          backgroundColor: '#4dabf7'
-        }]
-      },
-      options: {
-        responsive: true,
-        plugins: { legend: { display: false } },
-        scales: { y: { beginAtZero: true, max: 100 } }
+  <head>
+    <meta charset="UTF-8" />
+    <title>Student Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background: linear-gradient(135deg, #74ebd5, #acb6e5);
       }
-    });
 
-    // BPET Chart
-    new Chart(document.getElementById('bpetChart'), {
-      type: 'pie',
-      data: {
-        labels: ['Passed', 'Failed'],
-        datasets: [{
-          data: [2, 0],
-          backgroundColor: ['#51cf66', '#ff6b6b']
-        }]
-      },
-      options: { responsive: true }
-    });
+      /* Page Header */
+      .page-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px 40px;
+        background: linear-gradient(45deg, #74ebd5, #acb6e5);
+        border-bottom: 3px solid #444;
+        position: sticky;
+        top: 0;
+        z-index: 2000;
+      }
+      .page-header h1 {
+        flex: 1;
+        text-align: center;
+        font-size: 26px;
+        font-weight: bold;
+        color: #222;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-family: "Times New Roman", Times, serif;
+      }
+      .corner-img {
+        width: 70px;
+        height: 70px;
+        object-fit: cover;
+      }
 
-    // PPT Chart
-    new Chart(document.getElementById('pptChart'), {
-      type: 'doughnut',
-      data: {
-        labels: ['Qualified', 'Unqualified'],
-        datasets: [{
-          data: [1, 1],
-          backgroundColor: ['#339af0', '#ff922b']
-        }]
-      },
-      options: { responsive: true }
-    });
-  </script>
+      /* Profile below header */
+      .profile-pic {
+        display: block;
+        margin: 20px auto;
+        width: 150px;
+        height: 150px;
+        object-fit: cover;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
+      }
 
-</body>
+      /* Section Styling */
+      .section {
+        margin: 25px;
+        padding: 20px;
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      }
+      .section h2 {
+        text-align: center;
+        margin-bottom: 15px;
+        color: #333;
+        font-size: 22px;
+      }
+
+      /* Table Styling */
+      .data-table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      .data-table th,
+      .data-table td {
+        border: 1px solid #ccc;
+        padding: 8px;
+        text-align: center;
+        font-size: 14px;
+      }
+      .data-table th {
+        background: #f4f4f4;
+        font-weight: bold;
+      }
+      .data-table tr:nth-child(even) {
+        background: #f9f9f9;
+      }
+
+      /* Study Material Links */
+      .material-list {
+        list-style: none;
+        padding: 0;
+      }
+      .material-list li {
+        margin: 8px 0;
+      }
+      .material-list a {
+        text-decoration: none;
+        color: white;
+        background: linear-gradient(45deg, #ff6b6b, #f06595);
+        padding: 10px 15px;
+        border-radius: 8px;
+        display: inline-block;
+      }
+      .material-list a:hover {
+        background: linear-gradient(45deg, #fa5252, #d6336c);
+      }
+
+      /* Chart responsiveness */
+      .chart-container {
+        width: 50%;
+        max-width: 400px;
+        margin: 0 auto;
+      }
+      canvas {
+        width: 100% !important;
+        height: auto !important;
+      }
+      .profile-pic-form {
+        text-align: center;
+      }
+      .logout-button {
+        margin-top: 10px;
+        text-align: right;
+        margin-right: 20px;
+      }
+
+      /* Feedback Form Styling */
+      .form-group {
+        margin-bottom: 20px;
+      }
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: bold;
+        color: #333;
+      }
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        padding: 8px 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+      .form-group textarea {
+        resize: vertical;
+        min-height: 80px;
+      }
+      .form-group input[type="checkbox"] {
+        margin-right: 8px;
+      }
+      .feedback-submit-btn {
+        background: linear-gradient(45deg, #4dabf7, #339af0);
+        color: white;
+        padding: 12px 30px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+      }
+      .feedback-submit-btn:hover {
+        background: linear-gradient(45deg, #339af0, #228be6);
+      }
+
+      /* My Feedback Section */
+      .feedback-controls {
+        display: flex;
+        justify-content: flex-end;
+        margin-bottom: 20px;
+      }
+      .btn-refresh {
+        background: #4dabf7;
+        color: white;
+        border: none;
+        padding: 8px 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 500;
+      }
+      .btn-refresh:hover {
+        background: #339af0;
+      }
+      .feedback-list {
+        display: grid;
+        gap: 16px;
+      }
+      .feedback-item {
+        background: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 8px;
+        padding: 16px;
+        position: relative;
+      }
+      .feedback-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+      }
+      .feedback-rating {
+        font-size: 18px;
+        color: #ffd43b;
+      }
+      .feedback-date {
+        font-size: 12px;
+        color: #6c757d;
+      }
+      .feedback-content {
+        margin-bottom: 12px;
+      }
+      .feedback-content h4 {
+        margin: 0 0 4px 0;
+        font-size: 14px;
+        color: #495057;
+      }
+      .feedback-content p {
+        margin: 0 0 8px 0;
+        color: #212529;
+        line-height: 1.4;
+      }
+      .feedback-actions {
+        display: flex;
+        justify-content: flex-end;
+      }
+      .btn-delete {
+        background: #dc3545;
+        color: white;
+        border: none;
+        padding: 6px 12px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-size: 12px;
+        font-weight: 500;
+      }
+      .btn-delete:hover {
+        background: #c82333;
+      }
+      .no-feedback {
+        text-align: center;
+        color: #6c757d;
+        font-style: italic;
+        padding: 40px 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Page Header -->
+    <header class="page-header">
+      <img src="left-logo.png" alt="Left Logo" class="corner-img" />
+      <h1 class=""><u>Student Dashboard</u></h1>
+      <img src="right-logo.png" alt="Right Logo" class="corner-img" />
+    </header>
+
+    <!-- Profile Picture -->
+    <div class="logout-button" style="text-align: right; margin-right: 20px">
+      <button onclick="logout()">Logout</button>
+    </div>
+    <br />
+    <form
+      id="profile-pic-form"
+      class="profile-pic-form"
+      onsubmit="updateProfileImage(event)"
+    >
+      <img alt="Profile Photo" class="profile-pic" id="profile-pic" />
+      <input type="file" name="file" id="profile-pic-input" accept="image/*" />
+      <br />
+      <br />
+      <button type="submit">Update Profile Picture</button>
+      <div id="upload-status"></div>
+    </form>
+
+    <!-- Bio Data -->
+    <div class="section">
+      <h2>Bio Data</h2>
+      <table class="data-table" id="bioDataTable"></table>
+    </div>
+
+    <!-- Feedback Form -->
+    <div class="section">
+      <h2>Submit Feedback</h2>
+      <form id="feedback-form" onsubmit="submitFeedback(event)">
+        <div class="form-group">
+          <label for="rating">Rating (1-5):</label>
+          <select name="rating" id="rating" required>
+            <option value="">Select Rating</option>
+            <option value="1">1 - Very Poor</option>
+            <option value="2">2 - Poor</option>
+            <option value="3">3 - Average</option>
+            <option value="4">4 - Good</option>
+            <option value="5">5 - Excellent</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="feedback">Feedback:</label>
+          <textarea
+            name="feedback"
+            id="feedback"
+            rows="4"
+            placeholder="Share your feedback about the training, course content, or overall experience..."
+            required
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="howToImprove">How to Improve:</label>
+          <textarea
+            name="howToImprove"
+            id="howToImprove"
+            rows="4"
+            placeholder="Suggest improvements or changes that would enhance the training experience..."
+            required
+          ></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="isAnonymous">
+            <input type="checkbox" name="isAnonymous" id="isAnonymous" />
+            Submit anonymously
+          </label>
+        </div>
+
+        <button type="submit" class="feedback-submit-btn">
+          Submit Feedback
+        </button>
+        <div
+          id="feedback-status"
+          style="margin-top: 10px; font-weight: bold"
+        ></div>
+      </form>
+    </div>
+
+    <!-- My Feedback -->
+    <div class="section">
+      <h2>My Submitted Feedback</h2>
+      <div class="feedback-controls">
+        <button onclick="loadMyFeedback()" class="btn-refresh">Refresh</button>
+      </div>
+      <div id="my-feedback-list" class="feedback-list">
+        <p>Loading your feedback...</p>
+      </div>
+    </div>
+
+    <!-- Study Material -->
+    <div class="section">
+      <h2>Study Material</h2>
+      <div id="materialList"></div>
+    </div>
+
+    <!-- Charts Script -->
+    <script>
+      // Disable animations globally
+      Chart.defaults.animation = false;
+
+      // Marks Chart
+      new Chart(document.getElementById("marksChart"), {
+        type: "bar",
+        data: {
+          labels: ["Math", "Science", "English", "History", "Geography"],
+          datasets: [
+            {
+              label: "Marks Obtained",
+              data: [88, 76, 82, 69, 91],
+              backgroundColor: "#4dabf7",
+            },
+          ],
+        },
+        options: {
+          responsive: true,
+          plugins: { legend: { display: false } },
+          scales: { y: { beginAtZero: true, max: 100 } },
+        },
+      });
+
+      // BPET Chart
+      new Chart(document.getElementById("bpetChart"), {
+        type: "pie",
+        data: {
+          labels: ["Passed", "Failed"],
+          datasets: [
+            {
+              data: [2, 0],
+              backgroundColor: ["#51cf66", "#ff6b6b"],
+            },
+          ],
+        },
+        options: { responsive: true },
+      });
+
+      // PPT Chart
+      new Chart(document.getElementById("pptChart"), {
+        type: "doughnut",
+        data: {
+          labels: ["Qualified", "Unqualified"],
+          datasets: [
+            {
+              data: [1, 1],
+              backgroundColor: ["#339af0", "#ff922b"],
+            },
+          ],
+        },
+        options: { responsive: true },
+      });
+    </script>
+    <script src="student.js"></script>
+  </body>
 </html>

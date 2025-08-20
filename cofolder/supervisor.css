@@ -305,6 +305,133 @@ button:focus-visible, a:focus-visible, li:focus-visible{
   }
 }
 
+/* ========== Feedback Section Styling ========== */
+.feedback-stats {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.stat-card {
+  background: var(--surface);
+  padding: 20px;
+  border-radius: 12px;
+  border: 1px solid var(--surface-border);
+  box-shadow: var(--shadow);
+  text-align: center;
+}
+
+.stat-card h4 {
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.stat-card p {
+  font-size: 28px;
+  font-weight: 700;
+  color: var(--heading);
+  margin: 0;
+}
+
+.feedback-filters {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+  padding: 16px;
+  background: var(--surface);
+  border-radius: 8px;
+  border: 1px solid var(--surface-border);
+}
+
+.feedback-filters label {
+  font-weight: 500;
+  color: var(--heading);
+}
+
+.feedback-filters select {
+  padding: 8px 12px;
+  border: 1px solid var(--surface-border);
+  border-radius: 6px;
+  background: var(--surface);
+  color: var(--text);
+  font-size: 14px;
+}
+
+.btn-refresh {
+  background: var(--btn-bg);
+  color: var(--btn-text);
+  border: none;
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.2s ease;
+}
+
+.btn-refresh:hover {
+  background: var(--btn-bg-hover);
+}
+
+#feedback-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--surface);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+}
+
+#feedback-table th {
+  background: var(--sidebar-bg);
+  color: var(--heading);
+  font-weight: 600;
+  text-align: left;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--surface-border);
+}
+
+#feedback-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--surface-border);
+  color: var(--text);
+}
+
+#feedback-table tr:nth-child(even) {
+  background: rgba(243, 232, 255, 0.3);
+}
+
+#feedback-table tr:hover {
+  background: var(--sidebar-hover);
+}
+
+/* Responsive adjustments for feedback section */
+@media (max-width: 1024px) {
+  .feedback-stats {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .feedback-filters {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  
+  #feedback-table {
+    font-size: 14px;
+  }
+  
+  #feedback-table th,
+  #feedback-table td {
+    padding: 8px 12px;
+  }
+}
+
 @media (max-width: 760px){
   .dashboard-container{
     grid-template-columns: 1fr;
@@ -313,5 +440,15 @@ button:focus-visible, a:focus-visible, li:focus-visible{
     position: sticky;
     top: 0;
     z-index: 10;
+  }
+  
+  .feedback-stats {
+    grid-template-columns: 1fr;
+  }
+  
+  #feedback-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
   }
 }

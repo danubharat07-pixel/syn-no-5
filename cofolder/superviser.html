@@ -1,148 +1,184 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>CO Dashboard – Syndicate No. 5</title>
-  <link rel="stylesheet" href="supervisor.css" />
-  <!-- Chart.js -->
-  <script src="dashboardco.js"></script>
-  <!-- jsPDF -->
-  <script src="superviser.html"></script>
-</head>
-<body>
-  <div class="dashboard-container">
-    
-    <aside class="sidebar">
-      <img src="/LOGO 1 LEFT.png" alt="Emblem" class="nav-logo" />
-      <nav>
-        <ul>
-          <li data-tab="overview" class="active">Overview</li>
-          <li data-tab="events">Training Events</li>
-          <li data-tab="attendance">Attendance</li>
-          <li data-tab="Trg Calendar"> <a href="/calendar.html"> Trg Calendar</li></a>
-          <li data-tab="reports">Reports</li>
-          <li data-tab="settings">Settings</li>
-        </ul>
-      </nav>
-    </aside>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CO Dashboard – Syndicate No. 5</title>
+    <link rel="stylesheet" href="supervisor.css" />
+  </head>
+  <body>
+    <div class="dashboard-container">
+      <aside class="sidebar">
+        <img src="/LOGO 1 LEFT.png" alt="Emblem" class="nav-logo" />
+        <nav>
+          <ul>
+            <li data-tab="overview" class="active">Overview</li>
+            <li data-tab="events">Training Events</li>
+            <li data-tab="attendance">Attendance</li>
+            <li data-tab="feedback">Student Feedback</li>
+            <li data-tab="Trg Calendar">
+              <a href="/calendar.html"> Trg Calendar</a>
+            </li>
+            <li data-tab="reports">Reports</li>
+            <li data-tab="settings">Settings</li>
+          </ul>
+        </nav>
+      </aside>
 
-    <main class="main-content">
-      
-      <header class="dashboard-header">
-        <h2>Welcome, Col Kishan Thapa</h2>
-        <button id="btn-logout" class="btn-logout">Sign Out</button>
-      </header>
+      <main class="main-content">
+        <header class="dashboard-header">
+          <h2>Welcome, Col Kishan Thapa</h2>
+          <button id="btn-logout" class="btn-logout">Sign Out</button>
+        </header>
 
-      <!-- Overview Tab -->
-      <section id="overview" class="tab-section">
-        <section class="summary-cards">
-          <div class="card">
-            <h3>Pre-Courses</h3>
-            <p id="card-precourses">--</p>
-          </div>
-          <div class="card">
-            <h3>Avg Progress</h3>
-            <p id="card-progress">--%</p>
-          </div>
-          <div class="card">
-            <h3>Attendance</h3>
-            <p id="card-attendance">--%</p>
-          </div>
-          <div class="card">
-            <h3>Alerts</h3>
-            <p id="card-alerts">-- New</p>
-          </div>
-          <div class="card">
-            <h3>Feedback</h3>
-            <p id="card-feedback">-- Received</p>
-          </div>
+        <!-- Overview Tab -->
+        <section id="overview" class="tab-section">
+          <section class="summary-cards">
+            <div class="card">
+              <h3>Pre-Courses</h3>
+              <p id="card-precourses">--</p>
+            </div>
+            <div class="card">
+              <h3>Avg Progress</h3>
+              <p id="card-progress">--%</p>
+            </div>
+            <div class="card">
+              <h3>Attendance</h3>
+              <p id="card-attendance">--%</p>
+            </div>
+            <div class="card">
+              <h3>Alerts</h3>
+              <p id="card-alerts">-- New</p>
+            </div>
+            <div class="card">
+              <h3>Feedback</h3>
+              <p id="card-feedback">-- Received</p>
+            </div>
+          </section>
+
+          <section class="charts-section">
+            <div class="chart-container">
+              <h3>Progress Trend</h3>
+              <canvas id="progressChart"></canvas>
+            </div>
+            <div class="chart-container">
+              <h3>Attendance Trend</h3>
+              <canvas id="attendanceChart"></canvas>
+            </div>
+          </section>
+
+          <section class="alerts-section">
+            <h3>Alerts & Notifications</h3>
+            <ul id="alerts-list" class="alerts-list"></ul>
+          </section>
+
+          <section class="feedback-section">
+            <h3>Feedback Received</h3>
+            <table id="feedback-table" class="data-table">
+              <thead>
+                <tr>
+                  <th>Trainee</th>
+                  <th>Course</th>
+                  <th>Rating</th>
+                  <th>Feedback</th>
+                  <th>How to Improve</th>
+                  <th>Date</th>
+                  <th>Anonymous</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </section>
         </section>
 
-        <section class="charts-section">
-          <div class="chart-container">
-            <h3>Progress Trend</h3>
-            <canvas id="progressChart"></canvas>
-          </div>
-          <div class="chart-container">
-            <h3>Attendance Trend</h3>
-            <canvas id="attendanceChart"></canvas>
-          </div>
-        </section>
-
-        <section class="alerts-section">
-          <h3>Alerts & Notifications</h3>
-          <ul id="alerts-list" class="alerts-list"></ul>
-        </section>
-
-        <section class="feedback-section">
-          <h3>Feedback Received</h3>
-          <table id="feedback-table" class="data-table">
+        <!-- Events Tab -->
+        <section id="events" class="tab-section hidden">
+          <h3>Training Events</h3>
+          <table id="events-table" class="data-table">
             <thead>
               <tr>
-                <th>Trainee</th>
-                <th>Course</th>
-                <th>Rating</th>
-                <th>Comments</th>
+                <th>Event</th>
+                <th>Date</th>
+                <th>Location</th>
+                <th>Status</th>
               </tr>
             </thead>
             <tbody></tbody>
           </table>
         </section>
-      </section>
 
-      <!-- Events Tab -->
-      <section id="events" class="tab-section hidden">
-        <h3>Training Events</h3>
-        <table id="events-table" class="data-table">
-          <thead>
-            <tr>
-              <th>Event</th>
-              <th>Date</th>
-              <th>Location</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </section>
+        <!-- Attendance Tab -->
+        <section id="attendance" class="tab-section hidden">
+          <h3>Recent Attendance</h3>
+          <table id="attendance-table" class="data-table">
+            <thead>
+              <tr>
+                <th>Soldier</th>
+                <th>Rank</th>
+                <th>Date</th>
+                <th>Status</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </section>
 
-      <!-- Attendance Tab -->
-      <section id="attendance" class="tab-section hidden">
-        <h3>Recent Attendance</h3>
-        <table id="attendance-table" class="data-table">
-          <thead>
-            <tr>
-              <th>Soldier</th>
-              <th>Rank</th>
-              <th>Date</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody></tbody>
-        </table>
-      </section>
-       
-      <!-- TRG Calendar Tab -->
-<section id="trg-calendar" class="tab-section hidden calendar-section">
-  <button id="btn-export-trg-calendar" class="btn-report">Export TRG Calendar</button>
-</section>
+        <!-- Student Feedback Tab -->
+        <section id="feedback" class="tab-section hidden">
+          <h3>Student Feedback</h3>
 
+          <!-- Feedback Statistics -->
+          <div class="feedback-stats">
+            <div class="stat-card">
+              <h4>Total Feedback</h4>
+              <p id="total-feedback">--</p>
+            </div>
 
-      <!-- Reports Tab -->
-      <section id="reports" class="tab-section hidden reports-section">
-        <button id="btn-export-pdf" class="btn-report">Export Feedback & Roster</button>
-      </section>
+            <div class="stat-card">
+              <h4>Average Rating</h4>
+              <p id="avg-rating">--</p>
+            </div>
+          </div>
 
-      <!-- Settings Tab -->
-      <section id="settings" class="tab-section hidden">
-        <h3>Settings</h3>
-        <!-- future settings form -->
-      </section>
+          <!-- Feedback Table -->
+          <table id="feedback-table" class="data-table">
+            <thead>
+              <tr>
+                <th>Student</th>
+                <th>For Role</th>
+                <th>Rating</th>
+                <th>Feedback</th>
+                <th>How to Improve</th>
+                <th>Date</th>
+                <th>Anonymous</th>
+              </tr>
+            </thead>
+            <tbody id="feedback-table-body"></tbody>
+          </table>
+        </section>
 
-    </main>
-  </div>
+        <!-- TRG Calendar Tab -->
+        <section id="trg-calendar" class="tab-section hidden calendar-section">
+          <button id="btn-export-trg-calendar" class="btn-report">
+            Export TRG Calendar
+          </button>
+        </section>
 
-  <script src="dashboardco.js"></script>
-</body>
+        <!-- Reports Tab -->
+        <section id="reports" class="tab-section hidden reports-section">
+          <button id="btn-export-pdf" class="btn-report">
+            Export Feedback & Roster
+          </button>
+        </section>
+
+        <!-- Settings Tab -->
+        <section id="settings" class="tab-section hidden">
+          <h3>Settings</h3>
+          <!-- future settings form -->
+        </section>
+      </main>
+    </div>
+
+    <script src="dashboardco.js"></script>
+  </body>
 </html>

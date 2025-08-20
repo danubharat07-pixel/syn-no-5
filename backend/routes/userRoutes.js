@@ -10,8 +10,10 @@ const {
   getAllStudentsWithCourse,
   updateUser,
   addStudent,
+  updateProfileImage,
 } = require("../controllers/userController");
 const { protect } = require("../middleware/authMiddleware");
+const upload = require("../middleware/multerMiddleware");
 
 router.post("/register", registerUser);
 router.post("/login", loginUser);
@@ -20,7 +22,13 @@ router.post("/:userId/assign-course", assignCourseToUser);
 router.post("/assign-course", bulkAssignCourse);
 router.get("/getAllStudents", getAllStudents);
 router.get("/getAllStudentsWithCourse", getAllStudentsWithCourse);
-router.put("/:userId", updateUser);
 router.post("/addStudent", addStudent);
+router.put(
+  "/profile-image",
+  protect,
+  upload.single("file"),
+  updateProfileImage
+);
+router.put("/:userId", updateUser);
 
 module.exports = router;

@@ -2,9 +2,6 @@ const Material = require("../models/Material");
 
 async function createMaterial(req, res) {
   try {
-    console.log("req.body:", req.body);
-    console.log("req.file:", req.file);
-
     const { title, description, course, forRole, type } = req.body;
 
     // Check if file was uploaded
@@ -49,7 +46,7 @@ async function getMaterials(req, res) {
     // Filter for only last 24 hours
     const twentyFourHoursAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
     filterObj.createdAt = { $gte: twentyFourHoursAgo };
-    
+
     const materials = await Material.find(filterObj).populate(
       "course",
       "courseName"

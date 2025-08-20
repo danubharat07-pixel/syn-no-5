@@ -80,10 +80,14 @@ const loginUser = async (req, res) => {
 // @access  Private
 const getProfile = async (req, res) => {
   try {
-    const user = await User.findById(req.user._id).select("-password");
-    if (!user) return res.status(404).json({ message: "User not found" });
+    const user = await User.findById(req.user._id)
+      .select("-password")
+      .populate("course", "courseName durationWeeks");
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
 
-    res.json(user);
+    res.json({ data: user });
   } catch (err) {
     res.status(500).json({ message: "Server Error" });
   }
@@ -182,8 +186,6 @@ const getAllStudentsWithCourse = async (req, res) => {
   }
 };
 
-
-
 /**
  * POST /api/users/assign-course
  * Body: {
@@ -272,6 +274,72 @@ const addStudent = async (req, res) => {
     res.status(500).json({ success: false, message: err.message });
   }
 };
+
+const updateProfileImage = async (req, res) => {
+  try {
+    console.log("=== Profile Image Upload Debug ===");
+    console.log("req.file:", req.file);
+    console.log("req.body:", req.body);
+    console.log("req.headers['content-type']:", req.headers['content-type']);
+    
+    const userId = req.user._id;
+    
+    // Check if file was uploaded
+    if (!req.file) {
+      console.log("No file received. Possible causes:");
+      console.log("- File size too large (>5MB)");
+      console.log("- Invalid file type");
+      console.log("- Multer error occurred");
+      console.log("- Form data not properly formatted");
+      
+      return res.status(400).json({ 
+        success: false, 
+        message: "File is required. Please ensure you're uploading a valid image file (JPG, PNG, GIF, WebP) under 5MB." 
+      });
+    }
+    
+    console.log("File successfully received:", {
+      filename: req.file.filename,
+      originalname: req.file.originalname,
+      mimetype: req.file.mimetype,
+      size: req.file.size,
+      path: req.file.path
+    });
+    
+    const user = await User.findByIdAndUpdate(
+      userId,
+      { profileImage: req.file.path },
+      { new: true }
+    );
+    
+    console.log("Profile image updated successfully for user:", userId);
+    res.status(200).json({ success: true, data: user });
+    
+  } catch (err) {
+    console.error("Error in updateProfileImage:", err);
+    
+    // Handle multer-specific errors
+    if (err.code === 'LIMIT_FILE_SIZE') {
+      return res.status(400).json({ 
+        success: false, 
+        message: "File too large. Maximum size is 5MB." 
+      });
+    }
+    
+    if (err.message && err.message.includes('Invalid file type')) {
+      return res.status(400).json({ 
+        success: false, 
+        message: err.message 
+      });
+    }
+    
+    res.status(500).json({ 
+      success: false, 
+      message: "Server Error", 
+      error: process.env.NODE_ENV === 'development' ? err.message : undefined 
+    });
+  }
+};
 module.exports = {
   registerUser,
   loginUser,
@@ -282,4 +350,5 @@ module.exports = {
   getAllStudentsWithCourse,
   updateUser,
   addStudent,
+  updateProfileImage,
 };

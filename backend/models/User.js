@@ -24,6 +24,10 @@ const userSchema = new mongoose.Schema({
     enum: ["good", "excellent", "satisfactory", "fail", "a", "b", "c"],
     default: null,
   },
+  profileImage: {
+    type: String,
+    default: null,
+  },
   remarks: String,
 });
 
