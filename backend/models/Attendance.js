@@ -14,10 +14,21 @@ const studentAttendanceSchema = new mongoose.Schema(
       default: "Absent",
       required: true,
     },
+    reasonForAbsence: {
+      type: String,
+      trim: true,
+      maxlength: 200,
+      default: "-",
+    },
     remarks: {
       type: String,
       trim: true,
       maxlength: 200,
+      default: "-",
+    },
+    date: {
+      type: Date,
+      required: true,
     },
   },
   { _id: false }
@@ -57,14 +68,7 @@ const attendanceSchema = new mongoose.Schema(
     takenBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
-      required: true,
-      validate: {
-        validator: async function (userId) {
-          const user = await mongoose.model("User").findById(userId);
-          return user && ["CO", "TrgOffr", "TrgJCO"].includes(user.role);
-        },
-        message: "Attendance can only be taken by CO, TrgOffr, or TrgJCO",
-      },
+      required: false,
     },
     session: {
       type: String,

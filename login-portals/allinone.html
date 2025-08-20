@@ -28,19 +28,19 @@
           localStorage.setItem("role", data.role);
           if (data.role === "CO") {
             window.location.href =
-              "http://127.0.0.1:5500/syn-no-5/cofolder/superviser.html";
+              "http://127.0.0.1:5500/cofolder/superviser.html";
           }
           if (data.role === "TrgOffr") {
             window.location.href =
-              "http://127.0.0.1:5500/syn-no-5/dashboards/training-officer.html";
+              "http://127.0.0.1:5500/dashboards/training-officer.html";
           }
           if (data.role === "TrgJCO") {
             window.location.href =
-              "http://127.0.0.1:5500/syn-no-5/dashboards/training-jco.html";
+              "http://127.0.0.1:5500/dashboards/training-jco.html";
           }
           if (data.role === "Student") {
             window.location.href =
-              "http://127.0.0.1:5500/syn-no-5/dashboards/student.html";
+              "http://127.0.0.1:5500/dashboards/student.html";
           }
         } catch (err) {
           console.error("Login failed:", err);

@@ -41,6 +41,7 @@ app.use("/api/training", require("./routes/trainingRoutes"));
 app.use("/api/calendar", require("./routes/calendarRoutes"));
 app.use("/api/courses", require("./routes/coursesRoutes"));
 app.use("/api/materials", require("./routes/materialRoutes"));
+app.use("/api/attendance", require("./routes/attendanceRoutes"));
 
 const PORT = process.env.PORT || 5001;
 console.log(PORT);
