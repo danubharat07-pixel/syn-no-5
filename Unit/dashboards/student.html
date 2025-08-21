@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Student Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #74ebd5, #ACB6E5);
+    }
+
+    /* Page Header */
+    .page-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 40px;
+      background: linear-gradient(45deg, #74ebd5, #ACB6E5);
+      border-bottom: 3px solid #444;
+      position: sticky;
+      top: 0;
+      z-index: 2000;
+    }
+    .page-header h1 {
+      flex: 1;
+      text-align: center;
+      font-size: 26px;
+      font-weight: bold;
+      color: #222;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .corner-img {
+      width: 70px;
+      height: 70px;
+      object-fit: cover;
+    }
+
+    /* Profile below header */
+    .profile-pic {
+      display: block;
+      margin: 20px auto;
+      width: 120px;
+      height: 120px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 4px solid #444;
+    }
+
+    /* Section Styling */
+    .section {
+      margin: 25px;
+      padding: 20px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    }
+    .section h2 {
+      text-align: center;
+      margin-bottom: 15px;
+      color: #333;
+      font-size: 22px;
+    }
+
+    /* Table Styling */
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .data-table th, .data-table td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+      font-size: 14px;
+    }
+    .data-table th {
+      background: #f4f4f4;
+      font-weight: bold;
+    }
+    .data-table tr:nth-child(even) {
+      background: #f9f9f9;
+    }
+
+    /* Study Material Links */
+    .material-list {
+      list-style: none;
+      padding: 0;
+    }
+    .material-list li {
+      margin: 8px 0;
+    }
+    .material-list a {
+      text-decoration: none;
+      color: white;
+      background: linear-gradient(45deg, #ff6b6b, #f06595);
+      padding: 10px 15px;
+      border-radius: 8px;
+      display: inline-block;
+    }
+    .material-list a:hover {
+      background: linear-gradient(45deg, #fa5252, #d6336c);
+    }
+
+    /* Chart responsiveness */
+    .chart-container {
+      width: 50%;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    canvas {
+      width: 100% !important;
+      height: auto !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <img src="left-logo.png" alt="Left Logo" class="corner-img">
+    <h1>Student Dashboard</h1>
+    <img src="right-logo.png" alt="Right Logo" class="corner-img">
+  </header>
+
+  <!-- Profile Picture -->
+  <img src="student-photo.jpg" alt="Profile Photo" class="profile-pic">
+
+  <!-- Bio Data -->
+  <div class="section">
+    <h2>Bio Data</h2>
+    <table class="data-table">
+      <tr><th>Army No</th><td>123456</td></tr>
+      <tr><th>Rank</th><td>Cadet</td></tr>
+      <tr><th>Name</th><td>Rahul Sharma</td></tr>
+      <tr><th>Coy</th><td>Alpha Coy</td></tr>
+      <tr><th>DOB</th><td>15-Aug-2008</td></tr>
+      <tr><th>Contact</th><td>9876543210</td></tr>
+      <tr><th>Email</th><td>rahul@example.com</td></tr>
+    </table>
+  </div>
+
+  <!-- Previous Test Marks -->
+  <div class="section">
+    <h2>Previous Test Marks</h2>
+    <table class="data-table">
+      <thead>
+        <tr><th>S No</th><th>Subject</th><th>Marks Obtained</th><th>Total Marks</th><th>Grade</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>Math</td><td>88</td><td>100</td><td>A</td></tr>
+        <tr><td>2</td><td>Science</td><td>76</td><td>100</td><td>B+</td></tr>
+        <tr><td>3</td><td>English</td><td>82</td><td>100</td><td>A</td></tr>
+        <tr><td>4</td><td>History</td><td>69</td><td>100</td><td>B</td></tr>
+        <tr><td>5</td><td>Geography</td><td>91</td><td>100</td><td>A+</td></tr>
+      </tbody>
+    </table>
+
+    <!-- Chart for Marks -->
+    <div class="chart-container">
+      <canvas id="marksChart"></canvas>
+    </div>
+  </div>
+
+  <!-- BPET Summary -->
+  <div class="section">
+    <h2>BPET Summary</h2>
+    <table class="data-table">
+      <thead>
+        <tr><th>S No</th><th>Event</th><th>Result</th><th>Remarks</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>Running</td><td>Passed</td><td>Good Stamina</td></tr>
+        <tr><td>2</td><td>Jumping</td><td>Passed</td><td>Strong Performance</td></tr>
+      </tbody>
+    </table>
+
+    <!-- Chart for BPET -->
+    <div class="chart-container">
+      <canvas id="bpetChart"></canvas>
+    </div>
+  </div>
+
+  <!-- PPT Summary -->
+  <div class="section">
+    <h2>PPT Summary</h2>
+    <table class="data-table">
+      <thead>
+        <tr><th>S No</th><th>Event</th><th>Result</th><th>Remarks</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>Pushups</td><td>Qualified</td><td>Excellent</td></tr>
+        <tr><td>2</td><td>Situps</td><td>Unqualified</td><td>Needs Practice</td></tr>
+      </tbody>
+    </table>
+
+    <!-- Chart for PPT -->
+    <div class="chart-container">
+      <canvas id="pptChart"></canvas>
+    </div>
+  </div>
+
+  <!-- Study Material -->
+  <div class="section">
+    <h2>Study Material</h2>
+    <ul class="material-list">
+      <li><a href="math_notes.pdf" download>📘 Download Math Notes</a></li>
+      <li><a href="science_notes.pdf" download>🔬 Download Science Notes</a></li>
+      <li><a href="english_grammar.pdf" download>📖 Download English Grammar</a></li>
+      <li><a href="history_chapter1.pdf" download>📜 Download History Ch 1</a></li>
+      <li><a href="geography_maps.pdf" download>🗺️ Download Geography Maps</a></li>
+    </ul>
+  </div>
+
+  <!-- Charts Script -->
+  <script>
+    // Disable animations globally
+    Chart.defaults.animation = false;
+
+    // Marks Chart
+    new Chart(document.getElementById('marksChart'), {
+      type: 'bar',
+      data: {
+        labels: ['Math', 'Science', 'English', 'History', 'Geography'],
+        datasets: [{
+          label: 'Marks Obtained',
+          data: [88, 76, 82, 69, 91],
+          backgroundColor: '#4dabf7'
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { display: false } },
+        scales: { y: { beginAtZero: true, max: 100 } }
+      }
+    });
+
+    // BPET Chart
+    new Chart(document.getElementById('bpetChart'), {
+      type: 'pie',
+      data: {
+        labels: ['Passed', 'Failed'],
+        datasets: [{
+          data: [2, 0],
+          backgroundColor: ['#51cf66', '#ff6b6b']
+        }]
+      },
+      options: { responsive: true }
+    });
+
+    // PPT Chart
+    new Chart(document.getElementById('pptChart'), {
+      type: 'doughnut',
+      data: {
+        labels: ['Qualified', 'Unqualified'],
+        datasets: [{
+          data: [1, 1],
+          backgroundColor: ['#339af0', '#ff922b']
+        }]
+      },
+      options: { responsive: true }
+    });
+  </script>
+
+</body>
+</html>

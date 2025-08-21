@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>CO Dashboard – Syndicate No. 5</title>
+  <link rel="stylesheet" href="supervisor.css" />
+  <!-- Chart.js -->
+  <script src="dashboardco.js"></script>
+  <!-- jsPDF -->
+  <script src="superviser.html"></script>
+</head>
+<body>
+  <div class="dashboard-container">
+    
+    <aside class="sidebar">
+      <img src="/LOGO 1 LEFT.png" alt="Emblem" class="nav-logo" />
+      <nav>
+        <ul>
+          <li data-tab="overview" class="active">Overview</li>
+          <li data-tab="events">Training Events</li>
+          <li data-tab="attendance">Attendance</li>
+          <li data-tab="Trg Calendar"> <a href="/calendar.html"> Trg Calendar</li></a>
+          <li data-tab="reports">Reports</li>
+          <li data-tab="settings">Settings</li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="main-content">
+      
+      <header class="dashboard-header">
+        <h2>Welcome, Col Kishan Thapa</h2>
+        <button id="btn-logout" class="btn-logout">Sign Out</button>
+      </header>
+
+      <!-- Overview Tab -->
+      <section id="overview" class="tab-section">
+        <section class="summary-cards">
+          <div class="card">
+            <h3>Pre-Courses</h3>
+            <p id="card-precourses">--</p>
+          </div>
+          <div class="card">
+            <h3>Avg Progress</h3>
+            <p id="card-progress">--%</p>
+          </div>
+          <div class="card">
+            <h3>Attendance</h3>
+            <p id="card-attendance">--%</p>
+          </div>
+          <div class="card">
+            <h3>Alerts</h3>
+            <p id="card-alerts">-- New</p>
+          </div>
+          <div class="card">
+            <h3>Feedback</h3>
+            <p id="card-feedback">-- Received</p>
+          </div>
+        </section>
+
+        <section class="charts-section">
+          <div class="chart-container">
+            <h3>Progress Trend</h3>
+            <canvas id="progressChart"></canvas>
+          </div>
+          <div class="chart-container">
+            <h3>Attendance Trend</h3>
+            <canvas id="attendanceChart"></canvas>
+          </div>
+        </section>
+
+        <section class="alerts-section">
+          <h3>Alerts & Notifications</h3>
+          <ul id="alerts-list" class="alerts-list"></ul>
+        </section>
+
+        <section class="feedback-section">
+          <h3>Feedback Received</h3>
+          <table id="feedback-table" class="data-table">
+            <thead>
+              <tr>
+                <th>Trainee</th>
+                <th>Course</th>
+                <th>Rating</th>
+                <th>Comments</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </section>
+      </section>
+
+      <!-- Events Tab -->
+      <section id="events" class="tab-section hidden">
+        <h3>Training Events</h3>
+        <table id="events-table" class="data-table">
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Date</th>
+              <th>Location</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+
+      <!-- Attendance Tab -->
+      <section id="attendance" class="tab-section hidden">
+        <h3>Recent Attendance</h3>
+        <table id="attendance-table" class="data-table">
+          <thead>
+            <tr>
+              <th>Soldier</th>
+              <th>Rank</th>
+              <th>Date</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </section>
+       
+      <!-- TRG Calendar Tab -->
+<section id="trg-calendar" class="tab-section hidden calendar-section">
+  <button id="btn-export-trg-calendar" class="btn-report">Export TRG Calendar</button>
+</section>
+
+
+      <!-- Reports Tab -->
+      <section id="reports" class="tab-section hidden reports-section">
+        <button id="btn-export-pdf" class="btn-report">Export Feedback & Roster</button>
+      </section>
+
+      <!-- Settings Tab -->
+      <section id="settings" class="tab-section hidden">
+        <h3>Settings</h3>
+        <!-- future settings form -->
+      </section>
+      <!-- Daily Programme List -->
+    <section class="section accent-primary span-2">
+      <h2>Daily Training Programme <span class="chip chip--success">Live</span></h2>
+      <table aria-label="Daily training programme">
+        <thead>
+          <tr>
+            <th> S. No.</th>
+            <th>Course</th>
+            <th>Time</th>
+            <th>Activity</th>
+            <th>Instructor</th>
+          </tr>
+          <tr>
+            <td> 1.</td>
+          <td> Sec Cdr</td>
+          <td> 0830Hrs-1325Hrs</td>
+          <td> 7.62mm SIG SAUER</td>
+          <td> WTI Gokaran Singh</td>
+          </tr>
+          <tr>
+            <td> 2.</td>
+          <td> Commando</td>
+          <td> 0830Hrs-1325Hrs</td>
+          <td> Wpn Trg</td>
+          <td> HI Pardeep Parihar</td>
+          </tr>
+          <tr>
+            <td> 3.</td>
+          <td> M.W</td>
+          <td> 0830Hrs-1325Hrs</td>
+          <td> Types of knots and ropes</td>
+          <td> HI Jagdish Bhandari</td>
+          </tr>
+          <tr>
+            <td> 4.</td>
+          <td>PPTC</td>
+          <td> 0830Hrs-1325Hrs</td>
+          <td> Pole Vault</td>
+          <td> Nk Kamal Singh</td>
+          </tr>
+          <tr>
+            <td> 5.</td>
+          <td> Drone </td>
+          <td> 0830Hrs-1325Hrs</td>
+          <td> Types of Drones and their usage</td>
+          <td> Nk Deepak Singh</td>
+          </tr>
+          <tr>
+            <td> 6.</td>
+          <td> ADC</td>
+          <td> 0830Hrs-1325Hrs</td>
+          <td> Cane Drill</td>
+          <td> DI Hem Chandra Pant</td>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Populate dynamically -->
+        </tbody>
+      </table>
+    </section>
+
+    </main>
+  </div>
+
+  <script src="dashboardco.js"></script>
+</body>
+</html>

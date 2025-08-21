@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Trg JCO / Admin Summary</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: linear-gradient(135deg, #a8e063, #f6d365);
+    }
+
+    /* Page Header */
+    .page-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px 40px;
+      background: linear-gradient(45deg, #a8e063, #f6d365);
+      border-bottom: 3px solid #444;
+      position: sticky;
+      top: 0;
+      z-index: 2000;
+    }
+    .page-header h1 {
+      flex: 1;
+      text-align: center;
+      font-size: 28px;
+      font-weight: bold;
+      color: #222;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+    }
+    .page-header .logo {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+    }
+
+    /* Filter Bar */
+    .filter-bar {
+      position: sticky;
+      top: 80px; /* below header */
+      z-index: 1000;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 15px;
+      padding: 12px 20px;
+      background: linear-gradient(45deg, #a8e063, #f6d365);
+      border-bottom: 2px solid #ccc;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .filter-bar label {
+      font-weight: bold;
+    }
+    .filter-bar select,
+    .filter-bar input,
+    .filter-bar button {
+      padding: 6px 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 14px;
+    }
+    .filter-bar button {
+      background: linear-gradient(45deg, #ff6b6b, #f06595);
+      color: white;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    .filter-bar button:hover {
+      background: linear-gradient(45deg, #fa5252, #d6336c);
+    }
+
+    /* Table Styling */
+    .summary-section {
+      margin: 25px;
+      padding: 20px;
+      background: white;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    }
+    .summary-section h2 {
+      text-align: center;
+      margin-bottom: 15px;
+      color: #333;
+      font-size: 22px;
+    }
+    .summary-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    .summary-table th, .summary-table td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: center;
+      font-size: 14px;
+    }
+    .summary-table th {
+      background: #f4f4f4;
+      font-weight: bold;
+      position: sticky;
+      top: 120px; /* keeps table headers visible under filter bar */
+      z-index: 500;
+    }
+    .summary-table tr:nth-child(even) {
+      background: #f9f9f9;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Page Header -->
+  <header class="page-header">
+    <img src="/LOGO 1 LEFT.png" alt="Left Logo" class="logo">
+    <h1>Trg JCO / Admin</h1>
+    <img src="/syn 5 logo.jpeg" alt="Right Logo" class="logo">
+  </header>
+
+  <!-- Filter Bar -->
+  <div class="filter-bar">
+    <label>Filter by Result:</label>
+    <select id="resultFilter" onchange="applyFilters()">
+      <option value="All">All</option>
+      <option value="Passed">Passed</option>
+      <option value="Failed">Failed</option>
+      <option value="Qualified">Qualified</option>
+      <option value="Unqualified">Unqualified</option>
+      <option value="Selected">Selected</option>
+      <option value="Not Selected">Not Selected</option>
+      <option value="MM">MM</option>
+      <option value="FC">FC</option>
+      <option value="SS">SS</option>
+    </select>
+
+    <label>Search by Army No:</label>
+    <input list="armyNoList" id="armySearch" placeholder="Enter Army No..." onkeyup="applyFilters()" />
+    <datalist id="armyNoList"></datalist>
+
+    <button onclick="clearFilters()">Clear Filters</button>
+  </div>
+
+  <!-- BPET Summary -->
+  <div class="summary-section">
+    <h2><b>BPET Summary</b></h2>
+    <table class="summary-table">
+      <thead>
+        <tr>
+          <th>S No</th><th>Army No</th><th>Rank</th><th>Name</th>
+          <th>Course</th><th>Event</th><th>Results</th><th>Remarks</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>101</td><td>Sep</td><td>Ravi</td><td>Alpha</td><td>Run</td><td>Passed</td><td>Good</td></tr>
+        <tr><td>2</td><td>102</td><td>L/Cpl</td><td>Amit</td><td>Bravo</td><td>Run</td><td>Failed</td><td>Retry</td></tr>
+        <tr><td>3</td><td>103</td><td>Cpl</td><td>Suraj</td><td>Charlie</td><td>Run</td><td>Passed</td><td>Excellent</td></tr>
+        <tr><td>4</td><td>104</td><td>Sep</td><td>Manoj</td><td>Alpha</td><td>Run</td><td>Failed</td><td>Slow</td></tr>
+        <tr><td>5</td><td>105</td><td>L/Cpl</td><td>Vijay</td><td>Bravo</td><td>Run</td><td>Passed</td><td>Improved</td></tr>
+        <tr><td>6</td><td>106</td><td>Cpl</td><td>Kiran</td><td>Charlie</td><td>Run</td><td>Passed</td><td>Consistent</td></tr>
+        <tr><td>7</td><td>107</td><td>Sep</td><td>Arun</td><td>Alpha</td><td>Run</td><td>Failed</td><td>Retry</td></tr>
+        <tr><td>8</td><td>108</td><td>L/Cpl</td><td>Rahul</td><td>Bravo</td><td>Run</td><td>Passed</td><td>Good</td></tr>
+        <tr><td>9</td><td>109</td><td>Cpl</td><td>Anil</td><td>Charlie</td><td>Run</td><td>Passed</td><td>Strong</td></tr>
+        <tr><td>10</td><td>110</td><td>Sep</td><td>Suresh</td><td>Alpha</td><td>Run</td><td>Failed</td><td>Needs Practice</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Physical Summary -->
+  <div class="summary-section">
+    <h2><b>PPT Summary</b></h2>
+    <table class="summary-table">
+      <thead>
+        <tr>
+          <th>S No</th><th>Army No</th><th>Rank</th><th>Name</th>
+          <th>Course</th><th>Event</th><th>Results</th><th>Remarks</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>201</td><td>Sep</td><td>Rohit</td><td>Alpha</td><td>Pushups</td><td>Qualified</td><td>Good</td></tr>
+        <tr><td>2</td><td>202</td><td>L/Cpl</td><td>Arvind</td><td>Bravo</td><td>Situps</td><td>Unqualified</td><td>Retry</td></tr>
+        <tr><td>3</td><td>203</td><td>Cpl</td><td>Ajay</td><td>Charlie</td><td>Pushups</td><td>Qualified</td><td>Excellent</td></tr>
+        <tr><td>4</td><td>204</td><td>Sep</td><td>Deepak</td><td>Alpha</td><td>Situps</td><td>Unqualified</td><td>Weak</td></tr>
+        <tr><td>5</td><td>205</td><td>L/Cpl</td><td>Sameer</td><td>Bravo</td><td>Pushups</td><td>Qualified</td><td>Strong</td></tr>
+        <tr><td>6</td><td>206</td><td>Cpl</td><td>Ramesh</td><td>Charlie</td><td>Situps</td><td>Qualified</td><td>Consistent</td></tr>
+        <tr><td>7</td><td>207</td><td>Sep</td><td>Virat</td><td>Alpha</td><td>Pushups</td><td>Unqualified</td><td>Retry</td></tr>
+        <tr><td>8</td><td>208</td><td>L/Cpl</td><td>Harish</td><td>Bravo</td><td>Situps</td><td>Qualified</td><td>Improved</td></tr>
+        <tr><td>9</td><td>209</td><td>Cpl</td><td>Karan</td><td>Charlie</td><td>Pushups</td><td>Qualified</td><td>Good</td></tr>
+        <tr><td>10</td><td>210</td><td>Sep</td><td>Ashok</td><td>Alpha</td><td>Situps</td><td>Unqualified</td><td>Needs Practice</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Firing Summary -->
+  <div class="summary-section">
+    <h2> <b>Firing Summary</b></h2>
+    <table class="summary-table">
+      <thead>
+        <tr>
+          <th>S No</th><th>Army No</th><th>Rank</th><th>Name</th>
+          <th>Course</th><th>Event</th><th>Results</th><th>Remarks</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>301</td><td>Sep</td><td>Kunal</td><td>Alpha</td><td>Rifle</td><td>MM</td><td>Average</td></tr>
+        <tr><td>2</td><td>302</td><td>L/Cpl</td><td>Sachin</td><td>Bravo</td><td>Pistol</td><td>FC</td><td>Good</td></tr>
+        <tr><td>3</td><td>303</td><td>Cpl</td><td>Prakash</td><td>Charlie</td><td>Rifle</td><td>SS</td><td>Excellent</td></tr>
+        <tr><td>4</td><td>304</td><td>Sep</td><td>Rajesh</td><td>Alpha</td><td>Pistol</td><td>MM</td><td>Retry</td></tr>
+        <tr><td>5</td><td>305</td><td>L/Cpl</td><td>Sanjay</td><td>Bravo</td><td>Rifle</td><td>FC</td><td>Strong</td></tr>
+        <tr><td>6</td><td>306</td><td>Cpl</td><td>Naresh</td><td>Charlie</td><td>Pistol</td><td>SS</td><td>Consistent</td></tr>
+        <tr><td>7</td><td>307</td><td>Sep</td><td>Akhil</td><td>Alpha</td><td>Rifle</td><td>MM</td><td>Retry</td></tr>
+        <tr><td>8</td><td>308</td><td>L/Cpl</td><td>Rohit</td><td>Bravo</td><td>Pistol</td><td>FC</td><td>Good</td></tr>
+        <tr><td>9</td><td>309</td><td>Cpl</td><td>Arjun</td><td>Charlie</td><td>Rifle</td><td>SS</td><td>Excellent</td></tr>
+        <tr><td>10</td><td>310</td><td>Sep</td><td>Sagar</td><td>Alpha</td><td>Pistol</td><td>MM</td><td>Needs Practice</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Agniveer Summary -->
+  <div class="summary-section">
+    <h2> <b> Agniveer Summary</b></h2>
+    <table class="summary-table">
+      <thead>
+        <tr>
+          <th>S No</th><th>Army No</th><th>Rank</th><th>Name</th>
+          <th>Course</th><th>Event</th><th>Results</th><th>Remarks</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>1</td><td>401</td><td>Sep</td><td>Ankit</td><td>Alpha</td><td>Drill</td><td>Selected</td><td>Good</td></tr>
+        <tr><td>2</td><td>402</td><td>L/Cpl</td><td>Dev</td><td>Bravo</td><td>Drill</td><td>Not Selected</td><td>Retry</td></tr>
+        <tr><td>3</td><td>403</td><td>Cpl</td><td>Nikhil</td><td>Charlie</td><td>Drill</td><td>Selected</td><td>Excellent</td></tr>
+        <tr><td>4</td><td>404</td><td>Sep</td><td>Abhay</td><td>Alpha</td><td>Drill</td><td>Not Selected</td><td>Weak</td></tr>
+        <tr><td>5</td><td>405</td><td>L/Cpl</td><td>Gaurav</td><td>Bravo</td><td>Drill</td><td>Selected</td><td>Strong</td></tr>
+        <tr><td>6</td><td>406</td><td>Cpl</td><td>Ajeet</td><td>Charlie</td><td>Drill</td><td>Selected</td><td>Consistent</td></tr>
+        <tr><td>7</td><td>407</td><td>Sep</td><td>Lokesh</td><td>Alpha</td><td>Drill</td><td>Not Selected</td><td>Retry</td></tr>
+        <tr><td>8</td><td>408</td><td>L/Cpl</td><td>Ashwin</td><td>Bravo</td><td>Drill</td><td>Selected</td><td>Improved</td></tr>
+        <tr><td>9</td><td>409</td><td>Cpl</td><td>Hemant</td><td>Charlie</td><td>Drill</td><td>Selected</td><td>Good</td></tr>
+        <tr><td>10</td><td>410</td><td>Sep</td><td>Punit</td><td>Alpha</td><td>Drill</td><td>Not Selected</td><td>Needs Practice</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Filtering Script -->
+  <script>
+  function applyFilters() {
+    let filterValue = document.getElementById("resultFilter").value.toLowerCase();
+    let searchValue = document.getElementById("armySearch").value.toLowerCase();
+
+    let tables = document.querySelectorAll(".summary-table");
+    tables.forEach(table => {
+      let rows = table.querySelectorAll("tbody tr");
+      rows.forEach(row => {
+        let cells = row.querySelectorAll("td");
+        let armyNo = cells[1]?.innerText.toLowerCase();
+        let result = cells[6]?.innerText.toLowerCase();
+
+        let matchesFilter = (filterValue === "all" || result === filterValue);
+        let matchesSearch = (searchValue === "" || armyNo.includes(searchValue));
+
+        if (matchesFilter && matchesSearch) {
+          row.style.display = "";
+        } else {
+          row.style.display = "none";
+        }
+      });
+    });
+  }
+
+  function clearFilters() {
+    document.getElementById("resultFilter").value = "All";
+    document.getElementById("armySearch").value = "";
+    applyFilters();
+  }
+
+  // Populate datalist with Army Nos
+  window.onload = function() {
+    let datalist = document.getElementById("armyNoList");
+    let armyNumbers = new Set();
+
+    let tables = document.querySelectorAll(".summary-table");
+    tables.forEach(table => {
+      let rows = table.querySelectorAll("tbody tr");
+      rows.forEach(row => {
+        let armyNo = row.querySelectorAll("td")[1]?.innerText;
+        if (armyNo) {
+          armyNumbers.add(armyNo);
+        }
+      });
+    });
+
+    armyNumbers.forEach(no => {
+      let option = document.createElement("option");
+      option.value = no;
+      datalist.appendChild(option);
+    });
+  }
+</script>
