@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .alerts-section {
+        background: var(--warning-soft);
+        border: 1px solid #ffd9a8;
+        border-radius: 16px;
+        padding: 14px;
+        box-shadow: var(--shadow);
+        margin-bottom: 18px;
+      }
+
+      .alerts-section h3 {
+        color: #5a3d16;
+      }
+      .data-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        background: var(--surface);
+        border: 1px solid var(--surface-border);
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+      }
+
+      .data-table thead th {
+        background: #e8eeff; /* soft blue header */
+        color: #273352;
+        text-align: left;
+        padding: 12px 14px;
+        font-weight: 700;
+        font-size: 14px;
+      }
+
+      .data-table tbody td {
+        padding: 12px 14px;
+        color: var(--text);
+        text-align: left;
+        border-top: 1px solid var(--surface-border);
+      }
+
+      .data-table tbody tr:nth-child(odd) {
+        background: #f8fbff; /* very light sky zebra */
+      }
+      .data-table tbody tr:nth-child(even) {
+        background: #fefcff; /* very light lilac */
+      }
+
+      .data-table tbody tr:hover {
+        background: #eef7ff;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="divmain"
+      style="
+        text-align: center;
+        color: #070707;
+        background: linear-gradient(90deg, rgb(255, 153, 51), white, green);
+        height: 90vh;
+        padding: 10px;
+      "
+    >
+      <!-----------------------------------------------START OF HEADER------------------------------------>
+      <div id="divheader" style="text-decoration: underline">
+        <h1>GRADING & PROG</h1>
+      </div>
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>S No</th>
+            <th>Army No</th>
+            <th>Rank</th>
+            <th>Name</th>
+            <th>Course</th>
+            <th>Event</th>
+            <th>Results</th>
+            <th>Remarks</th>
+          </tr>
+        </thead>
+        <tbody id="bpetSummary"></tbody>
+      </table>
+    </div>
+    <script src="grade.js"></script>
+  </body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alert & Notifications</title>
+    <style>
+      .alerts-section {
+        background: var(--warning-soft);
+        border: 1px solid #ffd9a8;
+        border-radius: 16px;
+        padding: 14px;
+        box-shadow: var(--shadow);
+        margin-bottom: 18px;
+      }
+
+      .alerts-section h3 {
+        color: #5a3d16;
+      }
+      .data-table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 0;
+        background: var(--surface);
+        border: 1px solid var(--surface-border);
+        border-radius: 14px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+      }
+
+      .data-table thead th {
+        background: #e8eeff; /* soft blue header */
+        color: #273352;
+        text-align: left;
+        padding: 12px 14px;
+        font-weight: 700;
+        font-size: 14px;
+      }
+
+      .data-table tbody td {
+        padding: 12px 14px;
+        color: var(--text);
+        text-align: left;
+        border-top: 1px solid var(--surface-border);
+      }
+
+      .data-table tbody tr:nth-child(odd) {
+        background: #f8fbff; /* very light sky zebra */
+      }
+      .data-table tbody tr:nth-child(even) {
+        background: #fefcff; /* very light lilac */
+      }
+
+      .data-table tbody tr:hover {
+        background: #eef7ff;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="divmain"
+      style="
+        text-align: center;
+        color: #070707;
+        background: linear-gradient(90deg, rgb(255, 153, 51), white, green);
+        height: 90vh;
+        padding: 10px;
+      "
+    >
+      <!-----------------------------------------------START OF HEADER------------------------------------>
+      <div id="divheader">
+        <section class="alerts-section">
+          <h1 style="text-decoration: underline">Alerts & Notifications</h1>
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>S. No.</th>
+                <th>Course</th>
+                <th>Venue</th>
+                <th>Days Left</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>1.</td>
+                <td>SEC Cdr</td>
+                <td>Inf school, Mhow</td>
+                <td>20</td>
+              </tr>
+              <tr>
+                <td>2.</td>
+                <td>ITCA</td>
+                <td>Inf school, Mhow</td>
+                <td>13</td>
+              </tr>
+              <tr>
+                <td>3.</td>
+                <td>NNG</td>
+                <td>Inf school, Mhow</td>
+                <td>10</td>
+              </tr>
+              <tr>
+                <td>4.</td>
+                <td>MW</td>
+                <td>Gulmarg, Kashmir</td>
+                <td>14</td>
+              </tr>
+              <tr>
+                <td>5.</td>
+                <td>CLC</td>
+                <td>NCO Academy, Dhana</td>
+                <td>20</td>
+              </tr>
+              <tr>
+                <td>6.</td>
+                <td>Sniper</td>
+                <td>Inf school, Mhow</td>
+                <td>12</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </div>
+    </div>
+  </body>
+</html>

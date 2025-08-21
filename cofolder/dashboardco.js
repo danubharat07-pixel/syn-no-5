@@ -8,21 +8,21 @@ document.addEventListener("DOMContentLoaded", async () => {
   initializeFeedback();
 
   // Fetch and render overview data
-  document.getElementById(
-    "card-precourses"
-  ).textContent = `${overview.pendingCourses} Courses Pending`;
-  document.getElementById(
-    "card-progress"
-  ).textContent = `${overview.avgProgress}%`;
-  document.getElementById(
-    "card-attendance"
-  ).textContent = `${overview.attendanceRate}%`;
-  document.getElementById(
-    "card-alerts"
-  ).textContent = `${overview.newAlerts} New`;
-  document.getElementById(
-    "card-feedback"
-  ).textContent = `${overview.feedbackCount} Received`;
+  // document.getElementById(
+  //   "card-precourses"
+  // ).textContent = `${overview.pendingCourses} Courses Pending`;
+  // document.getElementById(
+  //   "card-progress"
+  // ).textContent = `${overview.avgProgress}%`;
+  // document.getElementById(
+  //   "card-attendance"
+  // ).textContent = `${overview.attendanceRate}%`;
+  // document.getElementById(
+  //   "card-alerts"
+  // ).textContent = `${overview.newAlerts} New`;
+  // document.getElementById(
+  //   "card-feedback"
+  // ).textContent = `${overview.feedbackCount} Received`;
 
   // renderAlerts(overview.alerts);
   // renderFeedback(overview.feedback);
@@ -54,7 +54,7 @@ function setupTabNavigation() {
 function setupLogout() {
   document.getElementById("btn-logout").addEventListener("click", () => {
     // clear session, redirect to login
-    window.location.href = "index.html";
+    window.location.href = "/index.html";
   });
 }
 
@@ -193,6 +193,8 @@ async function loadFeedback() {
     if (feedbackResponse.ok) {
       const { data: feedbacks } = await feedbackResponse.json();
       displayFeedbackTable(feedbacks);
+      document.getElementById("card-feedback").textContent =
+        feedbacks.length + " Received";
     }
   } catch (error) {
     console.error("Error loading feedback:", error);
@@ -279,3 +281,88 @@ async function filterFeedback() {
     console.error("Error filtering feedback:", error);
   }
 }
+
+async function getAttendance() {
+  try {
+    // Fetch today's attendance records and all students with courses in parallel
+    const { attendance } = await fetch(
+      "http://localhost:5001/api/attendance"
+    ).then((res) => res.json());
+
+    const studentsWithAttendance = (attendance ?? []).reduce(
+      (acc, _attendance) => {
+        _attendance.students.forEach((student) => {
+          acc.push(student);
+        });
+        return acc;
+      },
+      []
+    );
+
+    const totalStudents = studentsWithAttendance.length;
+    const presentStudents = studentsWithAttendance.filter(
+      (student) => student.status === "Present"
+    );
+    const presentPercentage =
+      (presentStudents.length / (totalStudents || 1)) * 100;
+    const absentPercentage = 100 - presentPercentage;
+
+    document.getElementById("card-attendance-present").textContent =
+      presentPercentage.toFixed(0) + "%";
+    document.getElementById("card-attendance-absent").textContent =
+      absentPercentage.toFixed(0) + "%";
+
+    const attendanceTable = document.getElementById("attendanceTableBody");
+    attendanceTable.innerHTML = "";
+
+    const attendanceRecords = attendance || [];
+    const attendanceMap = new Map();
+    attendanceRecords.forEach((record) => {
+      record.students.forEach((studentAttendance) => {
+        attendanceMap.set(studentAttendance.student._id, {
+          ...studentAttendance,
+          course: record.course,
+          date: record.date,
+        });
+      });
+    });
+    studentsWithAttendance.forEach((student, index) => {
+      const attendanceData = attendanceMap.get(student.student._id);
+      if (attendanceData) {
+        // Student has attendance record
+        const date = new Date(attendanceData.date).toLocaleDateString();
+        attendanceTable.innerHTML += `
+          <tr class="student-row">
+            <td>${date}</td>
+            <td>${attendanceData.course.courseName}</td>
+            <td>
+              <div class="student-attendance-info">
+                <div class="student-details">
+                  <strong>${student.student.army_no} - ${
+          student.student.rank
+        } ${student.student.name}</strong>
+                </div>
+                <div class="attendance-status">
+                  <span class="status-badge status-${attendanceData.status.toLowerCase()}">
+                    ${attendanceData.status}
+                  </span>
+                  ${
+                    attendanceData.reasonForAbsence !== "-"
+                      ? `<div class="reason">Reason: ${attendanceData.reasonForAbsence}</div>`
+                      : ""
+                  }
+                  ${
+                    attendanceData.remarks !== "-"
+                      ? `<div class="remarks">Remarks: ${attendanceData.remarks}</div>`
+                      : ""
+                  }
+                </div>
+              </div>
+            </td>
+          </tr>
+        `;
+      }
+    });
+  } catch (err) {}
+}
+getAttendance();
