@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Camouflage Remote Login</title>
+    <title>Login</title>
     <script>
       const handleSubmit = async (e) => {
         e.preventDefault();
@@ -49,10 +49,10 @@
     </script>
     <style>
       :root {
-        --cam1: #2f3c33;
-        --cam2: #445642;
-        --cam3: #6a7c58;
-        --cam4: #8fa172;
+        --cam1: #acc4b3;
+        --cam2: #a4b5a2;
+        --cam3: #afc09f;
+        --cam4: #b6c0a6;
         --ink: #e8f1e9;
         --accent: #ffd54a;
         --btn-hi: #20c26a;
@@ -69,7 +69,7 @@
         color: var(--ink);
         font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
           Arial;
-        background-color: #253128;
+        background-color: #aebab1;
         background-image: radial-gradient(
             120px 90px at 15% 20%,
             var(--cam2) 0 40%,
@@ -90,7 +90,7 @@
             var(--cam2) 0 42%,
             transparent 47% 100%
           ),
-          linear-gradient(180deg, #1e281f, #1a231d);
+          linear-gradient(180deg, #aebab1, #a4b5a2);
         display: grid;
         place-items: center;
         padding: 20px;
@@ -164,7 +164,8 @@
       .card {
         border-radius: 22px;
         padding: 22px;
-        background: rgba(0, 0, 0, 0.55);
+        background: #fff;
+        color: #000;
         box-shadow: 0 24px 70px rgba(0, 0, 0, 0.45);
         width: 50%;
       }
@@ -193,18 +194,16 @@
         padding: 12px;
         border-radius: 12px;
         border: 1px solid rgba(255, 255, 255, 0.08);
-        background: #0f1612;
-        color: #e6f4ea;
       }
       .btn-primary {
         all: unset;
         cursor: pointer;
         text-align: center;
         background: linear-gradient(135deg, #22d276, #18a85b);
-        color: #0a1510;
         font-weight: 900;
         padding: 12px;
         border-radius: 14px;
+        color: #fff;
       }
     </style>
   </head>
@@ -229,7 +228,6 @@
               id="username"
               name="army_no"
               type="text"
-              value="ARMY001"
               required
             />
             <label class="label" for="password">Password</label>
@@ -238,7 +236,6 @@
               id="password"
               name="password"
               type="password"
-              value="Pass123!"
               required
             />
             <button class="btn-primary" type="submit">Sign in</button>

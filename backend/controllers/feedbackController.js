@@ -6,10 +6,16 @@ const User = require("../models/User");
 // @access  Private (Students only)
 const createFeedback = async (req, res) => {
   try {
-    const { feedback, howToImprove, rating, isAnonymous } = req.body;
+    const {
+      feedback,
+      howToImprove,
+      rating,
+      isAnonymous,
+      forRole: _forRole,
+    } = req.body;
     const userId = req.user._id;
 
-    const forRole = "CO";
+    const forRole = _forRole || "CO";
 
     // Check if user is a student
     if (req.user.role !== "Student") {
@@ -280,7 +286,7 @@ const deleteFeedback = async (req, res) => {
 
     // Find feedback and check ownership
     const feedback = await Feedback.findById(feedbackId);
-    
+
     if (!feedback) {
       return res.status(404).json({
         success: false,

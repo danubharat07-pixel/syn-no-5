@@ -3,8 +3,19 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CO Dashboard – Syndicate No. 5</title>
+    <title>CO Dashboard - Syndicate No. 5</title>
     <link rel="stylesheet" href="supervisor.css" />
+    <style>
+      .chip--warning {
+        background-color: #ff9800;
+        color: #fff;
+        font-size: 14px;
+        height: 25px;
+        width: 25px;
+        border-radius: 50%;
+        padding: 0 5px;
+      }
+    </style>
   </head>
   <body>
     <div class="dashboard-container">
@@ -21,9 +32,13 @@
             <li data-tab="events">Training Events</li>
             <li data-tab="attendance">Attendance</li>
             <li data-tab="feedback">Student Feedback</li>
-            <li data-tab="Trg Calendar">
-              <a href="/calendar.html"> Trg Calendar</a>
+            <li data-tab="trg-calendar">Trg Calendar</li>
+            <li data-tab="sticky-notes">Sticky Notes</li>
+            <li data-tab="alerts">
+              Alerts & Notifications
+              <span class="chip chip--warning">2</span>
             </li>
+            <li data-tab="summary">From Training Officer</li>
           </ul>
         </nav>
       </aside>
@@ -66,58 +81,6 @@
               <h3>Feedback</h3>
               <p id="card-feedback">-- Received</p>
             </div>
-          </section>
-
-          <section class="alerts-section">
-            <h3>Alerts & Notifications</h3>
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>S. No.</th>
-                  <th>Course</th>
-                  <th>Venue</th>
-                  <th>Days Left</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1.</td>
-                  <td>SEC Cdr</td>
-                  <td>Inf school, Mhow</td>
-                  <td>20</td>
-                </tr>
-                <tr>
-                  <td>2.</td>
-                  <td>ITCA</td>
-                  <td>Inf school, Mhow</td>
-                  <td>13</td>
-                </tr>
-                <tr>
-                  <td>3.</td>
-                  <td>NNG</td>
-                  <td>Inf school, Mhow</td>
-                  <td>10</td>
-                </tr>
-                <tr>
-                  <td>4.</td>
-                  <td>MW</td>
-                  <td>Gulmarg, Kashmir</td>
-                  <td>14</td>
-                </tr>
-                <tr>
-                  <td>5.</td>
-                  <td>CLC</td>
-                  <td>NCO Academy, Dhana</td>
-                  <td>20</td>
-                </tr>
-                <tr>
-                  <td>6.</td>
-                  <td>Sniper</td>
-                  <td>Inf school, Mhow</td>
-                  <td>12</td>
-                </tr>
-              </tbody>
-            </table>
           </section>
 
           <section class="feedback-section">
@@ -253,9 +216,89 @@
 
         <!-- TRG Calendar Tab -->
         <section id="trg-calendar" class="tab-section hidden calendar-section">
-          <button id="btn-export-trg-calendar" class="btn-report">
-            Export TRG Calendar
-          </button>
+          <div id="calendar-container" style="height: 100vh">
+            <iframe
+              src="/calendar.html"
+              frameborder="0"
+              style="width: 100%; height: 100%"
+            ></iframe>
+          </div>
+        </section>
+
+        <!-- Sticky Notes Tab -->
+        <section id="sticky-notes" class="tab-section hidden">
+          <h3>Sticky Notes</h3>
+          <div id="sticky-notes-container">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>S. No.</th>
+                  <th>Note</th>
+                  <th>Created By</th>
+                  <th>Created At</th>
+                </tr>
+              </thead>
+              <tbody id="sticky-notes-table-body"></tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- Alerts Tab -->
+        <section id="alerts" class="tab-section hidden">
+          <h3>Alerts & Notifications</h3>
+          <div id="alerts-container">
+            <section class="alerts-section">
+              <h3>Alerts & Notifications</h3>
+              <table class="data-table">
+                <thead>
+                  <tr>
+                    <th>S. No.</th>
+                    <th>Course</th>
+                    <th>Venue</th>
+                    <th>Days Left</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>1.</td>
+                    <td>SEC Cdr</td>
+                    <td>Inf school, Mhow</td>
+                    <td>20</td>
+                  </tr>
+                  <tr>
+                    <td>2.</td>
+                    <td>ITCA</td>
+                    <td>Inf school, Mhow</td>
+                    <td>13</td>
+                  </tr>
+                  <tr>
+                    <td>3.</td>
+                    <td>NNG</td>
+                    <td>Inf school, Mhow</td>
+                    <td>10</td>
+                  </tr>
+                  <tr>
+                    <td>4.</td>
+                    <td>MW</td>
+                    <td>Gulmarg, Kashmir</td>
+                    <td>14</td>
+                  </tr>
+                  <tr>
+                    <td>5.</td>
+                    <td>CLC</td>
+                    <td>NCO Academy, Dhana</td>
+                    <td>20</td>
+                  </tr>
+                  <tr>
+                    <td>6.</td>
+                    <td>Sniper</td>
+                    <td>Inf school, Mhow</td>
+                    <td>12</td>
+                  </tr>
+                </tbody>
+              </table>
+            </section>
+          </div>
         </section>
 
         <!-- Reports Tab -->
@@ -263,6 +306,24 @@
           <button id="btn-export-pdf" class="btn-report">
             Export Feedback & Roster
           </button>
+        </section>
+
+        <!-- Summary Tab -->
+        <section id="summary" class="tab-section hidden">
+          <h3>Summary</h3>
+          <table id="summary-table" class="data-table">
+            <thead>
+              <tr>
+                <th>S. No.</th>
+                <th>Course</th>
+                <th>Total Strength</th>
+                <th>Present Strength</th>
+                <th>Absent Strength</th>
+                <th>Remarks</th>
+              </tr>
+            </thead>
+            <tbody id="summary-table-body"></tbody>
+          </table>
         </section>
 
         <!-- Settings Tab -->

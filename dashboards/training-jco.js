@@ -483,9 +483,43 @@ async function markBulkAttendance() {
   }
 }
 
+async function getStickyNotes() {
+  try {
+    const res = await fetch("http://localhost:5001/api/sticky?role=TrgJCO", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+    });
+    const { data } = await res.json();
+
+    const stickyNotesTableBody = document.getElementById(
+      "sticky-notes-table-body"
+    );
+    stickyNotesTableBody.innerHTML = "";
+    data.forEach((sticky, index) => {
+      stickyNotesTableBody.innerHTML += `
+      <tr>
+        <td>${index + 1}</td>
+        <td>${sticky.content}</td>
+        <td>${sticky.createdBy.name}</td>
+        <td>${new Date(sticky.createdAt).toLocaleDateString()}</td>
+      </tr>`;
+    });
+  } catch (err) {
+    console.error("Error getting sticky notes:", err);
+  }
+}
+
+function logout() {
+  localStorage.removeItem("token");
+  window.location.href = "/index.html";
+}
+
 getBPETSummary();
 getUsers();
 getUsersWithCourse();
 getAllCourses();
 getMaterials();
 getAttendance();
+getStickyNotes();

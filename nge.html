@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>New Generation Eqpt</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #bbf371;
+        background-image: url(cam.jpeg);
+      }
+      header {
+        background-color: #660016;
+        color: white;
+        text-align: center;
+        padding: 25px;
+        font-size: 40px;
+        font-weight: bold;
+      }
+      .container {
+        display: flex;
+        justify-content: space-between;
+        padding: 60px;
+        gap: 80px;
+      }
+      .box {
+        background-color: rgb(200, 201, 219);
+        border: 2px solid #ccc;
+        flex: 1;
+        padding: 65px;
+        text-align: center;
+        border-radius: 8px;
+        box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.12);
+        transition: transform 0.15s ease, box-shadow 0.15s ease;
+      }
+      .box:hover {
+        transform: translateY(-6px);
+        box-shadow: 0px 8px 18px rgba(0, 0, 0, 0.16);
+      }
+      .box h2 {
+        margin: 0 0 10px 0;
+        color: #003366;
+        font-size: 20px;
+      }
+      .box p {
+        color: #333;
+        font-size: 14px;
+        line-height: 1.4;
+      }
+      .box a {
+        display: inline-block;
+        margin-top: 12px;
+        padding: 8px 14px;
+        background: #003366;
+        color: #fff;
+        border-radius: 6px;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      .box a:hover {
+        background: #002244;
+      }
+      footer {
+        background-color: #660016;
+        color: white;
+        padding: 32px 10px;
+        text-align: center;
+        position: sticky;
+        bottom: 0;
+        width: 100%;
+      }
+      footer nav a {
+        color: white;
+        margin: 0 50px;
+        text-decoration: none;
+        font-weight: bold;
+      }
+      footer nav a:hover {
+        text-decoration: underline;
+      }
+
+      /* Responsive */
+      @media (max-width: 800px) {
+        .container {
+          flex-direction: column;
+        }
+        .box {
+          margin-bottom: 12px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>NEW GENERATION WPNs & EQPTs</header>
+
+    <div class="container">
+      <div class="box">
+        <h2>New Generation WPNs</h2>
+        <p>
+          Modern weapons with modular attachments, smart optics and improved
+          ergonomics for battlefield advantage.
+        </p>
+        <a href="wpns.html" target="_blank">INVENTORY</a>
+      </div>
+      <div class="box">
+        <h2>New Generation Drone</h2>
+        <p>
+          Advanced drones for surveillance, reconnaissance and autonomous
+          missions with thermal and high-res cameras.
+        </p>
+        <a href="drone.html" target="_blank">ARSENAL</a>
+      </div>
+      <div class="box">
+        <h2>New Generation Night Sights</h2>
+        <p>
+          Night vision and thermal systems designed for low-light/no-light
+          target detection and improved situational awareness.
+        </p>
+        <a href="eqts.html" target="_blank">NEW WAVE</a>
+      </div>
+    </div>
+
+    <footer>
+      <nav>
+        <a href="specifications.html" target="_blank">Specifications</a>
+        <a href="user_manual.html" target="_blank">User Manual</a>
+        <a href="photos.html" target="_blank">Photos</a>
+      </nav>
+    </footer>
+  </body>
+</html>

@@ -43,6 +43,8 @@ app.use("/api/courses", require("./routes/coursesRoutes"));
 app.use("/api/materials", require("./routes/materialRoutes"));
 app.use("/api/attendance", require("./routes/attendanceRoutes"));
 app.use("/api/feedback", require("./routes/feedbackRoutes"));
+app.use("/api/sticky", require("./routes/stickyRoutes"));
+app.use("/api/summary", require("./routes/summaryRoutes"));
 
 const PORT = process.env.PORT || 5001;
 console.log(PORT);

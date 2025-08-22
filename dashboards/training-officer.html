@@ -45,20 +45,32 @@
         font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
           Arial, sans-serif;
         color: var(--co-ink);
-        background: radial-gradient(
-            1400px 800px at -10% -20%,
-            rgba(37, 99, 235, 0.06),
-            transparent 60%
-          ),
-          radial-gradient(
-            1200px 700px at 110% 120%,
-            rgba(14, 165, 233, 0.05),
-            transparent 60%
-          ),
-          linear-gradient(180deg, var(--co-bg-grad-1), var(--co-bg-grad-2));
+        background-color: #c3ecf5;
         display: grid;
         place-items: start center;
         padding: 20px;
+      }
+
+      .form-group {
+        margin-bottom: 10px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 600;
+        color: var(--co-accent);
+        font-size: 0.9rem;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        width: 100%;
+      }
+
+      .form-group input,
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        padding: 10px;
       }
 
       /* Corner logos */
@@ -369,6 +381,16 @@
           flex: 1 1 100%;
         }
       }
+      .btn-primary {
+        background-color: #17a2b8;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-left: 10px;
+        margin-right: 10px;
+      }
     </style>
   </head>
   <body>
@@ -384,7 +406,16 @@
       <h1>TRG OFFR PORTAL</h1>
       <p class="muted"></p>
     </header>
-
+    <button style="margin-left: auto" class="btn-primary" onclick="logout()">
+      Sign Out
+    </button>
+    <section class="section accent-info half">
+      <img height="200px" src="/training-officer.jpeg" alt="Training JCO" />
+      <br />
+      <h2>Training officer</h2>
+      <h3>8 Kumaon</h3>
+    </section>
+    <br />
     <main class="dashboard">
       <div class="row wrap-sections equal-height">
         <!-- CTO Script Viewer -->
@@ -495,37 +526,46 @@
       </section>
 
       <div class="row wrap-sections equal-height">
-        <!-- Manage Training Schedule
-  <section class="section accent-primary half">
-    <h2>Manage Training Schedule <span class="chip chip--info">Admin</span></h2>
-    <div class="actions">
-      <a href="schedule-add.html" class="btn btn--primary">Add Schedule</a>
-      <a href="schedule-edit.html" class="btn btn--warning">Edit Schedule</a>
-      <a href="schedule-delete.html" class="btn btn--danger">Remove Schedule</a>
-    </div>
-  </section> -->
-
         <!-- Sticky Notes for CO -->
-        <section class="section accent-warning half">
+        <section class="section accent-warning span-2">
           <h2>
             Sticky Notes for CO <span class="chip chip--warning">Quick</span>
           </h2>
           <div id="notesContainer" aria-live="polite"></div>
-          <textarea
-            id="noteInput"
-            placeholder="Type your note here..."
-            aria-label="Note text"
-          ></textarea>
-          <div class="row">
-            <button id="addNote" class="btn btn--warning" type="button">
-              Add Note
-            </button>
-            <button id="clearNotes" class="btn btn--danger" type="button">
-              Clear All
-            </button>
-          </div>
+          <form id="stickyForm" onsubmit="addSticky(event, 'CO')">
+            <textarea
+              id="noteInput"
+              placeholder="Type your note here..."
+              aria-label="Note text"
+            ></textarea>
+            <div class="row">
+              <button id="addNote" class="btn btn--warning" type="submit">
+                Add Note
+              </button>
+            </div>
+          </form>
           <br />
-          <p class="sub">Notes save locally on this device for quick recall.</p>
+        </section>
+        <!-- Sticky Notes for JCOs -->
+        <section class="section accent-warning span-2">
+          <h2>
+            Sticky Notes for TRG JCO
+            <span class="chip chip--warning">Quick</span>
+          </h2>
+          <div id="notesContainer" aria-live="polite"></div>
+          <form id="stickyForm" onsubmit="addSticky(event, 'TrgJCO')">
+            <textarea
+              id="noteInput"
+              placeholder="Type your note here..."
+              aria-label="Note text"
+            ></textarea>
+            <div class="row">
+              <button id="addNote" class="btn btn--warning" type="submit">
+                Add Note
+              </button>
+            </div>
+          </form>
+          <br />
         </section>
       </div>
 
@@ -546,13 +586,17 @@
       </section>
 
       <!-- PPT Summary -->
-      <section class="section accent-info">
-        <h2>PPT Summary <span class="chip chip--info">Briefs</span></h2>
-        <a href="ppt-summary.html" class="btn btn--info">📊 View PPT Summary</a>
+      <section class="section accent-info half">
+        <h2>PPT Summary <span class="chip chip--info">Fitness</span></h2>
+        <a
+          href="/study-material/itcs/DBMS.pdf"
+          target="_blank"
+          class="btn btn--info"
+          >📊 View PPT Summary</a
+        >
       </section>
 
-      Schedule Management
-      <section class="section accent-primary">
+      <section class="section accent-primary half">
         <h2>
           Manage Training Schedule <span class="chip chip--info">Admin</span>
         </h2>
@@ -567,42 +611,81 @@
         </div>
       </section>
 
-      <!-- Sticky Notes for JCOs -->
-      <section class="section accent-warning span-2">
-        <h2>
-          Sticky Notes for TRG JCO <span class="chip chip--warning">Quick</span>
-        </h2>
-        <div id="notesContainer" aria-live="polite"></div>
-        <textarea
-          id="noteInput"
-          placeholder="Type your note here..."
-          aria-label="Note text"
-        ></textarea>
-        <div class="row">
-          <button id="addNote" class="btn btn--warning" type="button">
-            Add Note
-          </button>
-          <button id="clearNotes" class="btn btn--danger" type="button">
-            Clear All
-          </button>
-        </div>
-        <br />
-        <p class="sub">Notes save locally on this device for quick recall.</p>
-      </section>
-
       <!-- Weekly Feedback Form -->
       <section class="section accent-primary span-2">
         <h2>
           Weekly Feedback to CO <span class="chip chip--info">Comms</span>
         </h2>
-        <form id="feedbackForm" action="feedback.html" method="post">
-          <textarea
-            name="feedback"
-            placeholder="Enter your feedback..."
-            required
-            aria-label="Weekly feedback"
-          ></textarea>
-          <button type="submit" class="btn btn--primary">Send Feedback</button>
+        <!-- Feedback Form -->
+        <form id="summary-form" onsubmit="submitSummary(event)">
+          <div class="form-group">
+            <label for="sNo">S. No.:</label>
+            <input
+              type="number"
+              name="sNo"
+              id="sNo"
+              placeholder="Enter S. No."
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="course">Course:</label>
+            <select name="course" id="course-select" required>
+              <option value="">Select Course</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="totalStrength">Total Strength:</label>
+            <input
+              type="number"
+              name="totalStrength"
+              id="totalStrength"
+              placeholder="Enter Total Strength"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="presentStrength">Present Strength:</label>
+            <input
+              type="number"
+              name="presentStrength"
+              id="presentStrength"
+              placeholder="Enter Present Strength"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="absentStrength">Absent Strength:</label>
+            <input
+              type="number"
+              name="absentStrength"
+              id="absentStrength"
+              placeholder="Enter Absent Strength"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="remarks">Remarks:</label>
+            <textarea
+              name="remarks"
+              id="remarks"
+              rows="4"
+              placeholder="Share your remarks about the training, course content, or overall experience..."
+              required
+            ></textarea>
+          </div>
+          <button type="submit" class="summary-submit-btn btn btn--info">
+            Submit Summary
+          </button>
+          <div
+            id="summary-status"
+            style="margin-top: 10px; font-weight: bold"
+          ></div>
         </form>
         <br />
       </section>
@@ -676,22 +759,22 @@
         });
       };
 
-      addBtn.onclick = () => {
-        const text = (noteInput.value || "").trim();
-        if (!text) return;
-        const notes = loadNotes();
-        notes.unshift(text);
-        saveNotes(notes);
-        noteInput.value = "";
-        renderNotes();
-      };
-      clearBtn.onclick = () => {
-        if (confirm("Clear all notes on this device?")) {
-          localStorage.removeItem(notesKey);
-          renderNotes();
-        }
-      };
-      renderNotes();
+      // addBtn.onclick = () => {
+      //   const text = (noteInput.value || "").trim();
+      //   if (!text) return;
+      //   const notes = loadNotes();
+      //   notes.unshift(text);
+      //   saveNotes(notes);
+      //   noteInput.value = "";
+      //   renderNotes();
+      // };
+      // clearBtn.onclick = () => {
+      //   if (confirm("Clear all notes on this device?")) {
+      //     localStorage.removeItem(notesKey);
+      //     renderNotes();
+      //   }
+      // };
+      // renderNotes();
     </script>
     <script src="training-officer.js"></script>
   </body>

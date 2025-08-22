@@ -64,13 +64,13 @@
       }
       .filter-bar select,
       .filter-bar input,
-      .filter-bar button {
+      .filter-bar button.bb {
         padding: 6px 10px;
         border: 1px solid #ccc;
         border-radius: 8px;
         font-size: 14px;
       }
-      .filter-bar button {
+      .filter-bar button.bb {
         background: linear-gradient(45deg, #ff6b6b, #f06595);
         color: white;
         cursor: pointer;
@@ -232,6 +232,18 @@
         position: sticky;
         top: 0;
       }
+      .not-centered td {
+        text-align: left;
+      }
+      .btn-primary {
+        background-color: #17a2b8;
+        color: white;
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-left: 10px;
+      }
     </style>
   </head>
   <body>
@@ -267,7 +279,17 @@
       />
       <datalist id="armyNoList"></datalist>
 
-      <button onclick="clearFilters()">Clear Filters</button>
+      <button class="btn-primary bb" onclick="clearFilters()">
+        Clear Filters
+      </button>
+      <button
+        style="margin-left: auto"
+        class="btn-primary"
+        id="btn-logout"
+        onclick="logout()"
+      >
+        Sign Out
+      </button>
     </div>
 
     <!-- Course Summary -->
@@ -278,12 +300,14 @@
         <select id="courseSelect">
           <option value="">Select Course</option>
         </select>
+        &nbsp;
         <label>Students</label>
         <select id="studentSelect">
           <option value="">Select Student</option>
         </select>
-        <button type="submit">Assign Course</button>
+        <button class="btn-primary" type="submit">Assign Course</button>
       </form>
+      <br />
       <table class="summary-table">
         <thead>
           <tr>
@@ -304,18 +328,7 @@
     <div class="summary-section">
       <h2><b>Attendance</b></h2>
       <div style="margin-bottom: 15px">
-        <button
-          onclick="getAttendance()"
-          style="
-            background-color: #17a2b8;
-            color: white;
-            padding: 8px 16px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-left: 10px;
-          "
-        >
+        <button onclick="getAttendance()" class="btn-primary">
           Refresh Attendance
         </button>
       </div>
@@ -333,111 +346,137 @@
       </div>
     </div>
 
-    <div class="summary-section add-student">
-      <h2><b>Add Student</b></h2>
-      <form onsubmit="addStudent(event)">
-        <table>
-          <tr>
-            <td>Army No</td>
-            <td>
-              <input
-                placeholder="Army No"
-                type="text"
-                name="army_no"
-                id="armyNo"
-              />
-            </td>
-          </tr>
-          <tr>
-            <td>Rank</td>
-            <td>
-              <select name="rank" id="rank">
-                <option value="SEP">SEP</option>
-                <option value="NK">NK</option>
-                <option value="HAV">HAV</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td>Name</td>
-            <td>
-              <input placeholder="Name" type="text" name="name" id="name" />
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-          </tr>
-          <tr>
-            <td colspan="2" style="text-align: end">
-              <button type="submit">Add Student</button>
-            </td>
-          </tr>
+    <div class="summary-section">
+      <h2><b>Sticky Notes</b></h2>
+      <div id="sticky-notes-container attendanceTable">
+        <table class="summary-table">
+          <thead>
+            <tr>
+              <th>S. No.</th>
+              <th>Note</th>
+              <th>Created By</th>
+              <th>Created At</th>
+            </tr>
+          </thead>
+          <tbody id="sticky-notes-table-body"></tbody>
         </table>
-      </form>
+      </div>
     </div>
 
-    <div class="summary-section">
-      <h2><b>Upload Material / Report</b></h2>
-      <form onsubmit="uploadReport(event)" enctype="multipart/form-data">
-        <table>
-          <tr>
-            <td><label for="title">Title</label></td>
-            <td>
-              <input placeholder="Title" type="text" name="title" id="title" />
-            </td>
-          </tr>
-          <tr>
-            <td><label for="description">Description</label></td>
-            <td>
-              <input
-                placeholder="Description"
-                type="text"
-                name="description"
-                id="description"
-              />
-            </td>
-          </tr>
-          <tr>
-            <td><label for="course">Course</label></td>
-            <td>
-              <select name="course" id="courseSelect-upload">
-                <option value="">Select Course</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td><label for="forRole">For Role</label></td>
-            <td>
-              <select name="forRole" id="forRole">
-                <option value="CO">CO</option>
-                <option value="TrgOffr" selected>TrgOffr</option>
-                <option value="Student">Student</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td><label for="type">Type</label></td>
-            <td>
-              <select name="type" id="type">
-                <option value="report">Report</option>
-                <option value="study">Study</option>
-                <option value="planning">Planning</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td><label for="report">File</label></td>
-            <td>
-              <input type="file" accept=".pdf" name="file" id="file" />
-            </td>
-          </tr>
-          <tr>
-            <td colspan="2" style="text-align: end">
-              <button type="submit">Upload</button>
-            </td>
-          </tr>
-        </table>
-      </form>
+    <div style="display: flex; flex-direction: row; gap: 20px">
+      <div style="flex: 1" class="summary-section add-student">
+        <h2><b>Add Student</b></h2>
+        <form onsubmit="addStudent(event)">
+          <table class="summary-table not-centered">
+            <tr>
+              <td>Army No</td>
+              <td>
+                <input
+                  placeholder="Army No"
+                  type="text"
+                  name="army_no"
+                  id="armyNo"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td>Rank</td>
+              <td>
+                <select name="rank" id="rank">
+                  <option value="SEP">SEP</option>
+                  <option value="NK">NK</option>
+                  <option value="HAV">HAV</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td>Name</td>
+              <td>
+                <input placeholder="Name" type="text" name="name" id="name" />
+              </td>
+            </tr>
+
+            <tr>
+              <td colspan="2" style="text-align: end">
+                <button class="btn-primary" type="submit">Add Student</button>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </div>
+
+      <div style="flex: 1" class="summary-section">
+        <h2><b>Upload Material / Report</b></h2>
+        <form
+          class="summary-table not-centered"
+          onsubmit="uploadReport(event)"
+          enctype="multipart/form-data"
+        >
+          <table class="summary-table">
+            <tr>
+              <td><label for="title">Title</label></td>
+              <td>
+                <input
+                  placeholder="Title"
+                  type="text"
+                  name="title"
+                  id="title"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td><label for="description">Description</label></td>
+              <td>
+                <input
+                  placeholder="Description"
+                  type="text"
+                  name="description"
+                  id="description"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td><label for="course">Course</label></td>
+              <td>
+                <select name="course" id="courseSelect-upload">
+                  <option value="">Select Course</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td><label for="forRole">For Role</label></td>
+              <td>
+                <select name="forRole" id="forRole">
+                  <option value="CO">CO</option>
+                  <option value="TrgOffr" selected>TrgOffr</option>
+                  <option value="Student">Student</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td><label for="type">Type</label></td>
+              <td>
+                <select name="type" id="type">
+                  <option value="report">Report</option>
+                  <option value="study">Study</option>
+                  <option value="planning">Planning</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td><label for="report">File</label></td>
+              <td>
+                <input type="file" accept=".pdf" name="file" id="file" />
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2" style="text-align: end">
+                <button class="btn-primary" type="submit">Upload</button>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </div>
     </div>
 
     <div class="summary-section">

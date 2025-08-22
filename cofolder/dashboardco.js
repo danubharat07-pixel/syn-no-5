@@ -366,3 +366,64 @@ async function getAttendance() {
   } catch (err) {}
 }
 getAttendance();
+
+async function getStickyNotes() {
+  try {
+    const res = await fetch("http://localhost:5001/api/sticky?role=CO", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+    });
+    const { data } = await res.json();
+
+    const stickyNotesTableBody = document.getElementById(
+      "sticky-notes-table-body"
+    );
+    stickyNotesTableBody.innerHTML = "";
+    data.forEach((sticky, index) => {
+      stickyNotesTableBody.innerHTML += `
+      <tr>
+        <td>${index + 1}</td>
+        <td>${sticky.content}</td>
+        <td>${sticky.createdBy.name}</td>
+        <td>${new Date(sticky.createdAt).toLocaleDateString()}</td>
+      </tr>`;
+    });
+  } catch (err) {
+    console.error("Error getting sticky notes:", err);
+  }
+}
+
+getStickyNotes();
+
+async function getSummary() {
+  try {
+    const res = await fetch("http://localhost:5001/api/summary", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+    });
+    const { data } = await res.json();
+    console.log(data);
+    const summaryTableBody = document.getElementById("summary-table-body");
+    summaryTableBody.innerHTML = "";
+    data.forEach((summary, index) => {
+      summaryTableBody.innerHTML += `
+        <tr>
+          <td>${index + 1}</td>
+          <td>${summary.course?.courseName}</td>
+          <td>${summary.totalStrength}</td>
+          <td>${summary.presentStrength}</td>
+          <td>${summary.absentStrength}</td>
+          <td>${summary.remarks}</td>
+        </tr>
+      `;
+    });
+  } catch (err) {
+    console.error("Error getting summary:", err);
+  }
+}
+
+getSummary();
