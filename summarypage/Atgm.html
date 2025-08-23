@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>SEC CDR </title>
+  <link rel="stylesheet" href="atgm.css">
+  
+</head>
+<body>
+  <div class="wrap">
+    <header class="hero">
+      
+      
+        <h1 style="color: yellow; text-decoration: underline;">ATGM </h1>
+  
+      <div class="meta">
+          <a href="Summary.html">
+          <button style="cursor: pointer; color: red; background-color: bisque;border-radius: 10px;"> HOME</button> </a>
+        
+        <span>YEAR: 2024- 2025</span>
+        
+        
+      </div>
+    </header>
+
+    <section class="panel" aria-label="attendance table">
+      <div class="toolbar">
+        <div class="search">
+          <label for="q" class="kicker" style="font-size:12px">Search</label>
+          <input id="q" placeholder="Filter by Army No or Name " oninput="filterRows(this.value)"/>
+        </div>
+        <button class="btn" onclick="window.print()">Print</button>
+      </div>
+      <div class="table-wrap">
+        <table role="table" aria-describedby="desc">
+          <caption id="desc" style="position:absolute; left:-9999px;">List of 10 participants who attended SEC CDR course with Grade A</caption>
+          <thead>
+            <tr>
+              <th scope="col">S No</th>
+              <th scope="col">Rank</th>
+              <th scope="col">Name</th>
+              <th scope="col">Course</th>
+              <th scope="col">Grading</th>
+              <th scope="col">Remarks</th>
+              
+            </tr>
+          </thead>
+          <tbody id="rows">
+            <tr>
+              <td>1</td>
+              <td>Hav</td>
+              <td>Arun</td>
+              <td> ATGM J/N-121</td>
+              <td><span class="chip good">AXI</span></td>
+              <td>2nd Best Student</td>
+            </tr>
+            <tr>
+              <td>2</td>
+              <td>Hav</td>
+              <td>Nigesh K</td>
+              <td>ATGM J/N-120</td>
+              <td><span class="chip good">AXI</span></td>
+              <td></td>
+            </tr>
+            
+             <tr>
+              <td>3</td>
+              <td>NK </td>
+              <td>Rohit</td>
+              <td>ATGM J/N-119</td>
+              <td><span class="chip good">AXI</span></td>
+              <td>Best Student</td>
+            </tr>
+
+             <tr>
+              <td>4</td>
+              <td>Hav</td>
+              <td>Ram Kumar</td>
+              <td>ATGM J/N-118</td>
+              <td><span class="chip good">AXI</span></td>
+              <td>Best Student</td>
+            </tr>
+
+             <tr>
+              <td>5</td>
+              <td>Hav</td>
+              <td>Bharath</td>
+              <td>ATGM J/N-117</td>
+              <td><span class="chip good">AXI</span></td>
+              <td>Best Student</td>
+            </tr>
+
+             <tr>
+              <td>6</td>
+              <td>Hav</td>
+              <td>Anuj</td>
+              <td>ATGM J/N-116</td>
+              <td><span class="chip good">AX</span></td>
+              <td></td>
+            </tr>
+
+             <tr>
+              <td>7</td>
+              <td>Hav</td>
+              <td>Shankar</td>
+              <td>ATGM J/N-115</td>
+              <td><span class="chip good">AX</span></td>
+              <td></td>
+            </tr>
+
+             <tr>
+              <td>8</td>
+              <td>Nk</td>
+              <td>Vasu Dev</td>
+              <td>ATGM J/N-114</td>
+              <td><span class="chip good">AXI</span></td>
+              <td></td>
+            </tr>
+
+             <tr>
+              <td>9</td>
+              <td>Nk</td>
+              <td>Vishnu V</td>
+              <td>ATGM J/N-113</td>
+              <td><span class="chip good">AXI</span></td>
+              <td></td>
+            </tr>
+
+             <tr>
+              <td>10</td>
+              <td>Hav</td>
+              <td>Anil</td>
+              <td>ATGM J/N-112</td>
+              <td><span class="chip good">AX</span></td>
+              <td></td>
+            </tr>
+
+           
+
+
+
+
+
+
+
+
+
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <footer>© <span id="year"></span> SEC CDR · All participants graded AX & I</footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+    function filterRows(q){
+      q = (q||'').toLowerCase();
+      const rows = document.querySelectorAll('#rows tr');
+      rows.forEach(r=>{
+        const text = r.textContent.toLowerCase();
+        r.style.display = text.includes(q) ? '' : 'none';
+      })
+    }
+  </script>
+</body>
+</html>

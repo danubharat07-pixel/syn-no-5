@@ -1,407 +1,250 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Student Dashboard</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        background: linear-gradient(135deg, #74ebd5, #acb6e5);
-      }
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Trainee Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f6f9;
+      color: #333;
+    }
+    header {
+      background: linear-gradient(45deg, #6a82fb, #fc5c7d);
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+    }
+    .container {
+      display: flex;
+      padding: 20px;
+      gap: 20px;
+    }
+    .left, .right {
+      width: 25%;
+    }
+    .center {
+      width: 50%;
+    }
+    .section {
+      background: #fff;
+      padding: 15px;
+      margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+    }
+    .section h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #444;
+    }
+    .chart-container {
+      position: relative;
+      width: 100%;
+      height: 250px; /* smaller charts */
+    }
+    select {
+      padding: 5px;
+      margin: 5px 10px 10px 0;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    footer {
+      background: #333;
+      color: #fff;
+      text-align: center;
+      padding: 15px;
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <header>📊 Trainee Dashboard</header>
 
-      /* Page Header */
-      .page-header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 15px 40px;
-        background: linear-gradient(45deg, #74ebd5, #acb6e5);
-        border-bottom: 3px solid #444;
-        position: sticky;
-        top: 0;
-        z-index: 2000;
-      }
-      .page-header h1 {
-        flex: 1;
-        text-align: center;
-        font-size: 26px;
-        font-weight: bold;
-        color: #222;
-        text-transform: uppercase;
-        letter-spacing: 2px;
-        font-family: "Times New Roman", Times, serif;
-      }
-      .corner-img {
-        width: 70px;
-        height: 70px;
-        object-fit: cover;
-      }
-
-      /* Profile below header */
-      .profile-pic {
-        display: block;
-        margin: 20px auto;
-        width: 150px;
-        height: 150px;
-        object-fit: cover;
-        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
-      }
-
-      /* Section Styling */
-      .section {
-        margin: 25px;
-        padding: 20px;
-        background: white;
-        border-radius: 12px;
-        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-      }
-      .section h2 {
-        text-align: center;
-        margin-bottom: 15px;
-        color: #333;
-        font-size: 22px;
-      }
-
-      /* Table Styling */
-      .data-table {
-        width: 100%;
-        border-collapse: collapse;
-      }
-      .data-table th,
-      .data-table td {
-        border: 1px solid #ccc;
-        padding: 8px;
-        text-align: center;
-        font-size: 14px;
-      }
-      .data-table th {
-        background: #f4f4f4;
-        font-weight: bold;
-      }
-      .data-table tr:nth-child(even) {
-        background: #f9f9f9;
-      }
-
-      /* Study Material Links */
-      .material-list {
-        list-style: none;
-        padding: 0;
-      }
-      .material-list li {
-        margin: 8px 0;
-      }
-      .material-list a {
-        text-decoration: none;
-        color: white;
-        background: linear-gradient(45deg, #ff6b6b, #f06595);
-        padding: 10px 15px;
-        border-radius: 8px;
-        display: inline-block;
-      }
-      .material-list a:hover {
-        background: linear-gradient(45deg, #fa5252, #d6336c);
-      }
-
-      /* Chart responsiveness */
-      .chart-container {
-        width: 50%;
-        max-width: 400px;
-        margin: 0 auto;
-      }
-      canvas {
-        width: 100% !important;
-        height: auto !important;
-      }
-      .profile-pic-form {
-        text-align: center;
-      }
-      .logout-button {
-        margin-top: 10px;
-        text-align: right;
-        margin-right: 20px;
-      }
-
-      /* Feedback Form Styling */
-      .form-group {
-        margin-bottom: 20px;
-      }
-      .form-group label {
-        display: block;
-        margin-bottom: 5px;
-        font-weight: bold;
-        color: #333;
-      }
-      .form-group select,
-      .form-group textarea {
-        width: 100%;
-        padding: 8px 12px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-        font-size: 14px;
-      }
-      .form-group textarea {
-        resize: vertical;
-        min-height: 80px;
-      }
-      .form-group input[type="checkbox"] {
-        margin-right: 8px;
-      }
-      .feedback-submit-btn {
-        background: linear-gradient(45deg, #4dabf7, #339af0);
-        color: white;
-        padding: 12px 30px;
-        border: none;
-        border-radius: 6px;
-        cursor: pointer;
-        font-size: 16px;
-        font-weight: bold;
-      }
-      .feedback-submit-btn:hover {
-        background: linear-gradient(45deg, #339af0, #228be6);
-      }
-
-      /* My Feedback Section */
-      .feedback-controls {
-        display: flex;
-        justify-content: flex-end;
-        margin-bottom: 20px;
-      }
-      .btn-refresh {
-        background: #4dabf7;
-        color: white;
-        border: none;
-        padding: 8px 16px;
-        border-radius: 4px;
-        cursor: pointer;
-        font-weight: 500;
-      }
-      .btn-refresh:hover {
-        background: #339af0;
-      }
-      .feedback-list {
-        display: grid;
-        gap: 16px;
-      }
-      .feedback-item {
-        background: #f8f9fa;
-        border: 1px solid #dee2e6;
-        border-radius: 8px;
-        padding: 16px;
-        position: relative;
-      }
-      .feedback-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 12px;
-      }
-      .feedback-rating {
-        font-size: 18px;
-        color: #ffd43b;
-      }
-      .feedback-date {
-        font-size: 12px;
-        color: #6c757d;
-      }
-      .feedback-content {
-        margin-bottom: 12px;
-      }
-      .feedback-content h4 {
-        margin: 0 0 4px 0;
-        font-size: 14px;
-        color: #495057;
-      }
-      .feedback-content p {
-        margin: 0 0 8px 0;
-        color: #212529;
-        line-height: 1.4;
-      }
-      .feedback-actions {
-        display: flex;
-        justify-content: flex-end;
-      }
-      .btn-delete {
-        background: #dc3545;
-        color: white;
-        border: none;
-        padding: 6px 12px;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 12px;
-        font-weight: 500;
-      }
-      .btn-delete:hover {
-        background: #c82333;
-      }
-      .no-feedback {
-        text-align: center;
-        color: #6c757d;
-        font-style: italic;
-        padding: 40px 20px;
-      }
-    </style>
-  </head>
-  <body>
-    <!-- Page Header -->
-    <header class="page-header">
-      <img src="left-logo.png" alt="Left Logo" class="corner-img" />
-      <h1 class=""><u>Student Dashboard</u></h1>
-      <img src="right-logo.png" alt="Right Logo" class="corner-img" />
-    </header>
-
-    <!-- Profile Picture -->
-    <div class="logout-button" style="text-align: right; margin-right: 20px">
-      <button onclick="logout()">Logout</button>
-    </div>
-    <br />
-    <form
-      id="profile-pic-form"
-      class="profile-pic-form"
-      onsubmit="updateProfileImage(event)"
-    >
-      <img alt="Profile Photo" class="profile-pic" id="profile-pic" />
-      <input type="file" name="file" id="profile-pic-input" accept="image/*" />
-      <br />
-      <br />
-      <button type="submit">Update Profile Picture</button>
-      <div id="upload-status"></div>
-    </form>
-
-    <!-- Bio Data -->
-    <div class="section">
-      <h2>Bio Data</h2>
-      <table class="data-table" id="bioDataTable"></table>
-    </div>
-
-    <!-- Feedback Form -->
-    <div class="section">
-      <h2>Submit Feedback</h2>
-      <form id="feedback-form" onsubmit="submitFeedback(event)">
-        <div class="form-group">
-          <label for="rating">Rating (1-5):</label>
-          <select name="rating" id="rating" required>
-            <option value="">Select Rating</option>
-            <option value="1">1 - Very Poor</option>
-            <option value="2">2 - Poor</option>
-            <option value="3">3 - Average</option>
-            <option value="4">4 - Good</option>
-            <option value="5">5 - Excellent</option>
-          </select>
-        </div>
-
-        <div class="form-group">
-          <label for="feedback">Feedback:</label>
-          <textarea
-            name="feedback"
-            id="feedback"
-            rows="4"
-            placeholder="Share your feedback about the training, course content, or overall experience..."
-            required
-          ></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="howToImprove">How to Improve:</label>
-          <textarea
-            name="howToImprove"
-            id="howToImprove"
-            rows="4"
-            placeholder="Suggest improvements or changes that would enhance the training experience..."
-            required
-          ></textarea>
-        </div>
-
-        <div class="form-group">
-          <label for="isAnonymous">
-            <input type="checkbox" name="isAnonymous" id="isAnonymous" />
-            Submit anonymously
-          </label>
-        </div>
-
-        <button type="submit" class="feedback-submit-btn">
-          Submit Feedback
-        </button>
-        <div
-          id="feedback-status"
-          style="margin-top: 10px; font-weight: bold"
-        ></div>
-      </form>
-    </div>
-
-    <!-- My Feedback -->
-    <div class="section">
-      <h2>My Submitted Feedback</h2>
-      <div class="feedback-controls">
-        <button onclick="loadMyFeedback()" class="btn-refresh">Refresh</button>
-      </div>
-      <div id="my-feedback-list" class="feedback-list">
-        <p>Loading your feedback...</p>
+  <div class="container">
+    <div class="left">
+      <div class="section">
+        <h2>Quick Links</h2>
+        <ul>
+          <li><a href="#">Assignments</a></li>
+          <li><a href="#">Study Material</a></li>
+          <li><a href="#">Notices</a></li>
+        </ul>
       </div>
     </div>
 
-    <!-- Study Material -->
-    <div class="section">
-      <h2>Study Material</h2>
-      <div id="materialList"></div>
+    <div class="center">
+      <div class="section">
+        <h2>Performance</h2>
+
+        <div class="chart-container">
+          <canvas id="marksChart"></canvas>
+        </div><br>
+
+        <div class="chart-container">
+          <canvas id="bpetChart"></canvas>
+        </div><br>
+
+        <div class="chart-container">
+          <canvas id="pptChart"></canvas>
+        </div><br>
+
+        <!-- Selectors for Weekly Written -->
+        <label><strong>Subject:</strong></label>
+        <select id="subjectSelect">
+          <option value="math">Math</option>
+          <option value="gk">General Knowledge</option>
+          <option value="english">English</option>
+        </select>
+
+        <label><strong>Weeks:</strong></label>
+        <select id="weekSelect">
+          <option value="3">Last 3 Weeks</option>
+          <option value="5">Last 5 Weeks</option>
+          <option value="10">Last 10 Weeks</option>
+        </select>
+
+        <div class="chart-container">
+          <canvas id="weeklyWrittenChart"></canvas>
+        </div><br>
+
+        <div class="chart-container">
+          <canvas id="bpetPhysicalChart"></canvas>
+        </div>
+      </div>
     </div>
 
-    <!-- Charts Script -->
-    <script>
-      // Disable animations globally
-      Chart.defaults.animation = false;
+    <div class="right">
+      <div class="section">
+        <h2>Upcoming Events</h2>
+        <ul>
+          <li>Drill Practice - Monday</li>
+          <li>Exam - Wednesday</li>
+          <li>Sports Meet - Friday</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 
-      // Marks Chart
-      new Chart(document.getElementById("marksChart"), {
-        type: "bar",
-        data: {
-          labels: ["Math", "Science", "English", "History", "Geography"],
-          datasets: [
-            {
-              label: "Marks Obtained",
-              data: [88, 76, 82, 69, 91],
-              backgroundColor: "#4dabf7",
-            },
-          ],
-        },
-        options: {
-          responsive: true,
-          plugins: { legend: { display: false } },
-          scales: { y: { beginAtZero: true, max: 100 } },
-        },
-      });
+  <footer>© 2025 Training Academy | Dashboard</footer>
 
-      // BPET Chart
-      new Chart(document.getElementById("bpetChart"), {
-        type: "pie",
-        data: {
-          labels: ["Passed", "Failed"],
-          datasets: [
-            {
-              data: [2, 0],
-              backgroundColor: ["#51cf66", "#ff6b6b"],
-            },
-          ],
-        },
-        options: { responsive: true },
-      });
+  <script>
+    // Marks Chart
+    new Chart(document.getElementById("marksChart"), {
+      type: "bar",
+      data: {
+        labels: ["Math", "GK", "English", "Science"],
+        datasets: [{
+          label: "Marks",
+          data: [85, 78, 92, 88],
+          backgroundColor: "#6a82fb"
+        }]
+      },
+      options: { responsive: true, scales: { y: { beginAtZero: true, max: 100 } } }
+    });
 
-      // PPT Chart
-      new Chart(document.getElementById("pptChart"), {
-        type: "doughnut",
-        data: {
-          labels: ["Qualified", "Unqualified"],
-          datasets: [
-            {
-              data: [1, 1],
-              backgroundColor: ["#339af0", "#ff922b"],
-            },
-          ],
-        },
-        options: { responsive: true },
-      });
-    </script>
-    <script src="student.js"></script>
-  </body>
+    // BPET Chart
+    new Chart(document.getElementById("bpetChart"), {
+      type: "line",
+      data: {
+        labels: ["Test 1", "Test 2", "Test 3"],
+        datasets: [{
+          label: "BPET Score",
+          data: [80, 85, 90],
+          borderColor: "#20c997",
+          backgroundColor: "rgba(32, 201, 151, 0.2)",
+          fill: true,
+          tension: 0.3
+        }]
+      },
+      options: { responsive: true, scales: { y: { beginAtZero: true, max: 100 } } }
+    });
+
+    // PPT Chart
+    new Chart(document.getElementById("pptChart"), {
+      type: "pie",
+      data: {
+        labels: ["Pass", "Fail"],
+        datasets: [{
+          data: [85, 15],
+          backgroundColor: ["#51cf66", "#ff6b6b"]
+        }]
+      },
+      options: { responsive: true }
+    });
+
+    // Subject Data (example values for 10 weeks)
+    const subjectScores = {
+      math: [72, 85, 79, 88, 90, 84, 86, 80, 77, 89],
+      gk: [65, 70, 68, 74, 72, 71, 69, 73, 75, 78],
+      english: [80, 82, 78, 85, 88, 84, 83, 81, 79, 87]
+    };
+
+    // Weekly Written Chart
+    const weeklyWrittenCtx = document.getElementById("weeklyWrittenChart").getContext("2d");
+    let weeklyWrittenChart = new Chart(weeklyWrittenCtx, {
+      type: "line",
+      data: {
+        labels: Array.from({length: 10}, (_, i) => "Week " + (i+1)), // Weeks 1–10
+        datasets: [{
+          label: "Written Test Scores",
+          data: subjectScores.math.slice(-3), // default subject + 3 weeks
+          borderColor: "#4dabf7",
+          backgroundColor: "rgba(77, 171, 247, 0.2)",
+          fill: true,
+          tension: 0.3
+        }]
+      },
+      options: { responsive: true, scales: { y: { beginAtZero: true, max: 100 } } }
+    });
+
+    // Function to update Weekly Written Chart
+    function updateWeeklyWritten() {
+      const subject = document.getElementById("subjectSelect").value;
+      const weeks = parseInt(document.getElementById("weekSelect").value);
+
+      // Slice last "weeks" scores
+      const scores = subjectScores[subject].slice(-weeks);
+      const labels = Array.from({length: weeks}, (_, i) => "Week " + (i+1));
+
+      weeklyWrittenChart.data.labels = labels.slice(-weeks);
+      weeklyWrittenChart.data.datasets[0].data = scores;
+      weeklyWrittenChart.update();
+    }
+
+    // Add event listeners
+    document.getElementById("subjectSelect").addEventListener("change", updateWeeklyWritten);
+    document.getElementById("weekSelect").addEventListener("change", updateWeeklyWritten);
+
+    // BPET + Physical Test Chart
+    new Chart(document.getElementById("bpetPhysicalChart"), {
+      type: "bar",
+      data: {
+        labels: ["Week 1", "Week 2", "Week 3"],
+        datasets: [
+          {
+            label: "BPET Score",
+            data: [85, 88, 90],
+            backgroundColor: "#51cf66"
+          },
+          {
+            label: "Physical Test Score",
+            data: [78, 82, 80],
+            backgroundColor: "#ff922b"
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        plugins: { legend: { position: "top" } },
+        scales: { y: { beginAtZero: true, max: 100 } }
+      }
+    });
+  </script>
+</body>
 </html>

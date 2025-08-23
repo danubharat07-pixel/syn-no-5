@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Battalion Sports Page</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        background-color: #f4f4f4;
+    }
+    header {
+        background-color: green;
+        color: rgb(240, 240, 245);
+        padding: 5px;
+        text-align: center;
+        text-decoration: underline;
+        justify-content: space-between;
+        display: flex;
+        text-shadow: tomato;
+        color: yellow;
+    }
+    header img{
+        width: 150px;
+        border-radius: 20px;
+        border: #ecf0f1 solid 2px;
+        box-shadow: 0 0 15px rgba(0,0,0,10);
+        
+    }
+    nav {
+        background-color: #0e0101;
+        display: flex;
+        justify-content: center;
+        padding: 10px;
+    }
+    nav button {
+        background: red;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        margin: 0 5px;
+        cursor: pointer;
+        border-radius: 20px;
+        font-size: 14px;
+         box-shadow: 0 0 5px rgba(0,0,0,10);
+    }
+    nav button:hover {
+        background: #0d3303;
+    }
+    .container {
+        display: grid;
+        grid-template-columns: 1fr 2fr 1fr;
+        gap: 20px;
+        padding: 20px;
+    }
+    .achievements, .players, .events {
+        background: rgb(8, 65, 9);
+        padding: 15px;
+        border-radius: 8px;
+        box-shadow: 0 0 5px rgba(0,0,0,2);
+    }
+    .achievements h2, .players h2, .events h2 {
+        margin-top: 0;
+        color: #eff1f4;
+        text-align: center;
+        border: #e0e8e6 2px;
+        border-style: dashed;
+    }
+    .achievements ul {
+        padding-left: 20px;
+    }
+    .achievements li {
+        margin-bottom: 8px;
+        font-size: medium;
+     
+        text-transform: uppercase;
+        color: #ececec;
+        text-shadow: black;
+        
+    }
+     .achievements li:hover{
+        color: rgb(237, 249, 4);
+        cursor: alias;
+     }
+    
+    .search-bar input {
+        width: 100%;
+        padding: 8px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        margin-bottom: 15px;
+    }
+    .player-card {
+        background: #dbe3e2;
+        padding-left: 5px;
+        margin-bottom: 5px;
+        border-radius: 5px;
+    }
+    .player-card:hover{
+        background-color: #93d893;
+        color: black;
+    }
+    .player-card h3 {
+        margin: 0;
+        color: #2c3e50;
+    }
+    .level {
+        font-weight: bold;
+        color: #fc0000;
+    }
+    .event {
+        background: #ecf0f1;
+        padding: 8px;
+        margin-bottom: 8px;
+        border-left: 4px solid #2980b9;
+    }
+    .event:hover{
+        color: #f70000;
+        cursor: pointer;
+        background-color: rgb(226, 226, 55);
+    }
+    
+    
+</style>
+</head>
+<body>
+
+<header>
+    <img src="pic4.jpg" alt="logo">
+    <h1>PROF COMPETITION & SPORTS EVENTS</h1>
+    <img src="sports pic.jpeg" alt="logo">
+</header>
+
+<!-- Navbar for sports filter -->
+<nav>
+    <button onclick="filterPlayers('fd firing')">FD FIRING</button>
+    <button onclick="filterPlayers('ghatak')">GHATAK</button>
+    <button onclick="filterPlayers('football')">FOOTBALL</button>
+    <button onclick="filterPlayers('basketball')">BASKETBALL</button>
+    <button onclick="filterPlayers('volleyball')">VOLLEYBALL</button>
+    <button onclick="filterPlayers('x-country')">X-COUNTRY</button>
+</nav>
+
+<div class="container">
+    <!-- Left: Battalion Achievements -->
+    <div class="achievements">
+        <h2>BN ACHIEVEMENTS</h2>
+        <ul> <MArquee behavior="scroll" direction="up" scrollamount="5"> 
+            <li>1st Place in Inter-Battalion Football Championship 2024</li>
+            <li>2nd Place in District Basketball Tournament 2023</li>
+            <li>3 Players in Volleyball Nationals 2024</li>
+            <li>Gold Medal in 4x100m Relay 2023</li>
+            <li>Annual Sports Meet with 10+ units</li>
+            <li>Best Battalion Sports Performance Award 2024</li>
+            <li>1st Place in Inter-Battalion Football Championship 2024</li>
+            <li>2nd Place in District Basketball Tournament 2023</li>
+            <li>3 Players in Volleyball Nationals 2024</li>
+            <li>Gold Medal in 4x100m Relay 2023</li>
+            <li>Annual Sports Meet with 10+ units</li>
+            <li>Best Battalion Sports Performance Award 2024</li>
+            </MArquee>
+
+        </ul>
+         
+    </div>
+
+    <!-- Center: Players List -->
+    <div class="players">
+        <h2>INDIVIDUALS LIST</h2>
+        <!-- Center: 
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search Player..." onkeyup="searchPlayer()">
+        </div>
+Players List -->
+        <div class="player-card" data-sport="football">
+            <h3>Rahul Kumar</h3>
+            <p>Sport: Football</p>
+            <p>Level: <span class="level">National</span></p>
+           
+        </div>
+
+        <div class="player-card" data-sport="basketball">
+            <h3>Arjun Singh</h3>
+            <p>Sport: Basketball</p>
+            <p>Level: <span class="level">District</span></p>
+            
+        </div>
+
+        <div class="player-card" data-sport="volleyball">
+            <h3>Vikas Yadav</h3>
+            <p>Sport: Volleyball</p>
+            <p>Level: <span class="level">Battalion</span></p>
+            
+        </div>
+        <div class="player-card" data-sport="ghatak">
+            <h3>Akash Prasad</h3>
+            <p>Field: Ghatak</p>
+            <p>Level: <span class="level">DIV</span></p>
+            
+        </div>
+
+        <div class="player-card" data-sport="mor">
+            <h3>Ashok Kumar Singh</h3>
+            <p>Field: MOR </p>
+            <p>Level: <span class="level">Inter Bn</span></p>
+            
+        </div>
+
+        <div class="player-card" data-sport="fd firing">
+            <h3>Ajay Kumar Singh</h3>
+            <p>Field: Small Arms FD FIRING</p>
+            <p>Level: <span class="level">Inter Div</span></p>
+            
+        </div>
+        
+        <div class="player-card" data-sport="atgm">
+            <h3>Rohitas Kumar</h3>
+            <p>Field: Anti Tank Guided Missile</p>
+            <p>Level: <span class="level">Field Firing</span></p>
+            
+        </div>
+
+        <div class="player-card" data-sport="volleyball">
+            <h3>Sumit Shaw</h3>
+            <p>Sport: Volleyball</p>
+            <p>Level: <span class="level">Senior Mens Natonal</span></p>
+           
+        </div>
+
+        <div class="player-card" data-sport="atgm">
+            <h3>Ankit Kumar</h3>
+            <p>Field: Anti Tank Guided Missile</p>
+            <p>Level: <span class="level">Field Firing</span></p>
+            
+        </div>
+
+        <div class="player-card" data-sport="Basketball">
+            <h3>Chandrakant Kumar Singh</h3>
+            <p>Sport: Basketball</p>
+            <p>Level: <span class="level">Command</span></p>
+            
+        </div>
+        <div class="player-card" data-sport="ghatak">
+            <h3>Jai Kishore Sharma</h3>
+            <p>Field: Ghatak</p>
+            <p>Level: <span class="level">Inter Bn</span></p>
+            
+        </div>
+
+        <div class="player-card" data-sport="mor">
+            <h3>Shankar Oraon</h3>
+            <p>Field: MOR </p>
+            <p>Level: <span class="level">Inter Division</span></p>
+            
+        </div>
+
+        <div class="player-card" data-sport="fd firing">
+            <h3>Abhishek Kumar Singh</h3>
+            <p>Field: Small Arms FD FIRING</p>
+            <p>Level: <span class="level">Division</span></p>
+            
+        </div>
+        
+        <div class="player-card" data-sport="atgm">
+            <h3>Anand Kumar Singh</h3>
+            <p>Field: Anti Tank Guided Missile</p>
+            <p>Level: <span class="level">Inter Brigade</span></p>
+            
+        </div>
+
+        <div class="player-card" data-sport="football">
+            <h3>Rahul Kumar</h3>
+            <p>Sport: Football</p>
+            <p>Level: <span class="level">National</span></p>
+           
+        </div>
+
+        <div class="player-card" data-sport="basketball">
+            <h3>Arjun Singh</h3>
+            <p>Sport: Basketball</p>
+            <p>Level: <span class="level">District</span></p>
+            
+        </div>
+
+        <div class="player-card" data-sport="volleyball">
+            <h3>Vikas Yadav</h3>
+            <p>Sport: Volleyball</p>
+            <p>Level: <span class="level">Battalion</span></p>
+            
+        </div>
+        <div class="player-card" data-sport="ghatak">
+            <h3>Rahul Kumar</h3>
+            <p>Field: Ghatak</p>
+            <p>Level: <span class="level">DIV</span></p>
+            
+        </div>
+
+        <div class="player-card" data-sport="mor">
+            <h3>Arjun Singh</h3>
+            <p>Field: MOR </p>
+            <p>Level: <span class="level">Inter Bn</span></p>
+            
+        </div>
+
+        <div class="player-card" data-sport="fd firing">
+            <h3>Vikas Yadav</h3>
+            <p>Field: Small Arms FD FIRING</p>
+            <p>Level: <span class="level">Inter Div</span></p>
+            
+        </div>
+        
+        <div class="player-card" data-sport="atgm">
+            <h3>Rahul Kumar</h3>
+            <p>Field: Anti Tank Guided Missile</p>
+            <p>Level: <span class="level">DIV</span></p>
+            
+        </div>
+
+        <div class="player-card" data-sport="football">
+            <h3>Rahul Kumar</h3>
+            <p>Sport: Football</p>
+            <p>Level: <span class="level">National</span></p>
+           
+        </div>
+
+        <div class="player-card" data-sport="basketball">
+            <h3>Arjun Singh</h3>
+            <p>Sport: Basketball</p>
+            <p>Level: <span class="level">District</span></p>
+            
+        </div>
+
+        <div class="player-card" data-sport="volleyball">
+            <h3>Vikas Yadav</h3>
+            <p>Sport: Volleyball</p>
+            <p>Level: <span class="level">Battalion</span></p>
+            
+        </div>
+        <div class="player-card" data-sport="ghatak">
+            <h3>Rahul Kumar</h3>
+            <p>Field: Ghatak</p>
+            <p>Level: <span class="level">DIV</span></p>
+            
+        </div>
+
+        <div class="player-card" data-sport="mor">
+            <h3>Arjun Singh</h3>
+            <p>Field: MOR </p>
+            <p>Level: <span class="level">Inter Bn</span></p>
+            
+        </div>
+
+        <div class="player-card" data-sport="fd firing">
+            <h3>Vikas Yadav</h3>
+            <p>Field: Small Arms FD FIRING</p>
+            <p>Level: <span class="level">Inter Div</span></p>
+            
+        </div>
+        
+        <div class="player-card" data-sport="atgm">
+            <h3>Rahul Kumar</h3>
+            <p>Field: Anti Tank Guided Missile</p>
+            <p>Level: <span class="level">DIV</span></p>
+            
+        </div>
+
+        <div class="player-card" data-sport="football">
+            <h3>Rahul Kumar</h3>
+            <p>Sport: Football</p>
+            <p>Level: <span class="level">National</span></p>
+           
+        </div>
+
+        <div class="player-card" data-sport="basketball">
+            <h3>Arjun Singh</h3>
+            <p>Sport: Basketball</p>
+            <p>Level: <span class="level">District</span></p>
+            
+        </div>
+
+        <div class="player-card" data-sport="volleyball">
+            <h3>Vikas Yadav</h3>
+            <p>Sport: Volleyball</p>
+            <p>Level: <span class="level">Battalion</span></p>
+            
+        </div>
+        <div class="player-card" data-sport="ghatak">
+            <h3>Rahul Kumar</h3>
+            <p>Field: Ghatak</p>
+            <p>Level: <span class="level">DIV</span></p>
+            
+        </div>
+
+        <div class="player-card" data-sport="mor">
+            <h3>Arjun Singh</h3>
+            <p>Field: MOR </p>
+            <p>Level: <span class="level">Inter Bn</span></p>
+            
+        </div>
+
+        <div class="player-card" data-sport="fd firing">
+            <h3>Vikas Yadav</h3>
+            <p>Field: Small Arms FD FIRING</p>
+            <p>Level: <span class="level">Inter Div</span></p>
+            
+        </div>
+        
+        <div class="player-card" data-sport="atgm">
+            <h3>Rahul Kumar</h3>
+            <p>Field: Anti Tank Guided Missile</p>
+            <p>Level: <span class="level">DIV</span></p>
+            
+        </div>
+
+        <div class="player-card" data-sport="football">
+            <h3>Rahul Kumar</h3>
+            <p>Sport: Football</p>
+            <p>Level: <span class="level">National</span></p>
+           
+        </div>
+
+        <div class="player-card" data-sport="basketball">
+            <h3>Arjun Singh</h3>
+            <p>Sport: Basketball</p>
+            <p>Level: <span class="level">District</span></p>
+            
+        </div>
+
+        <div class="player-card" data-sport="volleyball">
+            <h3>Vikas Yadav</h3>
+            <p>Sport: Volleyball</p>
+            <p>Level: <span class="level">Battalion</span></p>
+            
+        </div>
+        <div class="player-card" data-sport="ghatak">
+            <h3>Rahul Kumar</h3>
+            <p>Field: Ghatak</p>
+            <p>Level: <span class="level">DIV</span></p>
+            
+        </div>
+
+        <div class="player-card" data-sport="mor">
+            <h3>Arjun Singh</h3>
+            <p>Field: MOR </p>
+            <p>Level: <span class="level">Inter Bn</span></p>
+            
+        </div>
+
+        <div class="player-card" data-sport="fd firing">
+            <h3>Vikas Yadav</h3>
+            <p>Field: Small Arms FD FIRING</p>
+            <p>Level: <span class="level">Inter Div</span></p>
+            
+        </div>
+        
+        <div class="player-card" data-sport="atgm">
+            <h3>Rahul Kumar</h3>
+            <p>Field: Anti Tank Guided Missile</p>
+            <p>Level: <span class="level">DIV</span></p>
+            
+        </div>
+
+        <div class="player-card" data-sport="football">
+            <h3>Rahul Kumar</h3>
+            <p>Sport: Football</p>
+            <p>Level: <span class="level">National</span></p>
+           
+        </div>
+
+        <div class="player-card" data-sport="basketball">
+            <h3>Arjun Singh</h3>
+            <p>Sport: Basketball</p>
+            <p>Level: <span class="level">District</span></p>
+            
+        </div>
+
+        <div class="player-card" data-sport="volleyball">
+            <h3>Vikas Yadav</h3>
+            <p>Sport: Volleyball</p>
+            <p>Level: <span class="level">Battalion</span></p>
+            
+        </div>
+        <div class="player-card" data-sport="ghatak">
+            <h3>Rahul Kumar</h3>
+            <p>Field: Ghatak</p>
+            <p>Level: <span class="level">DIV</span></p>
+            
+        </div>
+
+        <div class="player-card" data-sport="mor">
+            <h3>Arjun Singh</h3>
+            <p>Field: MOR </p>
+            <p>Level: <span class="level">Inter Bn</span></p>
+            
+        </div>
+
+        <div class="player-card" data-sport="fd firing">
+            <h3>Vikas Yadav</h3>
+            <p>Field: Small Arms FD FIRING</p>
+            <p>Level: <span class="level">Inter Div</span></p>
+            
+        </div>
+        
+        <div class="player-card" data-sport="atgm">
+            <h3>Rahul Kumar</h3>
+            <p>Field: Anti Tank Guided Missile</p>
+            <p>Level: <span class="level">DIV</span></p>
+            
+        </div>
+
+        <div class="player-card" data-sport="football">
+            <h3>Rahul Kumar</h3>
+            <p>Sport: Football</p>
+            <p>Level: <span class="level">National</span></p>
+           
+        </div>
+
+        <div class="player-card" data-sport="basketball">
+            <h3>Arjun Singh</h3>
+            <p>Sport: Basketball</p>
+            <p>Level: <span class="level">District</span></p>
+            
+        </div>
+
+        <div class="player-card" data-sport="volleyball">
+            <h3>Vikas Yadav</h3>
+            <p>Sport: Volleyball</p>
+            <p>Level: <span class="level">Battalion</span></p>
+            
+        </div>
+        <div class="player-card" data-sport="ghatak">
+            <h3>Rahul Kumar</h3>
+            <p>Field: Ghatak</p>
+            <p>Level: <span class="level">DIV</span></p>
+            
+        </div>
+
+        <div class="player-card" data-sport="mor">
+            <h3>Arjun Singh</h3>
+            <p>Field: MOR </p>
+            <p>Level: <span class="level">Inter Bn</span></p>
+            
+        </div>
+
+        <div class="player-card" data-sport="fd firing">
+            <h3>Vikas Yadav</h3>
+            <p>Field: Small Arms FD FIRING</p>
+            <p>Level: <span class="level">Inter Div</span></p>
+            
+        </div>
+        
+        <div class="player-card" data-sport="atgm">
+            <h3>Rahul Kumar</h3>
+            <p>Field: Anti Tank Guided Missile</p>
+            <p>Level: <span class="level">DIV</span></p>
+            
+        </div>
+
+        <div class="player-card" data-sport="football">
+            <h3>Rahul Kumar</h3>
+            <p>Sport: Football</p>
+            <p>Level: <span class="level">National</span></p>
+           
+        </div>
+
+        <div class="player-card" data-sport="basketball">
+            <h3>Arjun Singh</h3>
+            <p>Sport: Basketball</p>
+            <p>Level: <span class="level">District</span></p>
+            
+        </div>
+
+        <div class="player-card" data-sport="volleyball">
+            <h3>Vikas Yadav</h3>
+            <p>Sport: Volleyball</p>
+            <p>Level: <span class="level">Battalion</span></p>
+            
+        </div>
+        <div class="player-card" data-sport="ghatak">
+            <h3>Rahul Kumar</h3>
+            <p>Field: Ghatak</p>
+            <p>Level: <span class="level">DIV</span></p>
+            
+        </div>
+
+        <div class="player-card" data-sport="mor">
+            <h3>Arjun Singh</h3>
+            <p>Field: MOR </p>
+            <p>Level: <span class="level">Inter Bn</span></p>
+            
+        </div>
+
+        <div class="player-card" data-sport="fd firing">
+            <h3>Vikas Yadav</h3>
+            <p>Field: Small Arms FD FIRING</p>
+            <p>Level: <span class="level">Inter Div</span></p>
+            
+        </div>
+        
+        <div class="player-card" data-sport="atgm">
+            <h3>Rahul Kumar</h3>
+            <p>Field: Anti Tank Guided Missile</p>
+            <p>Level: <span class="level">DIV</span></p>
+            
+        </div>
+    </div>
+
+    <!-- Right: Upcoming Events with marquee -->
+    <div class="events">
+        <h2>UPCOMING EVENTS</h2>
+        <marquee behavior="scroll" direction="up" scrollamount="5"
+                 onmouseover="this.stop();" onmouseout="this.start();"
+                 style="height: 500px;">
+            <div class="event"><strong>15 Aug 2025</strong> - Independence Day Sports Meet 2025</div>
+            <div class="event"><strong>20 Sep 2025</strong> - Battalion Volleyball Championship 2025</div>
+            <div class="event"><strong>05 Oct 2025</strong> - District Football Trials 2025</div>
+            <div class="event"><strong>15 Nov 2025</strong> - Annual Sports Meet 2025</div>
+            <div class="event"><strong>25 Dec 2025</strong> - Winter Football Cup 2025</div>
+            <div class="event"><strong>10 Jan 2026</strong> - Inter div Kabaddi Championship 2025-2026</div>
+            <div class="event"><strong>28 Jan 2026</strong> - MOR Competition 2025-2026</div>
+            <div class="event"><strong>12 Feb 2026</strong> - Field Firing 2025-2026</div>
+            <div class="event"><strong>10 Mar 2026</strong> - Inter coy Volleyball 2025-2026</div>
+        
+    </div>
+</div>
+
+<script>
+function filterPlayers(sport) {
+    let players = document.querySelectorAll('.player-card');
+    players.forEach(player => {
+        if (sport === 'all' || player.dataset.sport === sport) {
+            player.style.display = 'block';
+        } else {
+            player.style.display = 'none';
+        }
+    });
+}
+
+function searchPlayer() {
+    let input = document.getElementById('searchInput').value.toLowerCase();
+    let players = document.querySelectorAll('.player-card');
+    players.forEach(player => {
+        let name = player.querySelector('h3').innerText.toLowerCase();
+        if (name.includes(input)) {
+            player.style.display = 'block';
+        } else {
+            player.style.display = 'none';
+        }
+    });
+}
+</script>
+
+</body>
+</html>

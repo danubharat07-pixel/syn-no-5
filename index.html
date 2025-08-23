@@ -49,6 +49,47 @@
         border-radius: 5px;
         box-shadow: 0px 0px 1px #f00;
       }
+    
+  .contentheader {
+    text-align: center;
+    font-size: 1em;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #ffffff;
+    /* 'blink' is deprecated and unsupported in modern browsers */
+    text-decoration: underline;
+  }
+
+#slider { 
+  width: 100%;
+  max-width: 550px;
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  padding: 10px;
+  box-sizing: border-box;
+  display:inline-block;
+  justify-content: center;
+  align-items: center;
+  background-color: #f9f9f9; /* Optional: adds contrast behind image */
+}
+
+#slider img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: cover; /* Ensures full image is visible without cropping */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+
+
+  #slider img:hover {
+    transform: scale(1.05);
+  }
     </style>
   </head>
 
@@ -63,6 +104,7 @@
             color: #070707;
             background: linear-gradient(90deg, rgb(255, 153, 51), white, green);
             height: 8vh;
+            padding-top: 20px;
           "
         >
           WELCOME TO TRG CELL
@@ -73,23 +115,17 @@
       <div class="container">
         <div id="menu">
           <ul>
-            <li>
-              <a href="#">HOME</a>
-              <ul>
-                <li><a href="http://portal.army.mil">INTRO TO PROJECT</a></li>
-                <li><a href="https://msweb.army.mil">INTRO TO SYN</a></li>
-              </ul>
-            </li>
+            
             <li>
               <a href="#">TRG & EVENT</a>
               <ul>
-                <li><a href="https://scweb.army.mil/">PRE COURSE</a></li>
-                <li><a href="https://ecweb.army.mil/">SUTC</a></li>
-                <li><a href="https://wcweb.army.mil">CTO</a></li>
+                <li><a href="/summarypage/Summary.html"> COURSES</a></li>
+                <!-- <li><a href="https://ecweb.army.mil/">SUTC</a></li>
+                <li><a href="https://wcweb.army.mil">CTO</a></li> -->
               </ul>
             </li>
             <li>
-              <a href="landing-page/links/grading/grade.html">GRADING & PROG</a>
+              <a href="trainees/coursecp.html">GRADING & PROG</a>
             </li>
             <li>
               <a href="#">STUDY MATERIAL</a>
@@ -102,12 +138,6 @@
             </li>
             <li>
               <a href="login-portals/allinone.html">INDL PROGRESS</a>
-              <ul>
-                <!-- <li><a href="#">XXX</a></li>
-                <li><a href="#">XXX</a></li>
-                <li><a href="#">XXX</a></li>
-                <li><a href="#">XXX</a></li> -->
-              </ul>
             </li>
             <li>
               <a href="#">ALERT & NOTFN</a>
@@ -123,7 +153,17 @@
               </ul>
             </li>
             <li>
+              <a href="#">TRACK HISTORY</a>
+              
+            </li>
+            <li>
               <a href="login-portals/allinone.html">LOGIN</a>
+              <ul>
+                <li><a href="login-portals/allinone.html">CO Portal</a></li>
+                <li><a href="login-portals/allinone.html">Trg Offr Portal</a></li>
+                <li><a href="login-portals/allinone.html">Trg Jco Portal</a></li>
+                <li><a href="login-portals/allinone.html">Trainee Login</a></li>
+              </ul>
             </li>
           </ul>
         </div>
@@ -154,7 +194,7 @@
               class="contentheader"
               style="text-align: center; font-weight: bold"
             >
-              <a style="color: #fff" href="#">STAR OF THE MONTH</a>
+              <a style="color: #fff" href="#">OUR SHINING DIAMOND</a>
             </div>
             <img class="imgstar" src="landing-page/images/imgstar/ankit.jpg" />
             <br />
@@ -163,8 +203,8 @@
 
           <div id="cssmenu">
             <ul>
-              <li><a href="#" style="color: #fff">ITCA COURSE</a></li>
-              <li><a href="#" style="color: #fff">A (I) </a></li>
+              <li><a href="#" style="color: #fff">SEC CDR COURSE</a></li>
+              <li><a href="#" style="color: #fff">AX(I) </a></li>
               <li><a href="#" style="color: #fff">07 JUL TO 30 AUG</a></li>
               <!-- <li><a href="#" style="color:#FFF"></a></li>
          <li><a href="#" style="color:#FFF">Accn Web</a></li> -->
@@ -180,20 +220,20 @@
           <!---------------------------START OF divCoasHts--------------------------------->
           <div id="divCoasHts">
             <div class="contentheader" style="text-decoration: blink">
-              Photo Gallery
+              PHOTO GALLERY
             </div>
             <div id="slider">
-              <img src="landing-page/images/imgSlider/1.jpg" alt="" />
-              <img src="landing-page/images/imgSlider/2.jpg" alt="" />
-              <img src="landing-page/images/imgSlider/3.jpg" alt="" />
-              <img src="landing-page/images/imgSlider/4.jpg" alt="" />
-              <img src="landing-page/images/imgSlider/5.jpg" alt="" />
+              <img src="/images/homepage/ccover.jpeg" alt="" />
+              <img src="images/homepage/image.png" alt="" />
+              <img src="/images/homepage/crop.jpg" alt="" />
+              <img src="/images/homepage/cto.jpeg" alt="" />
+              <img src="/images/homepage/mor action.jpeg" alt="" />
             </div>
           </div>
           <!---------------------------END OF divCoasHts--------------------------------->
           <!---------------------------START OF divQuickLinks--------------------------------->
           <div id="divQuickLinks">
-            <div class="contentheader">Quick Links</div>
+            <div class="contentheader">QUICK LINKS</div>
             <br />
             <table
               width="100%"
@@ -205,15 +245,12 @@
               <!-- TemplateBeginRepeat name="RepeatRegion1" -->
               <tr>
                 <td align="center">
-                  <a target="_blank" href="#"
-                    ><img
-                      src="landing-page/images/quciklinks/cyber-security.png"
-                      height="80"
-                      width="80"
-                  /></a>
+                  <a href="/study-material/CYBER SECURITY SCRIPT.pdf">
+  <img src="/CYBER SEC.jpg" height="80" width="80" alt="Student 2" />
+</a>
                 </td>
                 <td align="center">
-                  <a target="_blank" href="#"
+                  <a target="_blank" href="/landing-page/mediacreationtool.exe"
                     ><img
                       src="landing-page/images/quciklinks/downloads.png"
                       height="80"
@@ -221,9 +258,9 @@
                   /></a>
                 </td>
                 <td align="center">
-                  <a target="_blank" href="#"
+                  <a target="_blank" href="/login-portals/socialcalendar.html"
                     ><img
-                      src="landing-page/images/quciklinks/email.png"
+                      src="/quickLinks/calendar.png"
                       height="80"
                       width="80"
                       onmouseover=""
@@ -233,7 +270,7 @@
               <!-- TemplateEndRepeat -->
               <tr>
                 <td align="center">
-                  <a target="_blank" href="landing-page/links/news/index.html"
+                  <a target="_blank" href="/study-material/THS- Delhi 23-08.pdf"
                     ><img
                       src="landing-page/images/quciklinks/newspaper.png"
                       height="80"
@@ -241,15 +278,12 @@
                   /></a>
                 </td>
                 <td align="center">
-                  <a target="_blank" href="#"
-                    ><img
-                      src="landing-page/images/quciklinks/teledirectory.png"
-                      height="80"
-                      width="80"
-                  /></a>
+                  <a href="/DIRECTORY.pdf">
+  <img src="calldirectory.png" height="80" width="80" alt="Student 2" />
+</a>
                 </td>
                 <td align="center">
-                  <a target="_blank" href="#"
+                  <a target="_blank" href="/images/homepage/weather.png"
                     ><img
                       src="landing-page/images/quciklinks/weather.png"
                       height="80"
@@ -267,7 +301,7 @@
         <div id="divRightContent">
           <!---------------------------START OF divWhatsNew--------------------------------->
           <div id="divWhatsNew">
-            <div class="contentheader">UPCOMING EVENT</div>
+            <div class="contentheader">UPCOMING EVENTS</div>
             <marquee
               direction="up"
               width="380"
@@ -277,17 +311,19 @@
               onMouseOut="this.start();"
             >
               <ul>
-                <li><a href="#">BAYONET MUSIUM VISIT</a></li>
+                <li><a href="#">CYBER SECURITY <br>LECTURE <br> ON 28 AUG 25</a></li>
                 <br />
-                <li><a href="#">PROJECT DISTRIBUTION</a></li>
+                <li><a href="#">FINAL TEST OF <br>SEP-NK CADRE <br> ON 30 AUG 25</a></li>
                 <br />
-                <li><a href="#">TP ALLOTMENT</a></li>
+                <li><a href="#">FS CHECK <br> ON 31 AUG 25</a></li>
                 <br />
-                <li><a href="#">MANDU FORT VISIT</a></li>
+                <li><a href="#">RAISING DAY <br>CELEBRATION <br>ON 01 SEP 25</a></li>
                 <br />
-                <li><a href="#">TP ASSESSMENT</a></li>
+                <li><a href="#">I BATCH AV <br>ASSESSMENT TEST <br> ON 03 SEP 25 </a></li>
                 <br />
-                <li><a href="#">CLOSING ADDRESS OF ITCA</a></li>
+                <li><a href="#">HYGIENE & SANITARY <br> ROUND ON <br>05 SEP 25</a></li>
+                <br />
+                <li><a href="#">QTRLY BPET ON <br>   29 AUG 25</a></li>
                 <br />
               </ul>
             </marquee>
@@ -295,11 +331,11 @@
           <!---------------------------END OF divWhatsNew--------------------------------->
           <!---------------------------START OF divImg--------------------------------->
           <div id="divImg">
-            <div class="contentheader">Other Links</div>
+            <div class="contentheader">OTHER LINKS</div>
             <div id="cssmenur">
               <ul>
-                <li><a href="nge.html" style="color: #fff">WEAPONS</a></li>
-                <li><a href="#" style="color: #fff">CHINA CELL</a></li>
+                <li><a href="wpns.html" style="color: #fff">WEAPONS</a></li>
+                <li><a href="China.html" style="color: #fff">CHINA CELL</a></li>
                 <li><a href="Drone.html" style="color: #fff">DRONES</a></li>
                 <li><a href="eqts.html" style="color: #fff">EQUIPMENTS</a></li>
               </ul>

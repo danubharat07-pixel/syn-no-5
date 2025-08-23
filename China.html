@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>4 Column Webpage with PDF Links</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f4f4;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #3f5506d4;
+      color: white;
+      padding: 5px 5px;
+      box-shadow: 0 4px 8px rgba(0,0,0,5);
+    }
+
+    header h1 {
+      flex: 1;
+      text-align: center;
+      font-size: 30px;
+      margin: 0;
+    }
+
+    header img {
+      height: 100px;
+      width: 100px;
+      border-radius: 25PX;
+    }
+    .main{
+        background-image: url(back.jpg);
+        
+    }
+
+    /* 4 Columns */
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      padding: 30px;
+    }
+
+    .column {
+      background: rgb(167, 104, 104);
+      padding: 15px;
+      border-radius: 12px;
+      text-align: center;
+      box-shadow: 0 4px 8px rgba(0,0,0,5);
+      transition: transform 0.3s;
+    }
+
+    .column:hover {
+      transform: translateY(-5px);
+    }
+
+    .column h2 {
+      margin-bottom: 10px;
+      font-size: 18px;
+      color: #f9fafb;
+    }
+
+    .column img {
+      width: 100%;
+      max-height: 200px;
+      border-radius: 8px;
+      object-fit: cover;
+    }
+
+    /* Button Style */
+    .portal-link {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 10px 15px;
+      background: #810303;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      transition: background 0.3s;
+    }
+
+    .portal-link:hover {
+      background: #de0e0e;
+    }
+    footer{
+        display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: #506c08d4;
+      color: white;
+      padding: 5px 5px;
+    }
+    footer h1 {
+      flex: 1;
+      text-align: center;
+      font-size: 30px;
+      margin: 0;
+    }
+
+    footer img {
+      height: 100px;
+      width: 100px;
+      border-radius: 25PX;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <img src="logo 1.png" alt="Left Logo">
+    <h1>KNOW YOUR ENEMY (DRAGON)</h1>
+    <img src="syn 5 logo.png" alt="Right Logo">
+  </header>
+<div class="main">
+
+
+  <!-- 4 Column Section -->
+  <div class="container">
+    <div class="column">
+      <h2>THEATRE COMMANDS</h2>
+      <img src="R.png" alt="Image 1">
+      <br>
+      <a href="TheatreCommandsPublishedVersion.pdf" target="_blank" class="portal-link">Know More</a>
+    </div>
+    <div class="column">
+      <h2>PLA STRUCTURE</h2>
+      <img src="Org_Chart_01.png" alt="Image 2">
+      <br>
+      <a href="People's Liberation Army Ground Force - Wikipedia.PDF" target="_blank" class="portal-link">Know More</a>
+    </div>
+    <div class="column">
+      <h2>ARSENAL</h2>
+      <img src="china-jet.jpg" alt="Image 3">
+      <br>
+      <a href="People's Liberation Army - Wikipedia.PDF" target="_blank" class="portal-link">Know More</a>
+    </div>
+    <div class="column">
+      <h2>EQUIPMENTS</h2>
+      <img src="scope.jpg" alt="Image 4">
+      <br>
+      <a href="List of equipment of the People's Liberation Army Ground Force - Wikipedia.PDF" target="_blank" class="portal-link">Know More</a>
+    </div>
+  </div>
+  <!-- bottom sec -->
+  <footer>
+    
+    <h1>CONFLICTED REGIONS</h1>
+    
+  </footer>
+
+
+
+  <!-- 4 Column Section -->
+  <div class="container">
+    <div class="column">
+      <h2>TAWANG REGION</h2>
+      <img src="tawang-1670917797.jpg" alt="Image 1">
+      <br>
+      <a href="2022 Yangtse clash - Wikipedia.PDF" target="_blank" class="portal-link">Know More</a>
+    </div>
+    <div class="column">
+      <h2>CHICKEN NECK CORRIDOR</h2>
+      <img src="neck.jpg" alt="Image 2">
+      <br>
+      <a href="Siliguri Corridor - Wikipedia.PDF" target="_blank" class="portal-link">Know More</a>
+    </div>
+    <div class="column">
+      <h2>AKSAI CHIN</h2>
+      <img src="aksai1.jpeg" alt="Image 3">
+      <br>
+      <a href="Aksai Chin - Wikipedia.PDF" target="_blank" class="portal-link">Know More</a>
+    </div>
+    
+  </div>
+
+  </div>
+
+
+  
+
+</body>
+</html>

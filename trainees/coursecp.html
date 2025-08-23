@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Course Completed – Form</title>
+  <style>
+    :root{
+      --green:#1f6d33;
+      --yellow:#ffe34d;
+      --red:#e11d2a;
+      --orange:#ef7d34;
+      --ink:#111;
+      --chip:#ffffff;
+      --chip-border:#0f2a1a;
+      --ring:#0a5a2a22;
+      --muted:#f8f8f8;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", "Apple Color Emoji","Segoe UI Emoji"; color:var(--ink); background:#fff;
+    }
+    .wrap{width:min(1100px,95%); margin:24px auto 48px;}
+
+    /* Banner */
+    .banner{background:var(--green); color:var(--yellow); border-radius:18px; padding:28px 16px; text-align:center;}
+    .banner h1{margin:0; font-weight:800; text-transform:uppercase; letter-spacing:.5px; text-decoration:underline; font-size:clamp(28px,5vw,52px)}
+
+    /* Top course buttons */
+    .nav{display:flex; flex-wrap:wrap; gap:14px; justify-content:center; margin:18px 0 8px}
+    .btn-tab{display:inline-block; background:var(--red); color:#000; font-weight:800; border-radius:10px; padding:10px 18px; text-decoration:none; box-shadow:0 1.5px 0 #a01019 inset, 0 1px 2px #00000020; border:1px solid #b5141e}
+    .btn-tab:focus-visible{outline:3px solid var(--yellow)}
+
+    /* Section chip */
+    .chip{display:inline-block; background:var(--chip); border:2px solid #103421; color:#0b1f14; border-radius:10px; padding:10px 20px; font-weight:700; box-shadow:0 .5px 0 #00000010}
+
+    /* Form */
+    form{margin-top:14px}
+    .form-grid{display:grid; gap:18px; align-items:center; grid-template-columns:1fr 1fr 1fr}
+    @media (max-width:900px){.form-grid{grid-template-columns:1fr 1fr}}
+    @media (max-width:640px){.form-grid{grid-template-columns:1fr}}
+
+    .field{display:flex; flex-direction:column; gap:8px}
+    label{font-size:14px; font-weight:700; color:#1b3428}
+    input[type="text"], select{
+      width:100%; padding:12px 16px; border-radius:12px; background:#fff; border:2px solid #123b25; font-size:16px; font-weight:700; letter-spacing:.4px; text-transform:uppercase; color:#173623; box-shadow:0 1px 0 #00000010;
+    }
+    input::placeholder{color:#456b56}
+    input:focus, select:focus{outline:none; border-color:#0f5e33; box-shadow:0 0 0 6px var(--ring)}
+
+    .row-span-2{grid-column:1 / -1; justify-self:center; max-width:420px}
+
+    /* Table */
+    .table-wrap{margin-top:10px; border-radius:12px; overflow:hidden; border:1px solid #e7e7e7}
+    .tbl-title{background:var(--orange); color:#fff; font-weight:900; text-align:center; padding:10px; letter-spacing:.5px}
+    table{width:100%; border-collapse:collapse}
+    thead th{background:#ffe6d6; padding:12px; text-align:left; font-size:15px}
+    tbody td{padding:12px; border-top:1px solid #f1f1f1; background:#fff}
+    tbody tr:nth-child(even) td{background:#fff7f3}
+
+    /* Helper bar under banner to match composition */
+    .spacer{height:4px}
+
+    /* Submit row (optional visual only) */
+    .actions{display:flex; gap:12px; justify-content:center; margin-top:10px}
+    .btn{background:#173623; color:#fff; border:0; padding:12px 20px; border-radius:12px; font-weight:800; cursor:pointer}
+    .btn.secondary{background:#0f2a1a}
+    .btn:focus-visible{outline:3px solid var(--yellow)}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header class="banner" role="banner">
+      <h1>Course Completed</h1>
+    </header>
+
+    <nav class="nav" aria-label="Course categories">
+      <a href="#" class="btn-tab">SEC CDR</a>
+      <a href="#" class="btn-tab">MMG &amp; AGS</a>
+      <a href="#" class="btn-tab">81 MM MOR</a>
+      <a href="#" class="btn-tab">ATGM</a>
+      <a href="#" class="btn-tab">ITCA</a>
+      <a href="#" class="btn-tab">SNIPER</a>
+    </nav>
+
+<form id="courseForm" autocomplete="on">
+  <div class="form-grid">
+    <div class="field">
+      <label for="course">Enter Course</label>
+      <select id="course" name="Course" required>
+        <option value="" selected disabled>Course</option>
+        <option>SEC CDR</option>
+        <option>MMG & AGS</option>
+        <option>81MM MOR</option>
+        <option>ATGM</option>
+        <option>ITCA</option>
+        <option>SNIPER</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="armyNo">Enter Army No</label>
+      <input id="armyNo" name="armyNo" type="text" placeholder="Enter Army No" required />
+    </div>
+
+    <div class="field">
+      <label for="rank">Enter Rank</label>
+      <select id="rank" name="rank" required>
+        <option value="" selected disabled>Enter Rank</option>
+        <option>Sub</option>
+        <option>Nb Sub</option>
+        <option>Hav</option>
+        <option>L/Hav</option>
+        <option>Nk</option>
+        <option>Lnk</option>
+        <option>Sep</option>
+         <option>Rfn</option>
+
+        
+      </select>
+    </div>
+
+    <div class="field">
+      <label for="name">Enter Name</label>
+      <input id="name" name="name" type="text" placeholder="Enter Name" required />
+    </div>
+
+    <div class="field row-span-2">
+      <label for="grading">Enter Grading</label>
+      <select id="grading" name="grading" required>
+        <option value="" selected disabled>Enter Grading</option>
+        <option>AX(I)</option>
+        <option>A(I)</option>
+        <option>AX</option>
+        <option>A</option>
+        <option>BX</option>
+        <option>B</option>
+        <option>C</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="actions">
+    <button class="btn" type="submit">Submit</button>
+    <button class="btn secondary" type="reset">Reset</button>
+  </div>
+</form>
+
+<section class="table-wrap" aria-labelledby="sec-cdr-title">
+  <div class="tbl-title" id="sec-cdr-title">SEC CDR</div>
+  <table>
+    <thead>
+      <tr>
+        <th>S.No</th>
+        <th>Army No.</th>
+        <th>Rank</th>
+        <th>Name</th>
+        <th>Course</th>
+        <th>Grading</th>
+      </tr>
+    </thead>
+    <tbody id="rows">
+      <!-- Dynamic rows will be inserted here -->
+    </tbody>
+  </table>
+</section>
+
+<script>
+  let serial = 1;
+
+  document.getElementById('courseForm').addEventListener('submit', function (e) {
+    e.preventDefault();
+
+    const armyNo = document.getElementById('armyNo').value;
+    const rank = document.getElementById('rank').value;
+    const name = document.getElementById('name').value;
+    const course = document.getElementById('course').value;
+    const grading = document.getElementById('grading').value;
+
+    const table = document.getElementById('rows');
+    const row = document.createElement('tr');
+
+    row.innerHTML = `
+      <td>${serial++}</td>
+      <td>${armyNo}</td>
+      <td>${rank}</td>
+      <td>${name}</td>
+      <td>${course}</td>
+      <td>${grading}</td>
+    `;
+
+    table.appendChild(row);
+    this.reset(); // Clear form after submission
+  });
+
+  document.querySelector('button[type="reset"]').addEventListener('click', function () {
+    serial = 1;
+    document.getElementById('rows').innerHTML = '';
+  });
+</script>
+
+</body>
+</html>
