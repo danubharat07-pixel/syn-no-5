@@ -5,6 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CO Dashboard - Syndicate No. 5</title>
     <link rel="stylesheet" href="supervisor.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css"
+    />
     <style>
       .chip--warning {
         background-color: #ff9800;
@@ -39,6 +43,7 @@
               <span class="chip chip--warning">2</span>
             </li>
             <li data-tab="summary">From Training Officer</li>
+            <li data-tab="daily-schedule">Daily Schedule</li>
           </ul>
         </nav>
       </aside>
@@ -236,6 +241,7 @@
                   <th>Note</th>
                   <th>Created By</th>
                   <th>Created At</th>
+                  <th>Action</th>
                 </tr>
               </thead>
               <tbody id="sticky-notes-table-body"></tbody>
@@ -247,57 +253,54 @@
         <section id="alerts" class="tab-section hidden">
           <h3>Alerts & Notifications</h3>
           <div id="alerts-container">
-            <section class="alerts-section">
-              <h3>Alerts & Notifications</h3>
-              <table class="data-table">
-                <thead>
-                  <tr>
-                    <th>S. No.</th>
-                    <th>Course</th>
-                    <th>Venue</th>
-                    <th>Days Left</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>1.</td>
-                    <td>SEC Cdr</td>
-                    <td>Inf school, Mhow</td>
-                    <td>20</td>
-                  </tr>
-                  <tr>
-                    <td>2.</td>
-                    <td>ITCA</td>
-                    <td>Inf school, Mhow</td>
-                    <td>13</td>
-                  </tr>
-                  <tr>
-                    <td>3.</td>
-                    <td>NNG</td>
-                    <td>Inf school, Mhow</td>
-                    <td>10</td>
-                  </tr>
-                  <tr>
-                    <td>4.</td>
-                    <td>MW</td>
-                    <td>Gulmarg, Kashmir</td>
-                    <td>14</td>
-                  </tr>
-                  <tr>
-                    <td>5.</td>
-                    <td>CLC</td>
-                    <td>NCO Academy, Dhana</td>
-                    <td>20</td>
-                  </tr>
-                  <tr>
-                    <td>6.</td>
-                    <td>Sniper</td>
-                    <td>Inf school, Mhow</td>
-                    <td>12</td>
-                  </tr>
-                </tbody>
-              </table>
-            </section>
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>S. No.</th>
+                  <th>Course</th>
+                  <th>Venue</th>
+                  <th>Days Left</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1.</td>
+                  <td>SEC Cdr</td>
+                  <td>Inf school, Mhow</td>
+                  <td>20</td>
+                </tr>
+                <tr>
+                  <td>2.</td>
+                  <td>ITCA</td>
+                  <td>Inf school, Mhow</td>
+                  <td>13</td>
+                </tr>
+                <tr>
+                  <td>3.</td>
+                  <td>NNG</td>
+                  <td>Inf school, Mhow</td>
+                  <td>10</td>
+                </tr>
+                <tr>
+                  <td>4.</td>
+                  <td>MW</td>
+                  <td>Gulmarg, Kashmir</td>
+                  <td>14</td>
+                </tr>
+                <tr>
+                  <td>5.</td>
+                  <td>CLC</td>
+                  <td>NCO Academy, Dhana</td>
+                  <td>20</td>
+                </tr>
+                <tr>
+                  <td>6.</td>
+                  <td>Sniper</td>
+                  <td>Inf school, Mhow</td>
+                  <td>12</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </section>
 
@@ -323,6 +326,34 @@
               </tr>
             </thead>
             <tbody id="summary-table-body"></tbody>
+          </table>
+        </section>
+
+        <!-- Daily Schedule Tab -->
+        <section id="daily-schedule" class="tab-section hidden">
+          <div class="row">
+            <h3 class="col">Daily Schedule</h3>
+            <input
+              class="form-control col"
+              type="date"
+              id="date-filter"
+              onchange="getDailySchedule(event)"
+            />
+          </div>
+          <br />
+
+          <table id="daily-schedule-table" class="data-table">
+            <thead>
+              <tr>
+                <th>S. No.</th>
+                <th>Date</th>
+                <th>Time</th>
+                <th>Course</th>
+                <th>Activity</th>
+                <th>Instructor</th>
+              </tr>
+            </thead>
+            <tbody id="daily-schedule-table-body"></tbody>
           </table>
         </section>
 

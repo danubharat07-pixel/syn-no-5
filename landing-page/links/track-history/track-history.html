@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Track History</title>
+    <link rel="stylesheet" href="track-history.css" />
+  </head>
+  <body>
+    <!-- dont delete start -->
+    <h1>PAST COURSE ATTENDEES</h1>
+    <form id="past-tracker-form" onsubmit="searchPastTracker(event)">
+      <input type="text" name="army_no" placeholder="Search by Army No" />
+      <select name="course" id="course-select-past-tracker">
+        <option value="">Select Course</option>
+      </select>
+      <input type="text" name="rank" placeholder="Search by Rank" />
+      <select name="grade" id="grade">
+        <option value="">Select Grade</option>
+        <option value="AXI">AX'I'</option>
+        <option value="AX">AX</option>
+        <option value="A">A</option>
+        <option value="BXI">BX'I'</option>
+        <option value="BY">BY</option>
+        <option value="C">C</option>
+      </select>
+      <button type="submit">Search</button>
+    </form>
+    <div id="past-tracker-container">
+      <table id="past-tracker-table">
+        <thead>
+          <tr>
+            <th>S.NO</th>
+            <th>ARMY NO</th>
+            <th>RANK</th>
+            <th>TRAINEE NAME</th>
+            <th>COURSE</th>
+            <th>COURSE DURATION</th>
+            <th>GRADE</th>
+            <th>ERE</th>
+            <th>REMARKS</th>
+          </tr>
+        </thead>
+        <tbody id="past-tracker-body"></tbody>
+      </table>
+    </div>
+    <!-- dont delete end -->
+  </body>
+  <!-- dont delete this script tag -->
+  <script src="track-history.js"></script>
+</html>

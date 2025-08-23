@@ -480,6 +480,81 @@
     </div>
 
     <div class="summary-section">
+      <h2><b>Past tracker</b></h2>
+      <form
+        class="summary-table not-centered"
+        onsubmit="addPastTracker(event)"
+        enctype="multipart/form-data"
+      >
+        <table class="summary-table">
+          <tr>
+            <td><label for="army_no">Trainee</label></td>
+            <td>
+              <select name="user" id="user-select-past-tracker" required>
+                <option value="">Select Trainee</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td><label for="course">Course</label></td>
+            <td>
+              <select name="course" id="course-select-past-tracker" required></select>
+            </td>
+          </tr>
+          <tr>
+            <td><label for="grade">Grade</label></td>
+            <td>
+              <select name="grade" id="grade">
+                <option value="">Select Grade</option>
+                <option value="AXI">AX'I'</option>
+                <option value="AX">AX</option>
+                <option value="A">A</option>
+                <option value="BXI">BX'I'</option>
+                <option value="BY">BY</option>
+                <option value="C">C</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+            <td><label for="courseDuration">Course Duration</label></td>
+            <td>
+              <input
+                placeholder="Course Duration"
+                type="number"
+                name="courseDuration"
+                id="courseDuration"
+                min="4"
+                max="18"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td><label for="ere">ERE</label></td>
+            <td>
+              <input placeholder="ERE" type="text" name="ere" id="ere" />
+            </td>
+          </tr>
+          <tr>
+            <td><label for="remarks">Remarks</label></td>
+            <td>
+              <input
+                placeholder="Remarks"
+                type="text"
+                name="remarks"
+                id="remarks"
+              />
+            </td>
+          </tr>
+          <tr>
+            <td colspan="2" style="text-align: end">
+              <button class="btn-primary" type="submit">Add</button>
+            </td>
+          </tr>
+        </table>
+      </form>
+    </div>
+
+    <div class="summary-section">
       <h2><b>Materials</b></h2>
       <div id="materialSelect"></div>
     </div>

@@ -388,6 +388,11 @@ async function getStickyNotes() {
         <td>${sticky.content}</td>
         <td>${sticky.createdBy.name}</td>
         <td>${new Date(sticky.createdAt).toLocaleDateString()}</td>
+        <td>
+          <button class="btn-delete-sticky" onclick="deleteStickyNote('${
+            sticky._id
+          }')" data-id="${sticky._id}">Delete</button>
+        </td>
       </tr>`;
     });
   } catch (err) {
@@ -396,6 +401,23 @@ async function getStickyNotes() {
 }
 
 getStickyNotes();
+
+async function deleteStickyNote(id) {
+  try {
+    const res = await fetch(`http://localhost:5001/api/sticky/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+    });
+    if (res.ok) {
+      getStickyNotes();
+    }
+  } catch (err) {
+    console.error("Error deleting sticky note:", err);
+  }
+}
 
 async function getSummary() {
   try {
@@ -427,3 +449,40 @@ async function getSummary() {
 }
 
 getSummary();
+
+async function getDailySchedule(event) {
+  try {
+    event?.preventDefault();
+    const date =
+      event?.target?.date?.value ||
+      document.getElementById("date-filter")?.value ||
+      new Date().toISOString().split("T")[0];
+    const res = await fetch(
+      `http://localhost:5001/api/daily-schedule?date=${date}`,
+      {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
+      }
+    );
+    const { data } = await res.json();
+    console.log(data);
+    const dailySchedule = document.getElementById("daily-schedule-table-body");
+    dailySchedule.innerHTML = data
+      .map((schedule, index) => {
+        return `<tr>
+          <td>${index + 1}</td>
+          <td>${new Date(schedule.date).toLocaleDateString()}</td>
+          <td>${schedule.time}</td>
+          <td>${schedule.course?.courseName || "N/A"}</td>
+          <td>${schedule.activity}</td>
+          <td>${schedule.instructor}</td>
+        </tr>`;
+      })
+      .join("");
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+getDailySchedule();

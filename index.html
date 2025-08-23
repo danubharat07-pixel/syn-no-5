@@ -49,47 +49,45 @@
         border-radius: 5px;
         box-shadow: 0px 0px 1px #f00;
       }
-    
-  .contentheader {
-    text-align: center;
-    font-size: 1em;
-    font-weight: bold;
-    margin-bottom: 20px;
-    color: #ffffff;
-    /* 'blink' is deprecated and unsupported in modern browsers */
-    text-decoration: underline;
-  }
 
-#slider { 
-  width: 100%;
-  max-width: 550px;
-  height: 200px;
-  overflow: hidden;
-  position: relative;
-  border: 2px solid #ccc;
-  border-radius: 10px;
-  padding: 10px;
-  box-sizing: border-box;
-  display:inline-block;
-  justify-content: center;
-  align-items: center;
-  background-color: #f9f9f9; /* Optional: adds contrast behind image */
-}
+      .contentheader {
+        text-align: center;
+        font-size: 1em;
+        font-weight: bold;
+        margin-bottom: 20px;
+        color: #ffffff;
+        /* 'blink' is deprecated and unsupported in modern browsers */
+        text-decoration: underline;
+      }
 
-#slider img {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: cover; /* Ensures full image is visible without cropping */
-  border-radius: 8px;
-  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease;
-}
+      #slider {
+        width: 100%;
+        max-width: 550px;
+        height: 200px;
+        overflow: hidden;
+        position: relative;
+        border: 2px solid #ccc;
+        border-radius: 10px;
+        padding: 10px;
+        box-sizing: border-box;
+        display: inline-block;
+        justify-content: center;
+        align-items: center;
+        background-color: #f9f9f9; /* Optional: adds contrast behind image */
+      }
 
+      #slider img {
+        max-width: 100%;
+        max-height: 100%;
+        object-fit: cover; /* Ensures full image is visible without cropping */
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        transition: transform 0.2s ease;
+      }
 
-
-  #slider img:hover {
-    transform: scale(1.05);
-  }
+      #slider img:hover {
+        transform: scale(1.05);
+      }
     </style>
   </head>
 
@@ -115,7 +113,6 @@
       <div class="container">
         <div id="menu">
           <ul>
-            
             <li>
               <a href="#">TRG & EVENT</a>
               <ul>
@@ -153,15 +150,20 @@
               </ul>
             </li>
             <li>
-              <a href="#">TRACK HISTORY</a>
-              
+              <a href="landing-page/links/track-history/track-history.html"
+                >TRACK HISTORY</a
+              >
             </li>
             <li>
               <a href="login-portals/allinone.html">LOGIN</a>
               <ul>
                 <li><a href="login-portals/allinone.html">CO Portal</a></li>
-                <li><a href="login-portals/allinone.html">Trg Offr Portal</a></li>
-                <li><a href="login-portals/allinone.html">Trg Jco Portal</a></li>
+                <li>
+                  <a href="login-portals/allinone.html">Trg Offr Portal</a>
+                </li>
+                <li>
+                  <a href="login-portals/allinone.html">Trg Jco Portal</a>
+                </li>
                 <li><a href="login-portals/allinone.html">Trainee Login</a></li>
               </ul>
             </li>
@@ -222,9 +224,8 @@
             <div class="contentheader" style="text-decoration: blink">
               PHOTO GALLERY
             </div>
-            <div id="slider">
+            <div id="slider" style="background-color: #f00">
               <img src="/images/homepage/ccover.jpeg" alt="" />
-              <img src="images/homepage/image.png" alt="" />
               <img src="/images/homepage/crop.jpg" alt="" />
               <img src="/images/homepage/cto.jpeg" alt="" />
               <img src="/images/homepage/mor action.jpeg" alt="" />
@@ -246,8 +247,13 @@
               <tr>
                 <td align="center">
                   <a href="/study-material/CYBER SECURITY SCRIPT.pdf">
-  <img src="/CYBER SEC.jpg" height="80" width="80" alt="Student 2" />
-</a>
+                    <img
+                      src="/CYBER SEC.jpg"
+                      height="80"
+                      width="80"
+                      alt="Student 2"
+                    />
+                  </a>
                 </td>
                 <td align="center">
                   <a target="_blank" href="/landing-page/mediacreationtool.exe"
@@ -279,8 +285,13 @@
                 </td>
                 <td align="center">
                   <a href="/DIRECTORY.pdf">
-  <img src="calldirectory.png" height="80" width="80" alt="Student 2" />
-</a>
+                    <img
+                      src="calldirectory.png"
+                      height="80"
+                      width="80"
+                      alt="Student 2"
+                    />
+                  </a>
                 </td>
                 <td align="center">
                   <a target="_blank" href="/images/homepage/weather.png"
@@ -311,19 +322,53 @@
               onMouseOut="this.start();"
             >
               <ul>
-                <li><a href="#">CYBER SECURITY <br>LECTURE <br> ON 28 AUG 25</a></li>
+                <li>
+                  <a href="#"
+                    >CYBER SECURITY <br />LECTURE <br />
+                    ON 28 AUG 25</a
+                  >
+                </li>
                 <br />
-                <li><a href="#">FINAL TEST OF <br>SEP-NK CADRE <br> ON 30 AUG 25</a></li>
+                <li>
+                  <a href="#"
+                    >FINAL TEST OF <br />SEP-NK CADRE <br />
+                    ON 30 AUG 25</a
+                  >
+                </li>
                 <br />
-                <li><a href="#">FS CHECK <br> ON 31 AUG 25</a></li>
+                <li>
+                  <a href="#"
+                    >FS CHECK <br />
+                    ON 31 AUG 25</a
+                  >
+                </li>
                 <br />
-                <li><a href="#">RAISING DAY <br>CELEBRATION <br>ON 01 SEP 25</a></li>
+                <li>
+                  <a href="#"
+                    >RAISING DAY <br />CELEBRATION <br />ON 01 SEP 25</a
+                  >
+                </li>
                 <br />
-                <li><a href="#">I BATCH AV <br>ASSESSMENT TEST <br> ON 03 SEP 25 </a></li>
+                <li>
+                  <a href="#"
+                    >I BATCH AV <br />ASSESSMENT TEST <br />
+                    ON 03 SEP 25
+                  </a>
+                </li>
                 <br />
-                <li><a href="#">HYGIENE & SANITARY <br> ROUND ON <br>05 SEP 25</a></li>
+                <li>
+                  <a href="#"
+                    >HYGIENE & SANITARY <br />
+                    ROUND ON <br />05 SEP 25</a
+                  >
+                </li>
                 <br />
-                <li><a href="#">QTRLY BPET ON <br>   29 AUG 25</a></li>
+                <li>
+                  <a href="#"
+                    >QTRLY BPET ON <br />
+                    29 AUG 25</a
+                  >
+                </li>
                 <br />
               </ul>
             </marquee>

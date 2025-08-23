@@ -45,6 +45,8 @@ app.use("/api/attendance", require("./routes/attendanceRoutes"));
 app.use("/api/feedback", require("./routes/feedbackRoutes"));
 app.use("/api/sticky", require("./routes/stickyRoutes"));
 app.use("/api/summary", require("./routes/summaryRoutes"));
+app.use("/api/daily-schedule", require("./routes/dailyScheduleRoutes"));
+app.use("/api/past-tracker", require("./routes/pastTrackerRoutes"));
 
 const PORT = process.env.PORT || 5001;
 console.log(PORT);

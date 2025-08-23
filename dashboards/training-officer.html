@@ -4,6 +4,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>TRG OFFR PORTAL</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+      integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+      crossorigin="anonymous"
+    />
     <style>
       /* =========================================
        CO Portal Theme — single source of truth
@@ -45,7 +51,7 @@
         font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
           Arial, sans-serif;
         color: var(--co-ink);
-        background-color: #c3ecf5;
+        background-color: beige;
         display: grid;
         place-items: start center;
         padding: 20px;
@@ -120,7 +126,7 @@
         display: grid;
         grid-template-columns: 1fr;
         gap: 24px;
-        width: min(1100px, 96vw);
+        /* width: min(1100px, 96vw); */
       }
 
       /* Section cards with accent bar and tone */
@@ -403,17 +409,21 @@
     </div>
 
     <header>
-      <h1>TRG OFFR PORTAL</h1>
+      <h1><u>TRG OFFR PORTAL</u></h1>
       <p class="muted"></p>
     </header>
-    <button style="margin-left: auto" class="btn-primary" onclick="logout()">
+    <button
+      style="margin-left: auto; margin-top: 40px"
+      class="btn-primary"
+      onclick="logout()"
+    >
       Sign Out
     </button>
     <section class="section accent-info half">
-      <img height="200px" src="/training-officer.jpeg" alt="Training JCO" />
+      <img height="200px" width="170px" src="/training-officer.jpeg" alt="Training JCO" />
       <br />
-      <h2>Training officer</h2>
-      <h3>8 Kumaon</h3>
+      <h2>TRAINING OFFICER</h2>
+      <h4>8 Kumaon</h4>
     </section>
     <br />
     <main class="dashboard">
@@ -450,60 +460,27 @@
       <section class="section accent-primary span-2">
         <h2>
           Daily Training Programme <span class="chip chip--success">Live</span>
+          <form id="daily-schedule-form" onsubmit="getDailySchedule(event)">
+            <input
+              type="date"
+              id="date-filter"
+              name="date"
+              onchange="getDailySchedule()"
+            />
+          </form>
         </h2>
         <table aria-label="Daily training programme">
           <thead>
             <tr>
               <th>S. No.</th>
-              <th>Course</th>
+              <th>Date</th>
               <th>Time</th>
+              <th>Course</th>
               <th>Activity</th>
               <th>Instructor</th>
             </tr>
-            <tr>
-              <td>1.</td>
-              <td>Sec Cdr</td>
-              <td>0830Hrs-1325Hrs</td>
-              <td>7.62mm SIG SAUER</td>
-              <td>WTI Gokaran Singh</td>
-            </tr>
-            <tr>
-              <td>2.</td>
-              <td>Commando</td>
-              <td>0830Hrs-1325Hrs</td>
-              <td>Wpn Trg</td>
-              <td>HI Pardeep Parihar</td>
-            </tr>
-            <tr>
-              <td>3.</td>
-              <td>M.W</td>
-              <td>0830Hrs-1325Hrs</td>
-              <td>Types of knots and ropes</td>
-              <td>HI Jagdish Bhandari</td>
-            </tr>
-            <tr>
-              <td>4.</td>
-              <td>PPTC</td>
-              <td>0830Hrs-1325Hrs</td>
-              <td>Pole Vault</td>
-              <td>Nk Kamal Singh</td>
-            </tr>
-            <tr>
-              <td>5.</td>
-              <td>Drone</td>
-              <td>0830Hrs-1325Hrs</td>
-              <td>Types of Drones and their usage</td>
-              <td>Nk Deepak Singh</td>
-            </tr>
-            <tr>
-              <td>6.</td>
-              <td>ADC</td>
-              <td>0830Hrs-1325Hrs</td>
-              <td>Cane Drill</td>
-              <td>DI Hem Chandra Pant</td>
-            </tr>
           </thead>
-          <tbody>
+          <tbody id="daily-schedule">
             <!-- Populate dynamically -->
           </tbody>
         </table>
@@ -538,11 +515,10 @@
               placeholder="Type your note here..."
               aria-label="Note text"
             ></textarea>
-            <div class="row">
-              <button id="addNote" class="btn btn--warning" type="submit">
-                Add Note
-              </button>
-            </div>
+
+            <button id="addNote" class="btn btn--warning" type="submit">
+              Add Note
+            </button>
           </form>
           <br />
         </section>
@@ -559,11 +535,10 @@
               placeholder="Type your note here..."
               aria-label="Note text"
             ></textarea>
-            <div class="row">
-              <button id="addNote" class="btn btn--warning" type="submit">
-                Add Note
-              </button>
-            </div>
+
+            <button id="addNote" class="btn btn--warning" type="submit">
+              Add Note
+            </button>
           </form>
           <br />
         </section>
@@ -601,7 +576,13 @@
           Manage Training Schedule <span class="chip chip--info">Admin</span>
         </h2>
         <div class="actions">
-          <a href="schedule-add.html" class="btn btn--primary">Add Schedule</a>
+          <a
+            data-toggle="modal"
+            data-target="#addScheduleModal"
+            class="btn btn--primary"
+            id="addScheduleBtn"
+            >Add Schedule</a
+          >
           <a href="schedule-edit.html" class="btn btn--warning"
             >Edit Schedule</a
           >
@@ -689,6 +670,81 @@
         </form>
         <br />
       </section>
+
+      <!-- Add Schedule Modal -->
+      <div
+        class="modal fade"
+        id="addScheduleModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="addScheduleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content section">
+            <div class="modal-header">
+              <h5 class="modal-title" id="addScheduleModalLabel">
+                Add Schedule
+              </h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <form id="addScheduleForm" onsubmit="addSchedule(event)">
+                <div class="form-group">
+                  <label for="date">Date</label>
+                  <input type="date" id="date" name="date" required />
+                </div>
+                <div class="row">
+                  <div class="col-6 form-group">
+                    <label for="time">Time from</label>
+                    <input type="time" id="timeFrom" name="timeFrom" required />
+                  </div>
+                  <div class="col-6 form-group">
+                    <label for="time">Time to</label>
+                    <input type="time" id="timeTo" name="timeTo" required />
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="course">Course</label>
+                  <select
+                    name="course"
+                    id="course-select-add-schedule"
+                    required
+                  ></select>
+                </div>
+                <div class="form-group">
+                  <label for="activity">Activity</label>
+                  <input
+                    placeholder="Enter activity"
+                    type="text"
+                    id="activity"
+                    name="activity"
+                    required
+                  />
+                </div>
+                <div class="form-group">
+                  <label for="instructor">Instructor</label>
+                  <input
+                    placeholder="Enter instructor"
+                    type="text"
+                    id="instructor"
+                    name="instructor"
+                    required
+                  />
+                </div>
+                <button type="submit" class="btn btn--primary">Add</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
     </main>
 
     <script>
@@ -776,6 +832,23 @@
       // };
       // renderNotes();
     </script>
+
+    <script
+      src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+      integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+      integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+      integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+      crossorigin="anonymous"
+    ></script>
+
     <script src="training-officer.js"></script>
   </body>
 </html>

@@ -30,7 +30,17 @@ async function getStickies(req, res) {
   }
 }
 
-module.exports = {
-  createSticky,
-  getStickies,
-};
+async function deleteSticky(req, res) {
+  try {
+    const { id } = req.params;
+    const sticky = await Sticky.findByIdAndDelete(id);
+    if (!sticky) {
+      return res.status(404).json({ message: "Sticky note not found" });
+    }
+    res.status(200).json({ message: "Sticky note deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+}
+
+module.exports = { createSticky, getStickies, deleteSticky };

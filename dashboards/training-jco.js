@@ -32,6 +32,18 @@ async function getAllCourses() {
       option.textContent = course.courseName;
       courseSelectUpload.appendChild(option);
     });
+    const courseSelectPastTracker = document.getElementById(
+      "course-select-past-tracker"
+    );
+    courseSelectPastTracker.innerHTML = "";
+    [{ _id: "Other", courseName: "Other courses" }, ...courses].forEach(
+      (course) => {
+        const option = document.createElement("option");
+        option.value = course._id;
+        option.textContent = course.courseName;
+        courseSelectPastTracker.appendChild(option);
+      }
+    );
   } catch (err) {
     console.log(err);
   }
@@ -73,6 +85,16 @@ async function getUsers() {
       option.value = student._id;
       option.textContent = student.name;
       studentSelect.appendChild(option);
+    });
+    const userSelectPastTracker = document.getElementById(
+      "user-select-past-tracker"
+    );
+    userSelectPastTracker.innerHTML = "";
+    [{ _id: "", name: "Select Trainee" }, ...students].forEach((student) => {
+      const option = document.createElement("option");
+      option.value = student._id;
+      option.textContent = student.name;
+      userSelectPastTracker.appendChild(option);
     });
   } catch (err) {
     console.log(err);
@@ -514,6 +536,26 @@ async function getStickyNotes() {
 function logout() {
   localStorage.removeItem("token");
   window.location.href = "/index.html";
+}
+
+async function addPastTracker(event) {
+  event.preventDefault();
+  const formData = new FormData(event.target);
+  const pastTracker = Object.fromEntries(formData);
+  console.log(pastTracker);
+  try {
+    const res = await fetch("http://localhost:5001/api/past-tracker/add", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(pastTracker),
+    });
+    event.target.reset();
+  } catch (err) {
+    console.error("Error adding past tracker:", err);
+  }
 }
 
 getBPETSummary();
