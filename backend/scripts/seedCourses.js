@@ -43,6 +43,50 @@ const seedCourses = async () => {
           punishments: "No disciplinary actions in last 3 years",
         },
       },
+      {
+        courseName: "CLC",
+        durationWeeks: 8,
+        qualitativeRequirement: {
+          minServiceYears: 9,
+          age: { min: 29, max: 40 },
+          civEdn: "Graduate in any discipline",
+          milEdn: "MR I ",
+          punishments: "No disciplinary actions in last 3 years",
+        },
+      },
+      {
+        courseName: "Advanced IT",
+        durationWeeks: 8,
+        qualitativeRequirement: {
+          minServiceYears: 9,
+          age: { min: 29, max: 40 },
+          civEdn: "Graduate in any discipline",
+          milEdn: "MR I ",
+          punishments: "No disciplinary actions in last 3 years",
+        },
+      },
+      {
+        courseName: "MW",
+        durationWeeks: 16,
+        qualitativeRequirement: {
+          minServiceYears: 9,
+          age: { min: 29, max: 40 },
+          civEdn: "Graduate in any discipline",
+          milEdn: "MR I ",
+          punishments: "No disciplinary actions in last 3 years",
+        },
+      },
+      {
+        courseName: "Sniper",
+        durationWeeks: 8,
+        qualitativeRequirement: {
+          minServiceYears: 9,
+          age: { min: 29, max: 40 },
+          civEdn: "Graduate in any discipline",
+          milEdn: "MR I ",
+          punishments: "No disciplinary actions in last 3 years",
+        },
+      },
     ];
 
     await Course.deleteMany({});
