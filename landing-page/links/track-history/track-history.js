@@ -14,10 +14,11 @@ async function getPastTracker(filters) {
     const row = document.createElement("tr");
     row.innerHTML = `
       <td>${index + 1}</td>
-      <td>${pastTracker.user.army_no}</td>
-      <td>${pastTracker.user.rank}</td>
-      <td>${pastTracker.user.name}</td>
-      <td>${pastTracker.course.courseName}</td>
+      <td>${pastTracker.army_no}</td>
+      <td>${pastTracker.rank}</td>
+      <td>${pastTracker.name}</td>
+      <td>${pastTracker.coy}</td>
+      <td>${pastTracker.course}</td>
       <td>${pastTracker.courseDuration}</td>
       <td>${pastTracker.grade}</td>
       <td>${pastTracker.ere}</td>
@@ -34,26 +35,3 @@ async function searchPastTracker(event) {
   const filters = Object.fromEntries(formData);
   getPastTracker(filters);
 }
-
-async function getAllCourses() {
-  try {
-    const res = await fetch("http://localhost:5001/api/courses/getAllCourses");
-    const { data } = await res.json();
-    console.log(data);
-    courses = data;
-    // update course select with the data
-    const courseSelectPastTracker = document.getElementById(
-      "course-select-past-tracker"
-    );
-    courseSelectPastTracker.innerHTML = "";
-    [{ _id: "", courseName: "Select Course" }, ...courses].forEach((course) => {
-      const option = document.createElement("option");
-      option.value = course._id;
-      option.textContent = course.courseName;
-      courseSelectPastTracker.appendChild(option);
-    });
-  } catch (err) {
-    console.log(err);
-  }
-}
-getAllCourses();
