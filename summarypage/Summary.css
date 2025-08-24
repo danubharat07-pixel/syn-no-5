@@ -1,3 +1,4 @@
+
 #main{
     width: 100%;
     height: 100%;
@@ -15,7 +16,7 @@
 .header{
     width: 100%;
     height: 10vh;
-    background-color: green;
+    background-color:  rgba(5, 172, 52, 0.793);
     display: flex;
     justify-content: space-between;
     column-gap: 0.5vh;
@@ -30,7 +31,7 @@ a{
     
 
 h1{
-    color: yellow;
+    color: rgb(245, 245, 242);
     font-size: 5vh; 
     text-shadow: 2cqmax;
     text-decoration-thickness: 10px;
@@ -67,7 +68,7 @@ nav a {
   
 }
 nav a:hover {
-    background-color: #2cd923;
+    background-color: #010201;
     
 }
 .container{
@@ -112,7 +113,7 @@ nav a:hover {
  .Topleft button{
     font-size: 15px;
     cursor: pointer;
-    background-color: red;
+    background-color: rgb(207, 207, 207);
     text-align: center;
     margin-left: 38%;
     border-radius: 8px;
@@ -147,7 +148,7 @@ nav a:hover {
 .Topcentre button{
     font-size: 15px;
     cursor: pointer;
-    background-color: red;
+    background-color: rgb(255, 255, 255);
     text-align: center;
     margin-left: 45%;
     border-radius: 8px;
@@ -162,7 +163,7 @@ nav a:hover {
 .Topright{
     width: 33%;
     height: 35vh;
-    background-color: rgb(255, 255, 255);
+    background-color: white;
     column-gap: 0.5vh;
 
 }
@@ -180,7 +181,7 @@ nav a:hover {
  .Topright button{
     font-size: 15px;
     cursor: pointer;
-    background-color: red;
+    background-color: white;
     text-align: center;
     margin-left: 42%;
     border-radius: 8px;
@@ -194,7 +195,7 @@ nav a:hover {
 .downbox{
     width: 100%;
     height: 35vh;
-    background-color: rgb(255, 255, 255);
+    background-color: white;
     column-gap: 0.5vh;
     display: flex;
     margin-left: 5px;
@@ -206,7 +207,7 @@ nav a:hover {
 .downleft{
     width: 33%;
     height: 30vh;
-    background-color: rgb(255, 255, 255);
+    background-color: white;
     
 
 }
@@ -224,7 +225,7 @@ nav a:hover {
  .downleft button{
     font-size: 15px;
     cursor: pointer;
-    background-color: red;
+    background-color: white;
     text-align: center;
     margin-left: 27%;
     border-radius: 8px;
@@ -243,7 +244,7 @@ nav a:hover {
 .downcentre{
     width: 33%;
     height: 30vh;
-    background-color: rgb(255, 255, 255);
+    background-color: white;
    
     
 }
@@ -261,7 +262,7 @@ nav a:hover {
  .downcentre button{
     font-size: 15px;
     cursor: pointer;
-    background-color: red;
+    background-color: white;
     text-align: center;
     margin-left: 38%;
     border-radius: 8px;
@@ -277,7 +278,7 @@ nav a:hover {
 .downright{
     width: 33%;
     height: 30vh;
-    background-color: rgb(255, 255, 255);
+    background-color: white;
     
 
 
@@ -297,7 +298,7 @@ nav a:hover {
  .downright button{
     font-size: 15px;
     cursor: pointer;
-    background-color: red;
+    background-color: white;
     text-align: center;
     margin-left: 28%;
     border-radius: 8px;

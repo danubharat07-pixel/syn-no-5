@@ -77,8 +77,8 @@ header {
 
 /* Image Sliders */
 .image-slider {
-  width: 100%; /* Fill the full 200px column */
-  height: 100%; /* Adjust height based on content */
+  width: 300px; /* Fill the full 200px column */
+  height: 100vh; /* Adjust height based on content */
   display: flex;
   justify-content: center;
   overflow:scroll;
@@ -120,7 +120,8 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100%;
+  height: 100vh;
+  overflow: scroll;
 }
 
 
