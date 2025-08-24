@@ -8,6 +8,11 @@ yarn-error.log*
 # Dependency directories
 node_modules/
 
+# uploads
+uploads/
+# backend/uploads/
+backend/uploads/
+# backend/uploads/
 # Build output
 dist/
 build/
