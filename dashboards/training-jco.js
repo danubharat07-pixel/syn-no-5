@@ -494,10 +494,32 @@ async function getStickyNotes() {
         <td>${sticky.content}</td>
         <td>${sticky.createdBy.name}</td>
         <td>${new Date(sticky.createdAt).toLocaleDateString()}</td>
+        <td>
+          <button class="btn btn-danger" onclick="deleteStickyNote('${
+            sticky._id
+          }')" data-id="${sticky._id}">Delete</button>
+        </td>
       </tr>`;
     });
   } catch (err) {
     console.error("Error getting sticky notes:", err);
+  }
+}
+
+async function deleteStickyNote(id) {
+  try {
+    const res = await fetch(`http://localhost:5001/api/sticky/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+    });
+    if (res.ok) {
+      getStickyNotes();
+    }
+  } catch (err) {
+    console.error("Error deleting sticky note:", err);
   }
 }
 

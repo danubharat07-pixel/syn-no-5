@@ -48,7 +48,6 @@ async function updateProfileImage(event) {
   const statusDiv = document.getElementById("upload-status");
 
   try {
-    // Show upload status
     statusDiv.textContent = "Uploading...";
     statusDiv.style.color = "#666";
 
@@ -57,7 +56,8 @@ async function updateProfileImage(event) {
       throw new Error("No token found");
     }
 
-    const formData = new FormData(event.target);
+    const form = document.getElementById("profile-pic-form");
+    const formData = new FormData(form);
     const res = await fetch("http://localhost:5001/api/users/profile-image", {
       method: "PUT",
       body: formData,
@@ -74,10 +74,10 @@ async function updateProfileImage(event) {
     console.log(data);
 
     // Update the profile picture immediately
-    if (data.profileImage) {
-      const profilePic = document.getElementById("profile-pic");
-      profilePic.src = `http://localhost:5001/${data.profileImage}`;
-    }
+    // if (data.profileImage) {
+    //   const profilePic = document.getElementById("profile-pic");
+    //   profilePic.src = `http://localhost:5001/${data.profileImage}`;
+    // }
 
     // Show success message
     statusDiv.textContent = "Profile picture updated successfully!";
