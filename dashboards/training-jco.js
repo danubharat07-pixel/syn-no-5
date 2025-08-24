@@ -1,13 +1,3 @@
-async function getBPETSummary() {
-  try {
-    const res = await fetch("http://localhost:5001/api/training/bpet-summary");
-    const data = await res.json();
-    console.log(data);
-  } catch (err) {
-    console.log(err);
-  }
-}
-
 let courses = [];
 async function getAllCourses() {
   try {
@@ -32,18 +22,6 @@ async function getAllCourses() {
       option.textContent = course.courseName;
       courseSelectUpload.appendChild(option);
     });
-    const courseSelectPastTracker = document.getElementById(
-      "course-select-past-tracker"
-    );
-    courseSelectPastTracker.innerHTML = "";
-    [{ _id: "Other", courseName: "Other courses" }, ...courses].forEach(
-      (course) => {
-        const option = document.createElement("option");
-        option.value = course._id;
-        option.textContent = course.courseName;
-        courseSelectPastTracker.appendChild(option);
-      }
-    );
   } catch (err) {
     console.log(err);
   }
@@ -85,16 +63,6 @@ async function getUsers() {
       option.value = student._id;
       option.textContent = student.name;
       studentSelect.appendChild(option);
-    });
-    const userSelectPastTracker = document.getElementById(
-      "user-select-past-tracker"
-    );
-    userSelectPastTracker.innerHTML = "";
-    [{ _id: "", name: "Select Trainee" }, ...students].forEach((student) => {
-      const option = document.createElement("option");
-      option.value = student._id;
-      option.textContent = student.name;
-      userSelectPastTracker.appendChild(option);
     });
   } catch (err) {
     console.log(err);
@@ -558,7 +526,6 @@ async function addPastTracker(event) {
   }
 }
 
-getBPETSummary();
 getUsers();
 getUsersWithCourse();
 getAllCourses();

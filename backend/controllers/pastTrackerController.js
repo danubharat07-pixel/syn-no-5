@@ -9,14 +9,7 @@ const getPastTracker = async (req, res) => {
 
     // If filtering by army_no, first find the user by army_no
     if (army_no) {
-      const user = await User.findOne({ army_no: army_no });
-      if (!user) {
-        return res.status(404).json({
-          message: `User with army number ${army_no} not found`,
-          success: false,
-        });
-      }
-      filter.user = user._id; // Use the user's ObjectId
+      filter.army_no = army_no;
     }
 
     if (course) {
@@ -30,9 +23,7 @@ const getPastTracker = async (req, res) => {
     }
 
     // Populate user and course data for better response
-    const pastTracker = await PastTracker.find(filter)
-      .populate("user", "army_no rank name")
-      .populate("course", "courseName");
+    const pastTracker = await PastTracker.find(filter);
 
     res.json({ data: pastTracker, success: true });
   } catch (error) {
@@ -55,33 +46,11 @@ const getPastTrackerWithAggregation = async (req, res) => {
     const { army_no, course, grade, courseDuration, rank, name } = req.body;
 
     const pipeline = [
-      // Join with users collection
-      {
-        $lookup: {
-          from: "users",
-          localField: "user",
-          foreignField: "_id",
-          as: "user",
-        },
-      },
-      // Unwind the user array
-      { $unwind: "$user" },
-      // Join with courses collection
-      {
-        $lookup: {
-          from: "courses",
-          localField: "course",
-          foreignField: "_id",
-          as: "course",
-        },
-      },
-      { $unwind: "$course" },
-      // Match conditions
       {
         $match: {
-          ...(army_no && { "user.army_no": new RegExp(army_no, "i") }),
-          ...(rank && { "user.rank": new RegExp(rank, "i") }),
-          ...(course && { "course._id": new mongoose.Types.ObjectId(course) }),
+          ...(army_no && { army_no: new RegExp(army_no, "i") }),
+          ...(rank && { rank: new RegExp(rank, "i") }),
+          ...(course && { course: new RegExp(course, "i") }),
           ...(grade && { grade: new RegExp(grade, "i") }),
           ...(courseDuration && { courseDuration: parseInt(courseDuration) }),
         },
@@ -93,11 +62,12 @@ const getPastTrackerWithAggregation = async (req, res) => {
           grade: 1,
           courseDuration: 1,
           remarks: 1,
-          "user.army_no": 1,
-          "user.rank": 1,
-          "user.name": 1,
-          "course.courseName": 1,
-          "course._id": 1,
+          army_no: 1,
+          rank: 1,
+          name: 1,
+          coy: 1,
+          course: 1,
+          ere: 1,
         },
       },
     ];
