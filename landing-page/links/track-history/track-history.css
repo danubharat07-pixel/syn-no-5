@@ -1,3 +1,133 @@
-th {
-  text-transform: capitalize;
+/* ============================================================
+   track-history.css — 2D Pastel Styling for “Total Trained Individuals”
+   ============================================================ */
+
+/* 1. Page & Heading */
+body {
+  margin: 0;
+  padding: 20px;
+  background: linear-gradient(135deg, #fdf6e3 0%, #e0f7fa 100%);
+  font-family: 'Segoe UI', sans-serif;
+  color: #333;
+}
+
+h1.text-center {
+  font-size: 2.5rem;
+  letter-spacing: 1px;
+  margin-bottom: 1.5rem;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  color: #4e4e4e;
+  text-decoration: underline;
+}
+
+/* 2. Form Styling */
+#past-tracker-form {
+  margin-bottom: 2rem;
+}
+
+#past-tracker-form .form-control {
+  border-radius: 10px;
+  border: 2px solid #cfd8dc;
+  background-color: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  transition: border-color 0.3s ease;
+}
+
+#past-tracker-form .form-control:focus {
+  border-color: #81c784;
+  box-shadow: 0 0 0 4px rgba(129, 199, 132, 0.2);
+}
+
+#past-tracker-form button.btn-primary {
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 10px;
+  background: #81c784;
+  color: #fff;
+  font-weight: bold;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s ease;
+}
+
+#past-tracker-form button.btn-primary:hover {
+  background: #66bb6a;
+}
+
+/* 3. Table Container */
+#past-tracker-container {
+  margin-top: 20px;
+}
+
+/* 4. Table Styling */
+#past-tracker-table {
+  width: 100%;
+  background: #ffffff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  border-collapse: collapse;
+}
+
+/* 5. Table Header */
+#past-tracker-table thead th {
+  background: #b3e5fc;
+  color: #37474f;
+  font-weight: 700;
+  padding: 14px;
+  text-align: center;
+  font-size: 15px;
+  border-bottom: 2px solid #eeeeee;
+}
+
+/* 6. Table Body */
+#past-tracker-table tbody td {
+  padding: 12px;
+  text-align: center;
+  color: #555;
+  background-color: #fefefe;
+  border-bottom: 1px solid #eeeeee;
+}
+
+#past-tracker-table tbody tr:nth-child(even) td {
+  background-color: #f1f8e9;
+}
+
+/* 7. Hover Effect */
+#past-tracker-table tbody tr:hover td {
+  background-color: #e3f2fd;
+  color: #000;
+}
+
+/* 8. Responsive Tweak */
+@media (max-width: 768px) {
+  #past-tracker-form .form-control {
+    margin-bottom: 10px;
+  }
+
+  #past-tracker-form .d-flex {
+    flex-direction: column;
+  }
+
+  #past-tracker-table thead {
+    display: none;
+  }
+
+  #past-tracker-table tbody tr {
+    display: block;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  #past-tracker-table tbody td {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+
+  #past-tracker-table tbody td:last-child {
+    border-bottom: none;
+  }
 }

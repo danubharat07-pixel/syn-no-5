@@ -13,7 +13,8 @@
       body {
         font-family: Arial, sans-serif;
         margin: 0;
-        background: linear-gradient(135deg, #a8e063, #f6d365);
+        background: linear-gradient(135deg, #a8edea, #fed6e3);
+
       }
 
       /* Page Header */
@@ -31,7 +32,7 @@
       .page-header h1 {
         flex: 1;
         text-align: center;
-        font-size: 28px;
+        font-size: 50px;
         font-weight: bold;
         color: #222;
         text-transform: uppercase;
@@ -127,8 +128,7 @@
         margin: 10px;
         border-radius: 10px;
       }
-    </style>
-    <style>
+  
       /* Attendance Table Styles */
       .student-attendance-info {
         display: flex;
@@ -250,19 +250,92 @@
         cursor: pointer;
         margin-left: 10px;
       }
+        /* Centered Profile Photo Container */
+.profile-photo-container {
+  width: 120px;
+  height: 155px;
+  margin: 20px auto;         /* centers horizontally */
+  display: flex;
+  justify-content: center;
+  align-items: center;      /* make the container circular */
+  overflow: hidden;          /* ensures image stays inside */
+  border: 3px solid #444;    /* border around the circle */
+}
+
+.profile-photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;         /* fills container neatly */
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.profile-photo:hover {
+  transform: scale(1.05);
+}
+
+#profileUpload {
+  display: none;
+}
+P{
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 23px;
+  justify-self: center;
+  padding-bottom: 15px;
+  margin-bottom: 10px;
+  text-decoration: underline;
+  font-weight: bolder;
+}
     </style>
   </head>
   <body>
+
     <!-- Page Header -->
     <header class="page-header">
       <img src="/LOGO 1 LEFT.png" alt="Left Logo" class="logo" />
       <h1 class="page-title"><u>Trg JCO</u></h1>
       <img src="/syn 5 logo.jpeg" alt="Right Logo" class="logo" />
     </header>
+    <div class="profile-photo-container">
+  <img
+    src="/biodata/hem.jpeg"
+    alt="Profile Photo"
+    class="profile-photo"
+    id="profilePhoto"
+    onclick="document.getElementById('profileUpload').click();"
+  />
+  <input
+    type="file"
+    id="profileUpload"
+    accept="image/*"
+    onchange="updateProfilePhoto(event)"
+  />
+</div>
+<p>SUB GIRISH CHANDRA</p>
 
     <!-- Filter Bar -->
     <div class="filter-bar">
-      <label>Filter by Result:</label>
+      
+      <button
+        style="margin-left: auto"
+        class="btn-primary"
+        id="btn-logout"
+        onclick="logout()"
+      >
+        Sign Out
+      </button>
+    </div>
+<!-- Calendar -->
+ <section id="trg-calendar" class="tab-section hidden calendar-section">
+          <div id="calendar-container" style="height: 100vh">
+            <iframe
+              src="/calendar.html"
+              frameborder="0"
+              style="width: 100%; height: 100%"
+            ></iframe>
+          </div>
+        </section>
+        <label>Filter by Result:</label>
       <select id="resultFilter" onchange="applyFilters()">
         <option value="All">All</option>
         <option value="Passed">Passed</option>
@@ -288,16 +361,6 @@
       <button class="btn-primary bb" onclick="clearFilters()">
         Clear Filters
       </button>
-      <button
-        style="margin-left: auto"
-        class="btn-primary"
-        id="btn-logout"
-        onclick="logout()"
-      >
-        Sign Out
-      </button>
-    </div>
-
     <!-- Course Summary -->
     <div class="summary-section">
       <h2><b>Course Summary</b></h2>
@@ -377,7 +440,7 @@
         </table>
       </div>
     </div>
-
+    
     <div style="display: flex; flex-direction: row; gap: 20px">
       <div style="flex: 1" class="summary-section add-student">
         <h2><b>Add Student</b></h2>
@@ -597,17 +660,25 @@
             </td>
           </tr>
           <tr>
-            <td><label for="courseDuration">Course Duration</label></td>
+            <td><label for="courseDuration"> Course</label></td>
             <td>
-              <input
-                class="form-control"
-                placeholder="Course Duration"
-                type="number"
-                name="courseDuration"
-                id="courseDuration"
-                min="4"
-                max="18"
-              />
+              <label for="courseFrom">Course From</label>
+<input
+  class="form-control"
+  type="date"
+  name="courseFrom"
+  id="courseFrom"
+  required
+/>
+
+<label for="courseTo">Course To</label>
+<input
+  class="form-control"
+  type="date"
+  name="courseTo"
+  id="courseTo"
+  required
+/>
             </td>
           </tr>
           <tr>
