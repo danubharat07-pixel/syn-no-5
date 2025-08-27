@@ -43,7 +43,7 @@ const addPastTracker = async (req, res) => {
 // Alternative approach using aggregation pipeline (more efficient for complex queries)
 const getPastTrackerWithAggregation = async (req, res) => {
   try {
-    const { army_no, course, grade, courseDuration, rank, name } = req.body;
+    const { army_no, course, grade, rank, name } = req.body;
 
     const pipeline = [
       {
@@ -52,7 +52,7 @@ const getPastTrackerWithAggregation = async (req, res) => {
           ...(rank && { rank: new RegExp(rank, "i") }),
           ...(course && { course: new RegExp(course, "i") }),
           ...(grade && { grade: new RegExp(grade, "i") }),
-          ...(courseDuration && { courseDuration: parseInt(courseDuration) }),
+          ...(name && { name: new RegExp(name, "i") }),
         },
       },
       // Project only needed fields
@@ -60,13 +60,13 @@ const getPastTrackerWithAggregation = async (req, res) => {
         $project: {
           _id: 1,
           grade: 1,
-          courseDuration: 1,
           remarks: 1,
           army_no: 1,
           rank: 1,
           name: 1,
           coy: 1,
-          course: 1,
+          courseFrom: 1,
+          courseTo: 1,
           ere: 1,
         },
       },

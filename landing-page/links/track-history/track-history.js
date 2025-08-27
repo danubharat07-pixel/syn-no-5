@@ -19,7 +19,9 @@ async function getPastTracker(filters) {
       <td>${pastTracker.name}</td>
       <td>${pastTracker.coy}</td>
       <td>${pastTracker.course}</td>
-      <td>${pastTracker.courseDuration}</td>
+      <td>${new Date(pastTracker.courseFrom).toLocaleDateString(
+        "en-GB"
+      )} to ${new Date(pastTracker.courseTo).toLocaleDateString("en-GB")}</td>
       <td>${pastTracker.grade}</td>
       <td>${pastTracker.ere}</td>
       <td>${pastTracker.remarks}</td>
