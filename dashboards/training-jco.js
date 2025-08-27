@@ -523,6 +523,33 @@ async function deleteStickyNote(id) {
   }
 }
 
+async function addStickyNote(event) {
+  event.preventDefault();
+  const formData = new FormData(event.target);
+  const stickyNote = Object.fromEntries(formData);
+  console.log(stickyNote);
+  try {
+    const res = await fetch("http://localhost:5001/api/sticky", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(stickyNote),
+    });
+    if (res.ok) {
+      alert("Sticky note added successfully!");
+      event.target.reset();
+      getStickyNotes();
+    } else {
+      const error = await res.json();
+      alert(`Error adding sticky note: ${error.message}`);
+    }
+  } catch (err) {
+    console.error("Error adding sticky note:", err);
+  }
+}
+
 function logout() {
   localStorage.removeItem("token");
   window.location.href = "/index.html";

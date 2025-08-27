@@ -40,7 +40,7 @@
             <li data-tab="sticky-notes">Sticky Notes</li>
             <li data-tab="alerts">
               Alerts & Notifications
-              <span class="chip chip--warning">2</span>
+              <span id="alert-chip" class="chip chip--warning"></span>
             </li>
             <li data-tab="summary">From Training Officer</li>
             <li data-tab="daily-schedule">Instructor Incharge</li>
@@ -57,11 +57,11 @@
         <!-- Overview Tab -->
         <section id="overview" class="tab-section">
           <section class="summary-cards">
-            <div class="card">
+            <div class="card" data-tab="events">
               <h3>Pre-Courses</h3>
               <p id="card-precoursess">6 Ongoing Pre-Courses</p>
             </div>
-            <div class="card">
+            <div class="card" data-tab="attendance">
               <h3>Attendance</h3>
               <p style="font-size: small">
                 Present:
@@ -78,11 +78,11 @@
                 >
               </p>
             </div>
-            <div class="card">
+            <div class="card" data-tab="alerts">
               <h3>Alerts</h3>
-              <p id="card-alerts">4 New</p>
+              <p id="card-alerts">0 New</p>
             </div>
-            <div class="card">
+            <div class="card" data-tab="feedback">
               <h3>Feedback</h3>
               <p id="card-feedback">-- Received</p>
             </div>
@@ -128,8 +128,11 @@
                 <td>0830Hrs-1325Hrs</td>
                 <td>28 Aug 25</td>
                 <td>7.62mm SIG SAUER</td>
-               <td><a href="/biodata/Gokaran.html" target="_blank">WTI Gokaran Singh</a></td>
-
+                <td>
+                  <a href="/biodata/Gokaran.html" target="_blank"
+                    >WTI Gokaran Singh</a
+                  >
+                </td>
               </tr>
               <tr>
                 <td>2.</td>
@@ -137,7 +140,11 @@
                 <td>0830Hrs-1325Hrs</td>
                 <td>28 Aug 25</td>
                 <td>Wpn Trg</td>
-                <td><a href="/biodata/PradeepParihar.html" target="_blank"> WTI Pardeep Parihar</a></td>
+                <td>
+                  <a href="/biodata/PradeepParihar.html" target="_blank">
+                    WTI Pardeep Parihar</a
+                  >
+                </td>
               </tr>
               <tr>
                 <td>3.</td>
@@ -145,7 +152,11 @@
                 <td>0830Hrs-1325Hrs</td>
                 <td>28 Aug 25</td>
                 <td>Types of knots and ropes</td>
-                <td><a href="/biodata/JagdishBhandari.html" target="_blank">HI Jagdish Bhandari</a></td>
+                <td>
+                  <a href="/biodata/JagdishBhandari.html" target="_blank"
+                    >HI Jagdish Bhandari</a
+                  >
+                </td>
               </tr>
               <tr>
                 <td>4.</td>
@@ -153,7 +164,11 @@
                 <td>0830Hrs-1325Hrs</td>
                 <td>28 Aug 25</td>
                 <td>Pole Vault</td>
-                <td><a href="/biodata/KamalSingh.html" target="_blank">PTI Kamal Singh</a></td>
+                <td>
+                  <a href="/biodata/KamalSingh.html" target="_blank"
+                    >PTI Kamal Singh</a
+                  >
+                </td>
               </tr>
               <tr>
                 <td>5.</td>
@@ -161,7 +176,11 @@
                 <td>0830Hrs-1325Hrs</td>
                 <td>28 Aug 25</td>
                 <td>Types of Drones and their usage</td>
-                <td><a href="/biodata/DeepakSingh.html" target="_blank">Sep Deepak Singh</a></td>
+                <td>
+                  <a href="/biodata/DeepakSingh.html" target="_blank"
+                    >Sep Deepak Singh</a
+                  >
+                </td>
               </tr>
               <tr>
                 <td>6.</td>
@@ -169,7 +188,11 @@
                 <td>0830Hrs-1325Hrs</td>
                 <td>28 Aug 25</td>
                 <td>Cane Drill</td>
-                <td><a href="/biodata/Hemchandra.html" target="_blank">DI Hem Chandra Pant</a></td>
+                <td>
+                  <a href="/biodata/Hemchandra.html" target="_blank"
+                    >DI Hem Chandra Pant</a
+                  >
+                </td>
               </tr>
             </thead>
             <tbody>
@@ -255,6 +278,41 @@
               <tbody id="sticky-notes-table-body"></tbody>
             </table>
           </div>
+
+          <div class="summary-card card mt-4">
+            <h2><b>Add Sticky Notes</b></h2>
+            <form onsubmit="addStickyNote(event)">
+              <table class="summary-table">
+                <tr>
+                  <td><label for="role">For Role</label></td>
+                  <td>
+                    <select class="form-control" name="role" id="role">
+                      <option value="Student" selected>Student</option>
+                      <option value="TrgOffr">TrgOffr</option>
+                      <option value="TrgJCO">TrgJCO</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <td><label for="content">Note</label></td>
+                  <td>
+                    <input
+                      class="form-control"
+                      type="text"
+                      name="content"
+                      id="content"
+                      placeholder="Content"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="2" style="text-align: end">
+                    <button class="btn btn-primary" type="submit">Add</button>
+                  </td>
+                </tr>
+              </table>
+            </form>
+          </div>
         </section>
 
         <!-- Alerts Tab -->
@@ -270,43 +328,8 @@
                   <th>Days Left</th>
                 </tr>
               </thead>
-              <tbody>
-                <tr>
-                  <td>1.</td>
-                  <td>SEC Cdr</td>
-                  <td>Inf school, Mhow</td>
-                  <td>20</td>
-                </tr>
-                <tr>
-                  <td>2.</td>
-                  <td>ITCA</td>
-                  <td>Inf school, Mhow</td>
-                  <td>13</td>
-                </tr>
-                <tr>
-                  <td>3.</td>
-                  <td>NNG</td>
-                  <td>Inf school, Mhow</td>
-                  <td>10</td>
-                </tr>
-                <tr>
-                  <td>4.</td>
-                  <td>MW</td>
-                  <td>Gulmarg, Kashmir</td>
-                  <td>14</td>
-                </tr>
-                <tr>
-                  <td>5.</td>
-                  <td>CLC</td>
-                  <td>NCO Academy, Dhana</td>
-                  <td>20</td>
-                </tr>
-                <tr>
-                  <td>6.</td>
-                  <td>Sniper</td>
-                  <td>Inf school, Mhow</td>
-                  <td>12</td>
-                </tr>
+              <tbody id="alert-notifications-table-body">
+                <!-- populate dynamically -->
               </tbody>
             </table>
           </div>
@@ -374,5 +397,6 @@
     </div>
 
     <script src="dashboardco.js"></script>
+    <script src="alert-notifications.js"></script>
   </body>
 </html>

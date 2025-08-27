@@ -18,10 +18,8 @@ async function getStickies(req, res) {
   try {
     const { role } = req.query;
     let query = {};
-    if (role === "CO") {
-      query = { role: "CO" };
-    } else if (role === "TrgJCO") {
-      query = { role: "TrgJCO" };
+    if (role) {
+      query = { role };
     }
     const stickies = await Sticky.find(query).populate("createdBy", "name");
     res.status(200).json({ data: stickies });

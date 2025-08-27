@@ -8,7 +8,7 @@ const stickySchema = new mongoose.Schema(
     },
     role: {
       type: String,
-      enum: ["CO", "TrgJCO"],
+      enum: ["CO", "TrgJCO", "TrgOffr", "Student"],
       default: "CO",
     },
     createdBy: {

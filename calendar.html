@@ -35,8 +35,15 @@
       }
 
       /* Base */
-      * { box-sizing: border-box; }
-      html, body { height: 80%; margin: 0; padding: 0; }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 80%;
+        margin: 0;
+        padding: 0;
+      }
       body {
         font-family: "Inter", system-ui, sans-serif;
         color: var(--text);
@@ -57,7 +64,7 @@
       /* Calendar shell */
       .calendar {
         width: 100%;
-        height: 130%;
+        height: 140%;
         display: grid;
         grid-template-columns: repeat(7, 1fr);
         gap: 16px;
@@ -73,14 +80,19 @@
       .day-name {
         text-align: center;
         font-weight: 800;
-        color: var(--muted);
-        background: var(--surface-2);
+        color: white;
+        background: var(--event-5);
         border: 1px solid var(--border);
         border-radius: 5px;
         padding: 10px 6px;
         text-transform: uppercase;
-        font-size: 0.85rem;
+        font-size: 1rem;
         letter-spacing: 1px;
+        padding: 10px;
+      }
+      .day-name:nth-child(odd) {
+        background: #f14ec0;
+        color: white;
       }
 
       /* Day cells */
@@ -93,9 +105,12 @@
         min-height: 84px;
         padding: 12px 10px;
         cursor: pointer;
-        transition: background 0.2s, transform 0.08s, box-shadow 0.2s, border-color 0.2s;
+        transition: background 0.2s, transform 0.08s, box-shadow 0.2s,
+          border-color 0.2s;
       }
-      .day:nth-child(odd) { background: #64e644; }
+      .day:nth-child(odd) {
+        background: #64e644;
+      }
       .day:hover {
         background: var(--hover);
         transform: translateY(-2px);
@@ -123,12 +138,24 @@
         animation: popIn 0.25s ease;
         font-weight: 600;
       }
-      .day[data-variant="1"] .event { background: var(--event-1); }
-      .day[data-variant="2"] .event { background: var(--event-2); }
-      .day[data-variant="3"] .event { background: var(--event-3); }
-      .day[data-variant="4"] .event { background: var(--event-4); }
-      .day[data-variant="5"] .event { background: var(--event-5); }
-      .day[data-variant="6"] .event { background: var(--event-6); }
+      .day[data-variant="1"] .event {
+        background: var(--event-1);
+      }
+      .day[data-variant="2"] .event {
+        background: var(--event-2);
+      }
+      .day[data-variant="3"] .event {
+        background: var(--event-3);
+      }
+      .day[data-variant="4"] .event {
+        background: var(--event-4);
+      }
+      .day[data-variant="5"] .event {
+        background: var(--event-5);
+      }
+      .day[data-variant="6"] .event {
+        background: var(--event-6);
+      }
 
       /* Delete button */
       .delete-event {
@@ -144,16 +171,34 @@
 
       /* Animations */
       @keyframes fadeInDown {
-        from { opacity: 0; transform: translateY(-12px); }
-        to   { opacity: 1; transform: translateY(0); }
+        from {
+          opacity: 0;
+          transform: translateY(-12px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
       @keyframes fadeInUp {
-        from { opacity: 0; transform: translateY(12px); }
-        to   { opacity: 1; transform: translateY(0); }
+        from {
+          opacity: 0;
+          transform: translateY(12px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
       @keyframes popIn {
-        from { opacity: 0; transform: scale(0.96); }
-        to   { opacity: 1; transform: scale(1); }
+        from {
+          opacity: 0;
+          transform: scale(0.96);
+        }
+        to {
+          opacity: 1;
+          transform: scale(1);
+        }
       }
 
       .day:focus-visible {
@@ -162,14 +207,27 @@
       }
 
       @media (max-width: 720px) {
-        .calendar { gap: 8px; padding: 12px; }
-        .day { min-height: 72px; padding: 10px 8px; }
-        .event { font-size: 0.8rem; padding: 6px 24px 6px 8px; }
-        .delete-event { top: 2px; right: 4px; font-size: 0.7rem; }
+        .calendar {
+          gap: 8px;
+          padding: 12px;
+        }
+        .day {
+          min-height: 72px;
+          padding: 10px 8px;
+        }
+        .event {
+          font-size: 0.8rem;
+          padding: 6px 24px 6px 8px;
+        }
+        .delete-event {
+          top: 2px;
+          right: 4px;
+          font-size: 0.7rem;
+        }
       }
-      #calendarTitle{
+      #calendarTitle {
         font-weight: bold;
-        font-family:'Times New Roman', Times, serif;
+        font-family: "Times New Roman", Times, serif;
         text-decoration: underline;
         text-transform: uppercase;
       }
@@ -177,62 +235,93 @@
   </head>
 
   <body>
-    <div style="display:flex;justify-content:space-between;width:100%;margin-bottom:20px;">
-      <button onclick="prevMonth()" style="font-size:20px">← Previous Month</button>
+    <div
+      style="
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin-bottom: 20px;
+      "
+    >
+      <button onclick="prevMonth()" style="font-size: 20px">
+        ← Previous Month
+      </button>
       <h1 id="calendarTitle"><u>Training Calendar</u></h1>
-      <button onclick="nextMonth()" style="font-size:20px">Next Month →</button>
+      <button onclick="nextMonth()" style="font-size: 20px">
+        Next Month →
+      </button>
     </div>
 
     <div class="calendar" id="calendar">
-      <div class="day-name">Sun</div>
-      <div class="day-name">Mon</div>
-      <div class="day-name">Tue</div>
-      <div class="day-name">Wed</div>
-      <div class="day-name">Thu</div>
-      <div class="day-name">Fri</div>
-      <div class="day-name">Sat</div>
+      <div class="day-name">Sunday</div>
+      <div class="day-name">Monday</div>
+      <div class="day-name">Tuesday</div>
+      <div class="day-name">Wednesday</div>
+      <div class="day-name">Thursday</div>
+      <div class="day-name">Friday</div>
+      <div class="day-name">Saturday</div>
     </div>
 
     <script>
-      let MONTH = 7, YEAR = 2025;
+      let MONTH = 7,
+        YEAR = 2025;
       const INITIAL = { month: MONTH, year: YEAR };
       const DEFAULT_EVENTS = {
-        1: "Fitness Test", 5: "Weapon Inspection", 7: "Weapons Training",
-        11: "Drill Practice", 14: "Map Reading", 15: "Independence Parade",
-        18: "Night Nav", 23: "Mock Drill", 27: "Range Practice", 30: "Route March"
+        1: "Fitness Test",
+        5: "Weapon Inspection",
+        7: "Weapons Training",
+        11: "Drill Practice",
+        14: "Map Reading",
+        15: "Independence Parade",
+        18: "Night Nav",
+        23: "Mock Drill",
+        27: "Range Practice",
+        30: "Route March",
       };
       const monthNames = [
-        "January","February","March","April","May","June",
-        "July","August","September","October","November","December"
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December",
       ];
       const calendar = document.getElementById("calendar");
-      const titleEl  = document.getElementById("calendarTitle");
+      const titleEl = document.getElementById("calendarTitle");
 
       function generateCalendar(month, year) {
-        const key    = `calendarEvents_${month}_${year}`;
+        const key = `calendarEvents_${month}_${year}`;
         const stored = JSON.parse(localStorage.getItem(key)) || {};
         const events = {
-          ...(month===INITIAL.month && year===INITIAL.year ? DEFAULT_EVENTS : {}),
-          ...stored
+          ...(month === INITIAL.month && year === INITIAL.year
+            ? DEFAULT_EVENTS
+            : {}),
+          ...stored,
         };
 
         titleEl.textContent = `${monthNames[month]} ${year} - TRG Calendar`;
-        document.querySelectorAll(".day").forEach(d=>d.remove());
-        const firstDay   = new Date(year, month, 1).getDay();
-        const daysInMonth= new Date(year, month+1, 0).getDate();
+        document.querySelectorAll(".day").forEach((d) => d.remove());
+        const firstDay = new Date(year, month, 1).getDay();
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
 
         // blank slots
-        for(let i=0;i<firstDay;i++){
+        for (let i = 0; i < firstDay; i++) {
           const empty = document.createElement("div");
           empty.classList.add("day");
           calendar.appendChild(empty);
         }
 
         // days
-        for(let day=1; day<=daysInMonth; day++){
+        for (let day = 1; day <= daysInMonth; day++) {
           const cell = document.createElement("div");
           cell.classList.add("day");
-          cell.dataset.variant = new Date(year,month,day).getDay();
+          cell.dataset.variant = new Date(year, month, day).getDay();
 
           const lbl = document.createElement("div");
           lbl.classList.add("date");
@@ -240,26 +329,39 @@
           cell.appendChild(lbl);
 
           // render existing event
-          if(events[day]){
+          if (events[day]) {
             appendEventChip(cell, day, events, key, month, year);
           }
 
           // click date to add/edit
           cell.addEventListener("click", () => {
-            const current = events[day]||"";
-            const txt = prompt(`Event for ${monthNames[month]} ${day}:`, current);
-            if(txt===null) return;        // cancelled
-            if(txt.trim()===""){         // remove
+            const role = localStorage.getItem("role");
+            if (role !== "TrgJCO") {
+              return;
+            }
+            const current = events[day] || "";
+            const txt = prompt(
+              `Event for ${monthNames[month]} ${day}:`,
+              current
+            );
+            if (txt === null) return; // cancelled
+            if (txt.trim() === "") {
+              // remove
               delete events[day];
               localStorage.setItem(key, JSON.stringify(events));
               const old = cell.querySelector(".event");
-              if(old) old.remove();
-            } else {                      // add/update
-              events[day]=txt;
+              if (old) {
+                old.remove();
+              }
+            } else {
+              // add/update
+              events[day] = txt;
               localStorage.setItem(key, JSON.stringify(events));
               // remove old and re-append chip (with delete btn)
               const old = cell.querySelector(".event");
-              if(old) old.remove();
+              if (old) {
+                old.remove();
+              }
               appendEventChip(cell, day, events, key, month, year);
             }
           });
@@ -269,34 +371,46 @@
       }
 
       // helper to build event + delete button
-      function appendEventChip(cell, day, events, storageKey, month, year){
+      function appendEventChip(cell, day, events, storageKey, month, year) {
         const ev = document.createElement("div");
         ev.classList.add("event");
         ev.textContent = events[day];
 
-        const btn = document.createElement("button");
-        btn.classList.add("delete-event");
-        btn.textContent = "✕";
-        btn.addEventListener("click", e => {
-          e.stopPropagation();
-          if(!confirm(`Remove event on ${monthNames[month]} ${day}?`)) return;
-          delete events[day];
-          localStorage.setItem(storageKey, JSON.stringify(events));
-          ev.remove();
-        });
+        const role = localStorage.getItem("role");
+        if (role === "TrgJCO") {
+          const btn = document.createElement("button");
+          btn.classList.add("delete-event");
+          btn.textContent = "✕";
+          btn.addEventListener("click", (e) => {
+            e.stopPropagation();
+            if (!confirm(`Remove event on ${monthNames[month]} ${day}?`))
+              return;
+            delete events[day];
+            localStorage.setItem(storageKey, JSON.stringify(events));
+            ev.remove();
+          });
 
-        ev.appendChild(btn);
+          ev.appendChild(btn);
+        }
         cell.appendChild(ev);
       }
 
       // init & navigation
       generateCalendar(MONTH, YEAR);
       function prevMonth() {
-        MONTH--; if(MONTH<0){ MONTH=11; YEAR--; }
+        MONTH--;
+        if (MONTH < 0) {
+          MONTH = 11;
+          YEAR--;
+        }
         generateCalendar(MONTH, YEAR);
       }
       function nextMonth() {
-        MONTH++; if(MONTH>11){ MONTH=0; YEAR++; }
+        MONTH++;
+        if (MONTH > 11) {
+          MONTH = 0;
+          YEAR++;
+        }
         generateCalendar(MONTH, YEAR);
       }
     </script>

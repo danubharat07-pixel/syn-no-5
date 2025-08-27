@@ -31,11 +31,11 @@ async function getStudentData() {
       </tr>
       <tr>
         <th>Course</th>
-        <td>${data.course.courseName}</td>
+        <td>${data.course?.courseName}</td>
       </tr>
       <tr>
         <th>Duration</th>
-        <td>${data.course.durationWeeks} weeks</td>
+        <td>${data.course?.durationWeeks} weeks</td>
       </tr>
     `;
   } catch (error) {
@@ -135,27 +135,27 @@ function logout() {
 // Function to submit feedback
 async function submitFeedback(event) {
   event.preventDefault();
-  
+
   const feedbackStatus = document.getElementById("feedback-status");
-  
+
   try {
     feedbackStatus.textContent = "Submitting feedback...";
     feedbackStatus.style.color = "#666";
-    
+
     const token = localStorage.getItem("token");
     if (!token) {
       throw new Error("No token found");
     }
-    
+
     const formData = new FormData(event.target);
     const feedbackData = {
       forRole: formData.get("forRole"),
       feedback: formData.get("feedback"),
       howToImprove: formData.get("howToImprove"),
       rating: parseInt(formData.get("rating")),
-      isAnonymous: formData.get("isAnonymous") === "on"
+      isAnonymous: formData.get("isAnonymous") === "on",
     };
-    
+
     const res = await fetch("http://localhost:5001/api/feedback", {
       method: "POST",
       headers: {
@@ -164,35 +164,34 @@ async function submitFeedback(event) {
       },
       body: JSON.stringify(feedbackData),
     });
-    
+
     if (!res.ok) {
       const errorData = await res.json();
       throw new Error(errorData.message || `Submission failed: ${res.status}`);
     }
-    
+
     const { data } = await res.json();
     console.log("Feedback submitted:", data);
-    
+
     // Show success message
     feedbackStatus.textContent = "Feedback submitted successfully!";
     feedbackStatus.style.color = "#51cf66";
-    
+
     // Reset form
     event.target.reset();
-    
+
     // Refresh the feedback list to show the new feedback
     loadMyFeedback();
-    
+
     // Clear status message after 3 seconds
     setTimeout(() => {
       feedbackStatus.textContent = "";
     }, 3000);
-    
   } catch (error) {
     console.error("Error submitting feedback:", error);
     feedbackStatus.textContent = `Submission failed: ${error.message}`;
     feedbackStatus.style.color = "#ff6b6b";
-    
+
     // Clear error message after 5 seconds
     setTimeout(() => {
       feedbackStatus.textContent = "";
@@ -208,12 +207,15 @@ async function loadMyFeedback() {
       throw new Error("No token found");
     }
 
-    const response = await fetch("http://localhost:5001/api/feedback/my-feedback", {
-      headers: {
-        "Authorization": `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      "http://localhost:5001/api/feedback/my-feedback",
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     if (!response.ok) {
       throw new Error(`Failed to load feedback: ${response.status}`);
@@ -221,7 +223,6 @@ async function loadMyFeedback() {
 
     const { data: feedbacks } = await response.json();
     displayMyFeedback(feedbacks);
-
   } catch (error) {
     console.error("Error loading feedback:", error);
     const feedbackList = document.getElementById("my-feedback-list");
@@ -232,17 +233,19 @@ async function loadMyFeedback() {
 // Function to display user's feedback
 function displayMyFeedback(feedbacks) {
   const feedbackList = document.getElementById("my-feedback-list");
-  
+
   if (feedbacks.length === 0) {
-    feedbackList.innerHTML = '<p class="no-feedback">You haven\'t submitted any feedback yet.</p>';
+    feedbackList.innerHTML =
+      '<p class="no-feedback">You haven\'t submitted any feedback yet.</p>';
     return;
   }
 
-  feedbackList.innerHTML = feedbacks.map(feedback => {
-    const date = new Date(feedback.createdAt).toLocaleDateString();
-    const rating = "⭐".repeat(feedback.rating);
-    
-    return `
+  feedbackList.innerHTML = feedbacks
+    .map((feedback) => {
+      const date = new Date(feedback.createdAt).toLocaleDateString();
+      const rating = "⭐".repeat(feedback.rating);
+
+      return `
       <div class="feedback-item">
         <div class="feedback-header">
           <div class="feedback-rating">${rating} ${feedback.rating}/5</div>
@@ -254,19 +257,30 @@ function displayMyFeedback(feedbacks) {
           <p>${feedback.feedback}</p>
           <h4>How to Improve:</h4>
           <p>${feedback.howToImprove}</p>
-          ${feedback.isAnonymous ? '<p><small><em>Submitted anonymously</em></small></p>' : ''}
+          ${
+            feedback.isAnonymous
+              ? "<p><small><em>Submitted anonymously</em></small></p>"
+              : ""
+          }
         </div>
         <div class="feedback-actions">
-          <button class="btn-delete" onclick="deleteFeedback('${feedback._id}')">Delete</button>
+          <button class="btn-delete" onclick="deleteFeedback('${
+            feedback._id
+          }')">Delete</button>
         </div>
       </div>
     `;
-  }).join('');
+    })
+    .join("");
 }
 
 // Function to delete feedback
 async function deleteFeedback(feedbackId) {
-  if (!confirm("Are you sure you want to delete this feedback? This action cannot be undone.")) {
+  if (
+    !confirm(
+      "Are you sure you want to delete this feedback? This action cannot be undone."
+    )
+  ) {
     return;
   }
 
@@ -276,13 +290,16 @@ async function deleteFeedback(feedbackId) {
       throw new Error("No token found");
     }
 
-    const response = await fetch(`http://localhost:5001/api/feedback/${feedbackId}`, {
-      method: "DELETE",
-      headers: {
-        "Authorization": `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `http://localhost:5001/api/feedback/${feedbackId}`,
+      {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "application/json",
+        },
+      }
+    );
 
     if (!response.ok) {
       const errorData = await response.json();
@@ -291,10 +308,9 @@ async function deleteFeedback(feedbackId) {
 
     // Show success message
     alert("Feedback deleted successfully!");
-    
+
     // Reload feedback list
     loadMyFeedback();
-
   } catch (error) {
     console.error("Error deleting feedback:", error);
     alert(`Failed to delete feedback: ${error.message}`);
@@ -304,3 +320,55 @@ async function deleteFeedback(feedbackId) {
 getStudentData();
 getMaterials();
 loadMyFeedback();
+
+async function getStickyNotes() {
+  try {
+    const res = await fetch("http://localhost:5001/api/sticky?role=Student", {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+    });
+    const { data } = await res.json();
+
+    const stickyNotesTableBody = document.getElementById(
+      "sticky-notes-table-body"
+    );
+    stickyNotesTableBody.innerHTML = "";
+    data.forEach((sticky, index) => {
+      stickyNotesTableBody.innerHTML += `
+      <tr>
+        <td>${index + 1}</td>
+        <td>${sticky.content}</td>
+        <td>${sticky.createdBy.name}</td>
+        <td>${new Date(sticky.createdAt).toLocaleDateString()}</td>
+        <td>
+          <button class="btn btn-danger btn-delete-sticky" onclick="deleteStickyNote('${
+            sticky._id
+          }')" data-id="${sticky._id}">Delete</button>
+        </td>
+      </tr>`;
+    });
+  } catch (err) {
+    console.error("Error getting sticky notes:", err);
+  }
+}
+
+getStickyNotes();
+
+async function deleteStickyNote(id) {
+  try {
+    const res = await fetch(`http://localhost:5001/api/sticky/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+        "Content-Type": "application/json",
+      },
+    });
+    if (res.ok) {
+      getStickyNotes();
+    }
+  } catch (err) {
+    console.error("Error deleting sticky note:", err);
+  }
+}

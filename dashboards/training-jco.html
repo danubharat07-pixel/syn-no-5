@@ -14,7 +14,6 @@
         font-family: Arial, sans-serif;
         margin: 0;
         background: linear-gradient(135deg, #a8edea, #fed6e3);
-
       }
 
       /* Page Header */
@@ -128,7 +127,7 @@
         margin: 10px;
         border-radius: 10px;
       }
-  
+
       /* Attendance Table Styles */
       .student-attendance-info {
         display: flex;
@@ -250,46 +249,45 @@
         cursor: pointer;
         margin-left: 10px;
       }
-        /* Centered Profile Photo Container */
-.profile-photo-container {
-  width: 120px;
-  height: 155px;
-  margin: 20px auto;         /* centers horizontally */
-  display: flex;
-  justify-content: center;
-  align-items: center;      /* make the container circular */
-  overflow: hidden;          /* ensures image stays inside */
-  border: 3px solid #444;    /* border around the circle */
-}
+      /* Centered Profile Photo Container */
+      .profile-photo-container {
+        width: 120px;
+        height: 155px;
+        margin: 20px auto; /* centers horizontally */
+        display: flex;
+        justify-content: center;
+        align-items: center; /* make the container circular */
+        overflow: hidden; /* ensures image stays inside */
+        border: 3px solid #444; /* border around the circle */
+      }
 
-.profile-photo {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;         /* fills container neatly */
-  cursor: pointer;
-  transition: transform 0.2s;
-}
+      .profile-photo {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; /* fills container neatly */
+        cursor: pointer;
+        transition: transform 0.2s;
+      }
 
-.profile-photo:hover {
-  transform: scale(1.05);
-}
+      .profile-photo:hover {
+        transform: scale(1.05);
+      }
 
-#profileUpload {
-  display: none;
-}
-P{
-  font-family: Arial, Helvetica, sans-serif;
-  font-size: 23px;
-  justify-self: center;
-  padding-bottom: 15px;
-  margin-bottom: 10px;
-  text-decoration: underline;
-  font-weight: bolder;
-}
+      #profileUpload {
+        display: none;
+      }
+      P {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 23px;
+        justify-self: center;
+        padding-bottom: 15px;
+        margin-bottom: 10px;
+        text-decoration: underline;
+        font-weight: bolder;
+      }
     </style>
   </head>
   <body>
-
     <!-- Page Header -->
     <header class="page-header">
       <img src="/LOGO 1 LEFT.png" alt="Left Logo" class="logo" />
@@ -297,25 +295,24 @@ P{
       <img src="/syn 5 logo.jpeg" alt="Right Logo" class="logo" />
     </header>
     <div class="profile-photo-container">
-  <img
-    src="/biodata/hem.jpeg"
-    alt="Profile Photo"
-    class="profile-photo"
-    id="profilePhoto"
-    onclick="document.getElementById('profileUpload').click();"
-  />
-  <input
-    type="file"
-    id="profileUpload"
-    accept="image/*"
-    onchange="updateProfilePhoto(event)"
-  />
-</div>
-<p>SUB GIRISH CHANDRA</p>
+      <img
+        src="/biodata/hem.jpeg"
+        alt="Profile Photo"
+        class="profile-photo"
+        id="profilePhoto"
+        onclick="document.getElementById('profileUpload').click();"
+      />
+      <input
+        type="file"
+        id="profileUpload"
+        accept="image/*"
+        onchange="updateProfilePhoto(event)"
+      />
+    </div>
+    <p>SUB GIRISH CHANDRA</p>
 
     <!-- Filter Bar -->
     <div class="filter-bar">
-      
       <button
         style="margin-left: auto"
         class="btn-primary"
@@ -325,42 +322,42 @@ P{
         Sign Out
       </button>
     </div>
-<!-- Calendar -->
- <section id="trg-calendar" class="tab-section hidden calendar-section">
-          <div id="calendar-container" style="height: 100vh">
-            <iframe
-              src="/calendar.html"
-              frameborder="0"
-              style="width: 100%; height: 100%"
-            ></iframe>
-          </div>
-        </section>
-        <label>Filter by Result:</label>
-      <select id="resultFilter" onchange="applyFilters()">
-        <option value="All">All</option>
-        <option value="Passed">Passed</option>
-        <option value="Failed">Failed</option>
-        <option value="Qualified">Qualified</option>
-        <option value="Unqualified">Unqualified</option>
-        <option value="Selected">Selected</option>
-        <option value="Not Selected">Not Selected</option>
-        <option value="MM">MM</option>
-        <option value="FC">FC</option>
-        <option value="SS">SS</option>
-      </select>
+    <!-- Calendar -->
+    <section id="trg-calendar" class="tab-section hidden calendar-section">
+      <div id="calendar-container" style="height: 100vh">
+        <iframe
+          src="/calendar.html"
+          frameborder="0"
+          style="width: 100%; height: 100%"
+        ></iframe>
+      </div>
+    </section>
+    <label>Filter by Result:</label>
+    <select id="resultFilter" onchange="applyFilters()">
+      <option value="All">All</option>
+      <option value="Passed">Passed</option>
+      <option value="Failed">Failed</option>
+      <option value="Qualified">Qualified</option>
+      <option value="Unqualified">Unqualified</option>
+      <option value="Selected">Selected</option>
+      <option value="Not Selected">Not Selected</option>
+      <option value="MM">MM</option>
+      <option value="FC">FC</option>
+      <option value="SS">SS</option>
+    </select>
 
-      <label>Search by Army No:</label>
-      <input
-        list="armyNoList"
-        id="armySearch"
-        placeholder="Enter Army No..."
-        onkeyup="applyFilters()"
-      />
-      <datalist id="armyNoList"></datalist>
+    <label>Search by Army No:</label>
+    <input
+      list="armyNoList"
+      id="armySearch"
+      placeholder="Enter Army No..."
+      onkeyup="applyFilters()"
+    />
+    <datalist id="armyNoList"></datalist>
 
-      <button class="btn-primary bb" onclick="clearFilters()">
-        Clear Filters
-      </button>
+    <button class="btn-primary bb" onclick="clearFilters()">
+      Clear Filters
+    </button>
     <!-- Course Summary -->
     <div class="summary-section">
       <h2><b>Course Summary</b></h2>
@@ -440,7 +437,7 @@ P{
         </table>
       </div>
     </div>
-    
+
     <div style="display: flex; flex-direction: row; gap: 20px">
       <div style="flex: 1" class="summary-section add-student">
         <h2><b>Add Student</b></h2>
@@ -663,22 +660,22 @@ P{
             <td><label for="courseDuration"> Course</label></td>
             <td>
               <label for="courseFrom">Course From</label>
-<input
-  class="form-control"
-  type="date"
-  name="courseFrom"
-  id="courseFrom"
-  required
-/>
+              <input
+                class="form-control"
+                type="date"
+                name="courseFrom"
+                id="courseFrom"
+                required
+              />
 
-<label for="courseTo">Course To</label>
-<input
-  class="form-control"
-  type="date"
-  name="courseTo"
-  id="courseTo"
-  required
-/>
+              <label for="courseTo">Course To</label>
+              <input
+                class="form-control"
+                type="date"
+                name="courseTo"
+                id="courseTo"
+                required
+              />
             </td>
           </tr>
           <tr>
@@ -714,9 +711,45 @@ P{
       </form>
     </div>
 
-    <div class="summary-section">
-      <h2><b>Materials</b></h2>
-      <div id="materialSelect"></div>
+    <!-- Materials and sticky notes-->
+    <div style="display: flex; flex-direction: row; gap: 20px">
+      <div style="flex: 1" class="summary-section full-width">
+        <h2><b>Materials</b></h2>
+        <div id="materialSelect"></div>
+      </div>
+      <div style="flex: 1" class="summary-section">
+        <h2><b>Add Sticky Notes</b></h2>
+        <form onsubmit="addStickyNote(event)">
+          <table class="summary-table">
+            <tr>
+              <td><label for="role">For Role</label></td>
+              <td>
+                <select class="form-control" name="role" id="role">
+                  <option value="CO" selected>CO</option>
+                  <option value="TrgOffr">TrgOffr</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td><label for="content">Note</label></td>
+              <td>
+                <input
+                  class="form-control"
+                  type="text"
+                  name="content"
+                  id="content"
+                  placeholder="Content"
+                />
+              </td>
+            </tr>
+            <tr>
+              <td colspan="2" style="text-align: end">
+                <button class="btn-primary" type="submit">Add</button>
+              </td>
+            </tr>
+          </table>
+        </form>
+      </div>
     </div>
 
     <!-- Filtering Script -->

@@ -420,7 +420,12 @@
       Sign Out
     </button>
     <section class="section accent-info half">
-      <img height="200px" width="170px" src="/training-officer.jpeg" alt="Training JCO" />
+      <img
+        height="200px"
+        width="170px"
+        src="/training-officer.jpeg"
+        alt="Training JCO"
+      />
       <br />
       <h2>TRAINING OFFICER</h2>
       <h4>8 Kumaon</h4>
@@ -589,6 +594,20 @@
           <a href="schedule-delete.html" class="btn btn--danger"
             >Remove Schedule</a
           >
+        </div>
+      </section>
+
+      <!-- Training Calendar -->
+      <section class="section accent-info span-2">
+        <h2>Training Calendar <span class="chip chip--info">Live</span></h2>
+        <div id="calendar-container" style="height: 100vh">
+          <iframe
+            id="calendar-iframe"
+            src="/calendar.html"
+            frameborder="0"
+            style="width: 100%; height: 100%"
+            onload="styleCalendarTitle()"
+          ></iframe>
         </div>
       </section>
 
@@ -831,6 +850,21 @@
       //   }
       // };
       // renderNotes();
+
+      // Function to style calendar title in iframe
+      function styleCalendarTitle() {
+        try {
+          const iframe = document.getElementById('calendar-iframe');
+          const iframeDoc = iframe.contentDocument || iframe.contentWindow.document;
+          const calendarTitle = iframeDoc.getElementById('calendarTitle');
+          
+          if (calendarTitle) {
+            calendarTitle.style.color = 'white';
+          }
+        } catch (error) {
+          console.log('Could not access iframe content:', error);
+        }
+      }
     </script>
 
     <script

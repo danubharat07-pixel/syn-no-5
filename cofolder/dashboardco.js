@@ -49,6 +49,21 @@ function setupTabNavigation() {
       });
     });
   });
+  const summaryCards = document.querySelectorAll(".summary-cards .card");
+  summaryCards.forEach((card) => {
+    card.addEventListener("click", () => {
+      const target = card.dataset.tab;
+      sections.forEach((sec) => {
+        sec.classList.toggle("hidden", sec.id !== target);
+      });
+      tabs.forEach((t) => t.classList.remove("active"));
+      tabs.forEach((t) => {
+        if (t.dataset.tab === target) {
+          t.classList.add("active");
+        }
+      });
+    });
+  });
 }
 
 function setupLogout() {
@@ -389,7 +404,7 @@ async function getStickyNotes() {
         <td>${sticky.createdBy.name}</td>
         <td>${new Date(sticky.createdAt).toLocaleDateString()}</td>
         <td>
-          <button class="btn-delete-sticky" onclick="deleteStickyNote('${
+          <button class="btn btn-danger btn-delete-sticky" onclick="deleteStickyNote('${
             sticky._id
           }')" data-id="${sticky._id}">Delete</button>
         </td>
@@ -486,3 +501,30 @@ async function getDailySchedule(event) {
 }
 
 getDailySchedule();
+
+async function addStickyNote(event) {
+  event.preventDefault();
+  const formData = new FormData(event.target);
+  const stickyNote = Object.fromEntries(formData);
+  console.log(stickyNote);
+  try {
+    const res = await fetch("http://localhost:5001/api/sticky", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${localStorage.getItem("token")}`,
+      },
+      body: JSON.stringify(stickyNote),
+    });
+    if (res.ok) {
+      alert("Sticky note added successfully!");
+      event.target.reset();
+      getStickyNotes();
+    } else {
+      const error = await res.json();
+      alert(`Error adding sticky note: ${error.message}`);
+    }
+  } catch (err) {
+    console.error("Error adding sticky note:", err);
+  }
+}
