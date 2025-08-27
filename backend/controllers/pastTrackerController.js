@@ -68,6 +68,7 @@ const getPastTrackerWithAggregation = async (req, res) => {
           courseFrom: 1,
           courseTo: 1,
           ere: 1,
+          course: 1,
         },
       },
     ];
