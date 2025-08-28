@@ -32,7 +32,7 @@
       <div class="box center">
         <h2>Trained Soldiers in Action</h2>
         <video width="100%" controls poster="100%">
-          <source src="Unit\images\imgSlider\video.mp4" type="video/mp4" />
+          <source src="/images/imgSlider/Drone.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>     
         <!-- Video too be added later -->
@@ -45,6 +45,26 @@
           Explore our advanced  drones systems designed
           for modern warfare.
         </p>
+        <!-- Slider Start -->
+  <div class="slider">
+    <div class="slides">
+      <img src="/summarypage/DRONE.jpg" alt="Drone 1">
+      <img src="/summarypage/DRONE3.jpg" alt="Drone 2">
+      <img src="/summarypage/DRONES 2.jpg" alt="Drone 3">
+      <img src="/summarypage/combat-drone-mission-flight_868783-18146.avif" alt="Drone 1">
+      <img src="/summarypage/military-drone-flights-training-ground-generative-ai.jpg" alt="Drone 2">
+      <img src="/summarypage/DRONES 2.jpg" alt="Drone 3">
+      <img src="/summarypage/DRONE.jpg" alt="Drone 1">
+      <img src="/summarypage/DRONE3.jpg" alt="Drone 2">
+      <img src="/summarypage/DRONES 2.jpg" alt="Drone 3">
+      <img src="/summarypage/DRONE.jpg" alt="Drone 1">
+      <img src="/summarypage/DRONE3.jpg" alt="Drone 2">
+      <img src="/summarypage/DRONES 2.jpg" alt="Drone 3">
+    </div>
+    <button class="nav prev">&#10094;</button>
+    <button class="nav next">&#10095;</button>
+  </div>
+  <!-- Slider End -->
       </div>
     </div>
 
@@ -58,5 +78,24 @@
         </ul>
       </nav>
     </footer>
+    <script>
+  (function(){
+    const slidesEl = document.querySelector('.slider .slides');
+    const imgs      = slidesEl.querySelectorAll('img').length;
+    let   idx       = 0;
+
+    document.querySelector('.slider .next')
+      .addEventListener('click', ()=> {
+        idx = (idx + 1) % imgs;
+        slidesEl.style.transform = `translateX(-${idx * 100}%)`;
+      });
+
+    document.querySelector('.slider .prev')
+      .addEventListener('click', ()=> {
+        idx = (idx - 1 + imgs) % imgs;
+        slidesEl.style.transform = `translateX(-${idx * 100}%)`;
+      });
+  })();
+</script>
   </body>
 </html>

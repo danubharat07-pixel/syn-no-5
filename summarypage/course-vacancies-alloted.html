@@ -3,125 +3,213 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Course Vacencies Alloted</title>
+<title>Course Vacancies Allotted</title>
 
 <style>
   :root{
-    --banner:#108415;           /* green banner */
-    --banner-text:#ffffff;
-    --accent:#f8e96b;           /* yellow underline */
-    --thead:#0d2a5f;            /* deep navy header */
-    --row-1:#e7eee6;            /* pale green rows */
-    --row-2:#d6dfd5;
-    --card:#f7f9f7;
+    --banner: linear-gradient(135deg, #a8d5ba, #f9e1ae); 
+    --thead:#91a8d0;           
+    --row-1:#fdfdfd;           
+    --row-2:#f4f9f4;           
+    --card:#ffffff;
+    --border:#cbd5e0;
   }
-  *{box-sizing:border-box}
   body{
     margin:0;
     padding:24px;
-    background:#f1f4f3;
+    background:#f5f7fa;
     font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Sans",sans-serif;
-    color:#0d0d0d;
+    color:#333;
   }
   .container{
-    max-width:980px;
+    max-width:1100px;
     margin:0 auto;
     background:var(--card);
-    border-radius:20px;
-    box-shadow:0 8px 24px rgba(0,0,0,.08);
+    border-radius:16px;
+    border:1px solid var(--border);
+    box-shadow:0 6px 16px rgba(0,0,0,.06);
     overflow:hidden;
   }
   .banner{
     background:var(--banner);
-    color:var(--banner-text);
     padding:28px 28px 32px;
+    border-bottom:2px solid var(--border);
+    text-align:center;
   }
   .banner h1{
     margin:0;
-    text-align:center;
     font-weight:800;
-    letter-spacing:.4px;
-    font-size:clamp(22px, 3.2vw, 36px);
+    font-size:clamp(22px, 3.2vw, 34px);
     text-transform:uppercase;
-    text-decoration:underline;
-    text-decoration-color:yellow;
-    text-underline-offset:6px;
-    text-decoration-thickness:3px;
-    color: yellow;
-    text-align: center;
+    color:#2d3748;
   }
   .sub{
-    margin-top:10px;
-    text-align:left;
-    font-weight:700;
-    font-size:clamp(12px,1.6vw,16px);
+    margin-top:8px;
+    font-weight:600;
+    font-size:clamp(12px,1.6vw,15px);
+    color:#444;
   }
-  .table-wrap{ padding:18px 22px 28px; }
-  .table-scroll{ overflow-x:auto; border-radius:12px; }
+  .table-wrap{ padding:20px 22px 28px; }
+  .table-scroll{ overflow-x:auto; border-radius:12px; border:1px solid var(--border); }
   table{
-    width:70%;
+    width:100%;
     border-collapse:collapse;
-    border-radius:12px;
-    overflow:hidden;
-    margin-left: 15%;
-    
   }
   thead th{
     background:var(--thead);
     color:#fff;
-    text-align:left;
     padding:14px 16px;
-    font-weight:800;
-    text-align: center;
+    font-weight:700;
+    text-align:center;
+    border:1px solid var(--border);
   }
   tbody td{
     padding:14px 16px;
-    font-weight:800;
+    font-weight:600;
+    text-align:center;
+    border:1px solid var(--border);
   }
   tbody tr:nth-child(odd){ background:var(--row-1); }
   tbody tr:nth-child(even){ background:var(--row-2); }
+  td[contenteditable="true"] {
+    background: #fffef3;
+    cursor: text;
+  }
+  td[contenteditable="true"]:focus {
+    outline: 2px solid #ffd6a5;
+  }
   .note{
-    margin-top:10px;
-    font-size:12px;
-    color:#444;
+    margin-top:12px;
+    font-size:13px;
+    color:#666;
+    text-align:right;
+    font-style:italic;
+  }
+  .actions{
+    text-align:center;
+    margin:12px 0 0;
+  }
+  .btn{
+    background:#91a8d0;
+    border:none;
+    padding:10px 18px;
+    border-radius:8px;
+    color:white;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.2s;
+  }
+  .btn:hover{
+    background:#7a92b9;
   }
 </style>
 </head>
 <body>
   <div class="container">
     <div class="banner">
-      <h1>COURSE VACENCIES ALLOTED</h1>
-      <div class="sub">FOR TRG YR : 2026 TO 2027</div>
+      <h1>COURSE VACANCIES ALLOTTED</h1>
+      <div class="sub">FOR TRG YR : 2025 TO 2026</div>
     </div>
     <div class="table-wrap">
       <div class="table-scroll">
-        <table aria-label="Course Vacencies Alloted">
+        <table id="courseTable" aria-label="Course Vacancies Allotted">
           <thead>
             <tr>
-              <th style="width:50%">COURSE</th>
-              <th style="width:25%">VAC ALLOTED</th>
-              <th style="width:25%">REMARK</th>
+              <th style="width:10%">S NO</th>
+              <th style="width:25%">COURSE</th>
+              <th style="width:20%">FROM</th>
+              <th style="width:20%">TO</th>
+              <th style="width:15%">VAC ALLOTTED</th>
+              <th style="width:30%">NOMINATED ATTENDEE</th>
+              <th style="width:15%">REMARK</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td>SEC CDR</td><td>02</td><td></td></tr>
-            <tr><td>81MM MOR</td><td>03</td><td></td></tr>
-            <tr><td>ATGM</td><td>02</td><td></td></tr>
-            <tr><td>MMG AGS</td><td>01</td><td></td></tr>
-            <tr><td>ITCA</td><td>01</td><td></td></tr>
-            <tr><td>SNIPER</td><td>02</td><td></td></tr>
-            <tr><td>CLC</td><td>02</td><td></td></tr>
-            <tr><td>LMC</td><td>02</td><td></td></tr>
-            <tr><td>JTSC</td><td>01</td><td></td></tr>
-            <tr><td>NTSC</td><td>02</td><td></td></tr>
-            <tr><td>CDO</td><td>02</td><td></td></tr>
-            <tr><td>LICO</td><td>01</td><td></td></tr>
-            <tr><td>PC</td><td>02</td><td></td></tr>
+            <tr>
+              <td contenteditable="true">1.</td>
+              <td contenteditable="true">SEC CDR</td>
+              <td contenteditable="true">01-01-2026</td>
+              <td contenteditable="true">01-02-2026</td>
+              <td data-vac="2">2</td>
+              <td contenteditable="true"></td>
+              <td contenteditable="true"></td>
+            </tr>
           </tbody>
         </table>
       </div>
-      <p class="note"> Note: Vac not to be surrender.</p>
+      <div class="actions">
+        <button class="btn" onclick="addRow()">➕ Add Row</button>
+      </div>
+      <p class="note">Note: Vac not to be surrendered.</p>
     </div>
   </div>
+
+<script>
+  // Save table data to localStorage
+  function saveData() {
+    const table = document.querySelector("#courseTable tbody");
+    localStorage.setItem("courseTableData", table.innerHTML);
+  }
+
+  // Load data from localStorage
+  function loadData() {
+    const saved = localStorage.getItem("courseTableData");
+    if (saved) {
+      document.querySelector("#courseTable tbody").innerHTML = saved;
+      document.querySelectorAll("#courseTable tbody tr").forEach(attachLogic);
+    }
+  }
+
+  function attachLogic(row){
+    const vacCell = row.cells[4];
+    const attendeeCell = row.cells[5];
+
+    const originalVac = parseInt(vacCell.getAttribute("data-vac")) || parseInt(vacCell.textContent) || 0;
+    vacCell.textContent = originalVac;
+    vacCell.setAttribute("data-vac", originalVac);
+
+    attendeeCell.addEventListener("input", () => {
+      let names = attendeeCell.textContent
+        .trim()
+        .split(/[\s,]+/)
+        .filter(n => n);
+
+      let remaining = Math.max(originalVac - names.length, 0);
+      vacCell.textContent = remaining;
+      saveData();
+    });
+
+    // Save data on editing any cell
+    row.querySelectorAll("td[contenteditable='true']").forEach(cell => {
+      cell.addEventListener("input", saveData);
+    });
+  }
+
+  // function to add row
+  function addRow(){
+    const table = document.getElementById("courseTable").querySelector("tbody");
+    const row = table.insertRow();
+
+    row.innerHTML = `
+      <td contenteditable="true">New</td>
+      <td contenteditable="true">Course</td>
+      <td contenteditable="true">DD-MM-YYYY</td>
+      <td contenteditable="true">DD-MM-YYYY</td>
+      <td data-vac="1">1</td>
+      <td contenteditable="true"></td>
+      <td contenteditable="true"></td>
+    `;
+
+    attachLogic(row);
+    saveData();
+  }
+
+  // Initial load
+  window.onload = function(){
+    loadData();
+    document.querySelectorAll("#courseTable tbody tr").forEach(attachLogic);
+  }
+</script>
+
 </body>
 </html>

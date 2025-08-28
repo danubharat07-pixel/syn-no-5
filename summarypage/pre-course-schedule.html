@@ -7,52 +7,48 @@
 
 <style>
   :root{
-    --banner:#108415;       /* green banner */
-    --banner-text:#fff;
-    --table-header:#0c0c0c; /* black header */
-    --row:#e9e9e9;          /* light grey row */
-    --row-alt:#cfcfcf;      /* darker alt row */
-    --card:#f7f7f7;
-    --accent:#f8e96b;       /* yellow underline accent */
+    --banner:#a8dadc;       /* pastel teal */
+    --banner-text:#1d3557;
+    --table-header:#457b9d; /* pastel blue */
+    --row:#f1faee;          /* light pastel */
+    --row-alt:#e8e8f0;      /* alt pastel */
+    --card:#fafafa;
+    --accent:#fbc4ab;       /* pastel peach */
   }
   *{box-sizing:border-box}
   body{
     margin:0;
     padding:24px;
-    background:#f2f4f7;
+    background:#fefefe;
     font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Sans",sans-serif;
-    color:#111;
+    color:#222;
   }
   .container{
-    max-width:980px;
+    max-width:1000px;
     margin:0 auto;
     background:var(--card);
-    border-radius:20px;
-    box-shadow:0 8px 24px rgba(0,0,0,.08);
+    border-radius:16px;
+    box-shadow:0 6px 20px rgba(0,0,0,.08);
     overflow:hidden;
   }
   .banner{
     background:var(--banner);
     color:var(--banner-text);
-    padding:28px 28px 32px;
-    position:relative;
+    padding:24px;
+    text-align:center;
   }
   .banner h1{
     margin:0;
     font-weight:800;
-    letter-spacing:.5px;
-    text-align:center;
-    font-size:clamp(22px, 3.2vw, 36px);
-    text-transform:uppercase;
+    font-size:clamp(22px, 3vw, 34px);
     text-decoration:underline;
-    text-decoration-color:yellow;
+    text-decoration-color:var(--accent);
     text-underline-offset:6px;
     text-decoration-thickness:3px;
   }
   .sub{
-    margin-top:10px;
-    text-align:left;
-    font-weight:700;
+    margin-top:6px;
+    font-weight:600;
     font-size:clamp(12px,1.6vw,16px);
   }
   .table-wrap{
@@ -68,64 +64,118 @@
     background:var(--table-header);
     color:#fff;
     text-align:left;
-    padding:14px 16px;
+    padding:12px 14px;
     font-weight:700;
-    letter-spacing:.3px;
   }
   tbody td{
-    padding:14px 16px;
-    font-weight:600;
+    padding:12px 14px;
+    font-weight:500;
+    cursor:pointer;
   }
   tbody tr:nth-child(odd){ background:var(--row); }
   tbody tr:nth-child(even){ background:var(--row-alt); }
-  /* Responsive: allow horizontal scroll on very small screens */
-  .table-scroll{
-    overflow-x:auto;
-    border-radius:12px;
+  .add-btn{
+    margin-top:14px;
+    padding:10px 16px;
+    background:var(--accent);
+    border:none;
+    border-radius:8px;
+    font-weight:600;
+    cursor:pointer;
+    transition:0.2s;
   }
-  /* Small caption */
+  .add-btn:hover{ background:#ffdab9; }
   .note{
-    margin-top:10px;
-    font-size:15px;
-    color:#0d0a0a;
+    margin-top:14px;
+    font-size:14px;
+    color:#444;
+  }
+  input.edit-cell{
+    width:100%;
+    border:1px solid #ccc;
+    border-radius:6px;
+    padding:6px;
+    font-size:14px;
   }
 </style>
 </head>
 <body>
   <div class="container">
     <div class="banner">
-      <h1 style="color: yellow;">PRE COURSE SCHEDULE</h1>
+      <h1>PRE COURSE SCHEDULE</h1>
       <div class="sub">FOR TRG YR : 2026 TO 2027</div>
     </div>
     <div class="table-wrap">
       <div class="table-scroll">
-        <table aria-label="Pre course schedule">
+        <table id="courseTable" aria-label="Pre course schedule">
           <thead>
             <tr>
-              <th style="width:34%">COURSE</th>
-              <th style="width:22%">FROM</th>
-              <th style="width:22%">TO</th>
-              <th style="width:22%">LOC</th>
+              <th style="width:25%">COURSE</th>
+              <th style="width:15%">FROM</th>
+              <th style="width:15%">TO</th>
+              <th style="width:20%">LOC</th>
+              <th style="width:25%">ATTENDEE</th>
             </tr>
           </thead>
           <tbody>
-            <tr><td>SEC CDR</td><td>02 JAN 25</td><td>05 MAR 25</td><td>TRIVANDRUM</td></tr>
-            <tr><td>81MM MOR</td><td>15 FEB 25</td><td>08 APR 25</td><td>JAMMU</td></tr>
-            <tr><td>ATGM</td><td>02 MAR 25</td><td>30 APR 25</td><td>CHENNAI</td></tr>
-            <tr><td>MMG AGS</td><td>05 APR 25</td><td>30 MAY 25</td><td>SECUNDERABAD</td></tr>
-            <tr><td>ITCA</td><td>07 JUL 25</td><td>30 AUG 25</td><td>WELLINGTON</td></tr>
-            <tr><td>SNIPER</td><td>07 JUL 25</td><td>30 AUG 25</td><td>TRIVANDRUM</td></tr>
-            <tr><td>CLC</td><td>18 AUG 25</td><td>30 SEP 25</td><td>DHANA</td></tr>
-            <tr><td>JTSC</td><td>11 AUG 25</td><td>30 SEP 25</td><td>BNAGLORE</td></tr>
-            <tr><td>NTSC</td><td>11 AUG 25</td><td>30 SEP 25</td><td>BANGLORE</td></tr>
-            <tr><td>CDO</td><td>30 AUG 25</td><td>30 OCT 25</td><td>TRIVANDRUM</td></tr>
-            <tr><td>LICO</td><td>15 SEP 25</td><td>20 NOV 25</td><td>TRIVANDRUM</td></tr>
-            <tr><td>PC</td><td>02 NOV 25</td><td>30 DEC 25</td><td>WELLINGTON</td></tr>
+            <tr><td>SEC CDR</td><td>02 JAN 25</td><td>05 MAR 25</td><td>TRIVANDRUM</td><td>—</td></tr>
+            <tr><td>81MM MOR</td><td>15 FEB 25</td><td>08 APR 25</td><td>JAMMU</td><td>—</td></tr>
+            <tr><td>ATGM</td><td>02 MAR 25</td><td>30 APR 25</td><td>CHENNAI</td><td>—</td></tr>
+            <tr><td>MMG AGS</td><td>05 APR 25</td><td>30 MAY 25</td><td>SECUNDERABAD</td><td>—</td></tr>
+            <tr><td>ITCA</td><td>07 JUL 25</td><td>30 AUG 25</td><td>WELLINGTON</td><td>—</td></tr>
           </tbody>
         </table>
       </div>
+      <button class="add-btn" onclick="addRow()">➕ Add Row</button>
       <p class="note">Tip: Indl nominated for pre course should contact with Trg Jco for further info.</p>
     </div>
   </div>
+
+<script>
+  const table = document.getElementById("courseTable").getElementsByTagName("tbody")[0];
+
+  // Load saved data
+  document.addEventListener("DOMContentLoaded", () => {
+    const saved = localStorage.getItem("preCourseData");
+    if(saved) table.innerHTML = saved;
+  });
+
+  // Save on changes
+  function saveData(){
+    localStorage.setItem("preCourseData", table.innerHTML);
+  }
+
+  // Editable cells
+  table.addEventListener("click", function(e){
+    if(e.target.tagName === "TD"){
+      let current = e.target.innerText;
+      let input = document.createElement("input");
+      input.type = "text";
+      input.value = current;
+      input.className = "edit-cell";
+      e.target.innerText = "";
+      e.target.appendChild(input);
+      input.focus();
+
+      input.addEventListener("blur", function(){
+        e.target.innerText = this.value;
+        saveData();
+      });
+      input.addEventListener("keydown", function(ev){
+        if(ev.key === "Enter"){ this.blur(); }
+      });
+    }
+  });
+
+  // Add row
+  function addRow(){
+    let row = table.insertRow();
+    ["", "", "", "", ""].forEach(val=>{
+      let cell = row.insertCell();
+      cell.innerText = val || "—";
+    });
+    saveData();
+  }
+</script>
 </body>
 </html>

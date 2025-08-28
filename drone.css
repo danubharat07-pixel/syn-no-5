@@ -119,3 +119,43 @@ footer nav ul li a:hover {
     color: #ffffff;
     transform: scale(1.1);
 }
+
+  .box.right { position: relative; padding-bottom: 20px; }
+
+  .slider {
+    position: relative;
+    width: 100%;
+    max-width: 400px;   /* adjust as needed */
+    height: 250px;      /* adjust as needed */
+    margin-top: 16px;
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    justify-items: center;
+  }
+
+  .slides {
+    display: block;
+    width: 100%;        /* 100% × number of images */
+    transition: transform 0.5s ease;
+  }
+  .slides img {
+    width: 20%;
+    
+    object-fit: contain;
+  }
+
+  /* .nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0,0,0,0.4);
+    color: #fff;
+    border: none;
+    padding: 8px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    border-radius: 50%;
+  }
+  .nav.prev { left: 8px; }
+  .nav.next { right: 8px; } */

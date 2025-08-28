@@ -492,7 +492,7 @@ async function getStickyNotes() {
       <tr>
         <td>${index + 1}</td>
         <td>${sticky.content}</td>
-        <td>${sticky.createdBy.name}</td>
+        <td>${sticky.createdBy?.name}</td>
         <td>${new Date(sticky.createdAt).toLocaleDateString()}</td>
         <td>
           <button class="btn btn-danger" onclick="deleteStickyNote('${

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>COURSE COMPLETED</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      margin: 20px;
+      background: linear-gradient(135deg, #b8f36b, #fe84cb);
+      color: #444;
+    }
+    h2 {
+      text-align: center;
+      color: #070707;
+      margin-bottom: 20px;
+      font-size: 28px;
+    }
+    form {
+      max-width: 900px;
+      margin: auto;
+      padding: 25px;
+      background: #fffdf9;
+      border-radius: 16px;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+    }
+    form:hover {
+      transform: scale(1.01);
+    }
+    .image-box {
+      flex: 0 0 160px;
+      text-align: center;
+    }
+    .image-box img {
+      width: 140px;
+      height: 160px;
+      object-fit: cover;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      margin-bottom: 10px;
+    }
+    .form-fields {
+      flex: 1;
+    }
+    .form-fields input {
+      padding: 12px;
+      margin: 8px 0;
+      width: calc(50% - 14px);
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      outline: none;
+      background: #f9f9ff;
+      transition: border 0.3s;
+    }
+    .form-fields input:focus {
+      border: 1px solid #88c9bf;
+      background: #fff;
+    }
+    .form-fields button {
+      padding: 12px;
+      margin-top: 12px;
+      width: 48%;
+      border-radius: 8px;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .image-slider {
+  height: 100%;
+  position: relative;
+}
+
+
+
+/* Image Sliders */
+.image-slider {
+  width: 150px; /* Fill the full 200px column */
+  height: 500px; /* Adjust height based on content */
+  display: flex;
+  justify-content: center;
+  overflow:scroll;
+  position: relative;
+  border: 2px solid #c19a6b;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(193, 154, 107, 0.5);
+}
+
+@keyframes scrollImages {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+
+.slider-track {
+  display: flex;
+  flex-direction: column;
+  animation: scrollImages 14s linear infinite;
+}
+
+
+
+
+
+.slider-track img {
+  width: 100%;
+  margin-bottom: 10px;
+  border-radius: 6px;
+  border: 2px solid #f9ee73;
+}
+
+    .form-fields button:hover {
+      transform: translateY(-2px);
+    }
+    .form-fields button[type="submit"] {
+      background: #a8dadc;
+      color: blue;
+    }
+    .form-fields button[type="reset"] {
+      background: #f6a6a6;
+      color: blue;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 30px;
+      background: #fffdf9;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 14px;
+      text-align: center;
+      border-bottom: 1px solid #eee;
+    }
+    th {
+      background: #a8dadc;
+      color: #4a17ca;
+      font-size: 16px;
+    }
+    tr:hover {
+      background: #e4fdfd;
+    }
+    .delete-btn {
+      background: #f6a6a6;
+      color: white;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .delete-btn:hover {
+      background: #e06666;
+    }
+    ::placeholder {
+  font-size: 1.1rem;   /* Increase this value as needed */
+  font-weight: 500;    /* Optional: make it bold */
+  color: #666;         /* Optional: softer color */
+}
+  </style>
+</head>
+<body>
+  <h2><u>COURSE COMPLETED</u></h2>
+
+  <!-- 🔹 Form -->
+  <form id="courseForm">
+    <!-- Image Upload Section -->
+    <div class="image-box">
+       <!-- Left Image Slider -->
+    <aside class="image-slider left-slider">
+      <div class="slider-track">
+        <img src="/REGT CREST/kumaon logo.png" alt="kumaon" />
+        <img src="/REGT CREST/garhwal crest.jpg" alt="garhwal" />
+        <img src="/REGT CREST/crest golden with bkgrnd 123copy.png" alt="madras" />
+        <img src="/REGT CREST/Bihar_Regiment_Insignia.png" alt="bihar" />
+        <img src="/REGT CREST/Emblem_of_Jat_Regiment.jpg" alt="Jat" />
+        <img src="/REGT CREST/jakli.png" alt="jakli" />
+        <img src="/REGT CREST/jammu-Pica.png" alt="jammu-Pica" />
+        <img src="/REGT CREST/kumaon logo.png" alt="kumaon" />
+        <img src="/REGT CREST/MAHAR.png" alt="MAHAR" />
+        
+      </div>
+    </aside>
+    </div>
+
+    <!-- Fields -->
+    <div class="form-fields">
+      <input type="text" id="armyNo" placeholder="Army No" required>
+      <input type="text" id="rank" placeholder="Rank" required>
+      <input type="text" id="name" placeholder="Name" required>
+      <input type="text" id="course" placeholder="Course" required>
+      <input type="date" id="fromDate" required>
+      <input type="date" id="toDate" required>
+      <input type="text" id="grading" placeholder="Grading" required>
+
+      <div style="display:flex; justify-content:space-between; margin-top:10px;">
+        <button type="submit">➕ Add Entry</button>
+        <button type="reset">🗑 Reset All</button>
+      </div>
+    </div>
+    <div class="image-box">
+      <!-- Left Image Slider -->
+    <aside class="image-slider left-slider">
+      <div class="slider-track">
+               <img src="/REGT CREST/kumaon logo.png" alt="kumaon" />
+        <img src="/REGT CREST/garhwal crest.jpg" alt="garhwal" />
+        <img src="/REGT CREST/crest golden with bkgrnd 123copy.png" alt="madras" />
+        <img src="/REGT CREST/Bihar_Regiment_Insignia.png" alt="bihar" />
+        <img src="/REGT CREST/Emblem_of_Jat_Regiment.jpg" alt="Jat" />
+        <img src="/REGT CREST/jakli.png" alt="jakli" />
+        <img src="/REGT CREST/jammu-Pica.png" alt="jammu-Pica" />
+        <img src="/REGT CREST/kumaon logo.png" alt="kumaon" />
+        <img src="/REGT CREST/MAHAR.png" alt="MAHAR" />
+        
+      </div>    
+    </aside>
+    </div>
+  </form>
+
+  <!-- 🔹 Table -->
+  <table>
+  <thead>
+    <tr>
+      <th>S NO</th>
+      <th>ARMY NO</th>
+      <th>RANK</th>
+      <th>NAME</th>
+      <th>COURSE</th>
+      <th>FROM</th>
+      <th>TO</th>
+      <th>GRADING</th>
+      <th>ACTION</th>
+    </tr>
+  </thead>
+  <tbody id="rows"></tbody>
+</table>
+
+<script>
+  let serial = 1;
+
+  // Load saved data
+  window.addEventListener("DOMContentLoaded", () => {
+    const savedData = JSON.parse(localStorage.getItem("courseData")) || [];
+    savedData.forEach((item, index) => addRow(item, index + 1));
+    serial = savedData.length + 1;
+  });
+
+  // Add entry
+  document.getElementById('courseForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const newEntry = {
+      armyNo: document.getElementById('armyNo').value,
+      rank: document.getElementById('rank').value,
+      name: document.getElementById('name').value,
+      course: document.getElementById('course').value,
+      fromDate: document.getElementById('fromDate').value,
+      toDate: document.getElementById('toDate').value,
+      grading: document.getElementById('grading').value
+    };
+
+    const savedData = JSON.parse(localStorage.getItem("courseData")) || [];
+    savedData.push(newEntry);
+    localStorage.setItem("courseData", JSON.stringify(savedData));
+
+    addRow(newEntry, serial++);
+    this.reset();
+  });
+
+  // Add row
+  function addRow(item, rowNo) {
+    const table = document.getElementById("rows");
+    const row = document.createElement("tr");
+
+    row.innerHTML = `
+      <td>${rowNo}</td>
+      <td>${item.armyNo}</td>
+      <td>${item.rank}</td>
+      <td>${item.name}</td>
+      <td>${item.course}</td>
+      <td>${item.fromDate}</td>
+      <td>${item.toDate}</td>
+      <td>${item.grading}</td>
+      <td><button class="delete-btn">Delete</button></td>
+    `;
+
+    row.querySelector(".delete-btn").addEventListener("click", () => {
+      deleteEntry(rowNo - 1);
+      refreshTable();
+    });
+
+    table.appendChild(row);
+  }
+
+  // Delete entry
+  function deleteEntry(index) {
+    let savedData = JSON.parse(localStorage.getItem("courseData")) || [];
+    savedData.splice(index, 1);
+    localStorage.setItem("courseData", JSON.stringify(savedData));
+  }
+
+  // Refresh table
+  function refreshTable() {
+    const table = document.getElementById("rows");
+    table.innerHTML = "";
+    const savedData = JSON.parse(localStorage.getItem("courseData")) || [];
+    savedData.forEach((item, index) => addRow(item, index + 1));
+    serial = savedData.length + 1;
+  }
+
+  // Reset all
+  document.querySelector('button[type="reset"]').addEventListener('click', function() {
+    serial = 1;
+    document.getElementById('rows').innerHTML = '';
+    localStorage.removeItem("courseData");
+  });
+</script>
+</body>
+</html>
