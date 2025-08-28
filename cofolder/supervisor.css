@@ -194,6 +194,14 @@ h5 {
   background: #fff9d6; /* butter */
 }
 
+.summary-cards .card:hover {
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+.summary-cards .card:hover {
+  transform: scale(1.1);
+}
+
 .card h3 {
   font-size: 14px;
   text-transform: uppercase;

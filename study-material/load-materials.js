@@ -56,7 +56,7 @@ function loadMaterials(elementId, materialKey) {
     materialsContainer.innerHTML = materials
       .map(
         (material) =>
-          `<a href="${material.url}" target="_blank">${material.title}</a><br/><br/>`
+          `<a class="material-link" href="${material.url}" target="_blank">${material.title}</a><br/><br/>`
       )
       .join("");
   }
